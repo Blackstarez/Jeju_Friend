@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="697.0" style="-fx-background-color: #e8f6ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="25.0" layoutY="94.0" prefHeight="292.0" prefWidth="211.0" style="-fx-background-color: rgb(164, 92, 162);" />
+      <Pane layoutX="263.0" layoutY="94.0" prefHeight="292.0" prefWidth="211.0" style="-fx-background-color: rgb(43, 97, 82);" />
+      <Pane layoutY="14.0" prefHeight="60.0" prefWidth="697.0" style="-fx-background-color: rgb(26, 74, 106);">
+         <children>
+            <TextField layoutX="50.0" layoutY="14.0" prefHeight="33.0" prefWidth="417.0" />
+            <Button layoutX="425.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="19.0" text="Button" textFill="TRANSPARENT" />
+         </children>
+      </Pane>
+      <Pane layoutX="530.0" prefHeight="400.0" prefWidth="167.0" style="-fx-background-color: rgb(156, 212, 201);">
+         <children>
+            <Circle fill="#bdd1e4" layoutX="138.0" layoutY="28.0" radius="22.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Label layoutX="5.0" layoutY="58.0" prefHeight="19.0" prefWidth="157.0" text="현재관심지역 :">
+               <font>
+                  <Font name="LG PC" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="5.0" layoutY="91.0" text="나의 여행 일정">
+               <font>
+                  <Font name="LG PC" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="113.0" layoutY="92.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="51.0" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
+               <font>
+                  <Font name="LG PC" size="10.0" />
+               </font>
+            </Button>
+            <Button layoutX="124.0" layoutY="378.0" mnemonicParsing="false" style="-fx-background-color: rgb(52, 152, 219);" text="로그아웃" textFill="WHITE">
+               <font>
+                  <Font name="LG PC" size="8.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sign_Controller">
+   <children>
+      <ImageView fitHeight="326.0" fitWidth="462.0" layoutX="266.0" layoutY="50.0">
+         <image>
+            <Image url="@../../../../../../관련%20이미지/제주%20지도%20.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="408.0" layoutY="60.0" text="관심 지역 선택">
+         <font>
+            <Font name="LG PC" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="68.0" layoutY="95.0" text="남성">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font></Label>
+      <Label layoutX="166.0" layoutY="93.0" text="여성">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font></Label>
+      <VBox layoutX="46.0" layoutY="135.0" prefHeight="217.0" prefWidth="219.0">
+         <children>
+            <Label text="아이디  ">
+               <font>
+                  <Font name="LG PC" size="11.0" />
+               </font>
+            </Label>
+            <TextField fx:id="idField" minHeight="0.0" onKeyTyped="#idField_Typed" prefHeight="25.0" prefWidth="219.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></TextField>
+            <Label text="비밀번호">
+               <font>
+                  <Font name="LG PC" size="11.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="pwField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwField_Typed" prefHeight="25.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Label text="비밀번호 확인">
+               <font>
+                  <Font name="LG PC" size="11.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <PasswordField fx:id="pwConfirmField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwConfirmField_Typed" prefHeight="25.0" />
+            <Label text="닉네임">
+               <font>
+                  <Font name="LG PC" size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="nameField" maxHeight="25.0" minHeight="0.0" onKeyTyped="#nameField_Typed" prefHeight="25.0" prefWidth="219.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <Button layoutX="582.0" layoutY="335.0" mnemonicParsing="false" text="확인" wrapText="true">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font></Button>
+      <Button layoutX="497.0" layoutY="335.0" mnemonicParsing="false" text="취소" wrapText="true">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font></Button>
+      <ChoiceBox layoutX="87.0" layoutY="346.0" minHeight="0.0" prefHeight="25.0" prefWidth="85.0" />
+      <Label layoutX="54.0" layoutY="348.0" text="나이">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="348.0" text="세">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font>
+      </Label>
+      <ToggleButton fx:id="maleToggleBtn" layoutX="59.0" layoutY="38.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" />
+      <ToggleButton fx:id="femaleToggleBtn" layoutX="158.0" layoutY="38.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" />
+   </children>
+</Pane>

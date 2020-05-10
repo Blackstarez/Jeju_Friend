@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1200" style="-fx-background-color: #cefbf2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="241.0" layoutY="52.0" text="여행 이름이 무엇인가요?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="LG PC" size="25.0" />
+         </font>
+      </Label>
+      <TextField layoutX="246.0" layoutY="101.0">
+         <font>
+            <Font name="LG PC" size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="240.0" layoutY="201.0" text="누구와 가는 여행인가요?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="LG PC" size="25.0" />
+         </font>
+      </Label>
+      <HBox layoutX="41.0" layoutY="263.0" prefHeight="49.0" prefWidth="617.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="93.0" style="-fx-background-color: rgb(127, 198, 135);" text="효도여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="93.0" style="-fx-background-color: rgb(127, 198, 135);" text="효도여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="93.0" style="-fx-background-color: rgb(127, 198, 135);" text="효도여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="93.0" style="-fx-background-color: rgb(127, 198, 135);" text="효도여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="93.0" style="-fx-background-color: rgb(127, 198, 135);" text="효도여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="93.0" style="-fx-background-color: rgb(127, 198, 135);" text="효도여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ToggleButton>
+         </children>
+      </HBox>
+      <Label layoutX="269.0" layoutY="363.0" text="어떤  여행인가요?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="LG PC" size="25.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="135.0" layoutY="428.0" prefHeight="90.0" prefWidth="429.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="수학여행" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="커플여행" GridPane.columnIndex="2">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="효도여행" GridPane.columnIndex="1">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="우정여행" GridPane.columnIndex="3">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="식도락여행" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="관광지 관광" GridPane.rowIndex="1">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="자아성찰" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: rgb(52, 152, 219);" text="가족여행">
+               <font>
+                  <Font name="LG PC" size="16.0" />
+               </font>
+            </ToggleButton>
+         </children>
+      </GridPane>
+      <ImageView fitHeight="402.0" fitWidth="587.0" layoutX="627.0" layoutY="184.0">
+         <image>
+            <Image url="@../../../../../../관련%20이미지/제주%20지도%20.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="860.0" layoutY="216.0" text="관심지역 선택" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="LG PC" size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="1044.0" layoutY="19.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="135.0" text="여행 추가">
+         <font>
+            <Font name="LG PC" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="921.0" layoutY="19.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="취소">
+         <font>
+            <Font name="LG PC" size="24.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
