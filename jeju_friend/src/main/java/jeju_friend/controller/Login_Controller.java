@@ -94,7 +94,7 @@ public class Login_Controller
 	public void moveToMain() throws IOException
 	{
 		Stage primaryStage = (Stage) loginBtn.getScene().getWindow(); 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/MainView.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();   
@@ -102,7 +102,7 @@ public class Login_Controller
 	public void moveToSign() throws IOException
 	{
 		Stage primaryStage = (Stage) loginBtn.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Sign.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Sign.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();   
