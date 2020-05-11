@@ -9,35 +9,36 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #e8f6ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="25.0" layoutY="94.0" prefHeight="292.0" prefWidth="211.0" style="-fx-background-color: rgb(164, 92, 162);" />
-      <Pane layoutX="263.0" layoutY="94.0" prefHeight="292.0" prefWidth="211.0" style="-fx-background-color: rgb(43, 97, 82);" />
-      <Pane layoutY="14.0" prefHeight="60.0" prefWidth="697.0" style="-fx-background-color: rgb(26, 74, 106);">
+      <Pane layoutX="27.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(164, 92, 162);" />
+      <Pane layoutX="556.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(43, 97, 82);" />
+      <Pane layoutY="14.0" prefHeight="84.0" prefWidth="1440.0" style="-fx-background-color: rgb(26, 74, 106);">
          <children>
-            <TextField layoutX="50.0" layoutY="14.0" prefHeight="33.0" prefWidth="417.0" />
-            <Button layoutX="425.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="19.0" text="Button" textFill="TRANSPARENT" />
+            <TextField fx:id="searchField" layoutX="90.0" layoutY="20.0" onKeyTyped="#searchField_Typed" onMouseClicked="#searchField_Clicked" prefHeight="44.0" prefWidth="903.0" text="관심있는 관광지를 검색해보세요!">
+               <font>
+                  <Font name="LG PC" size="22.0" />
+               </font></TextField>
          </children>
       </Pane>
-      <Pane layoutX="530.0" prefHeight="400.0" prefWidth="167.0" style="-fx-background-color: rgb(156, 212, 201);">
+      <Pane layoutX="1121.0" prefHeight="900.0" prefWidth="321.0" style="-fx-background-color: rgb(156, 212, 201);">
          <children>
-            <Circle fill="#bdd1e4" layoutX="138.0" layoutY="28.0" radius="22.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <Label layoutX="5.0" layoutY="58.0" prefHeight="19.0" prefWidth="157.0" text="현재관심지역 :">
+            <Label layoutX="5.0" layoutY="58.0" prefHeight="44.0" prefWidth="310.0" text="현재관심지역 :">
                <font>
-                  <Font name="LG PC" size="14.0" />
+                  <Font name="LG PC" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="5.0" layoutY="91.0" text="나의 여행 일정">
+            <Label layoutX="5.0" layoutY="163.0" prefHeight="38.0" prefWidth="144.0" text="나의 여행 일정">
                <font>
-                  <Font name="LG PC" size="18.0" />
+                  <Font name="LG PC" size="26.0" />
                </font>
             </Label>
-            <Button layoutX="113.0" layoutY="92.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="51.0" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
+            <Button fx:id="addTravelBtn" layoutX="209.0" layoutY="190.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" prefHeight="38.0" prefWidth="92.0" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
                <font>
-                  <Font name="LG PC" size="10.0" />
+                  <Font name="LG PC" size="19.0" />
                </font>
             </Button>
-            <Button layoutX="124.0" layoutY="378.0" mnemonicParsing="false" style="-fx-background-color: rgb(52, 152, 219);" text="로그아웃" textFill="WHITE">
+            <Button fx:id="logoutBtn" layoutX="209.0" layoutY="836.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="38.0" prefWidth="92.0" style="-fx-background-color: rgb(52, 152, 219);" text="로그아웃" textFill="WHITE">
                <font>
-                  <Font name="LG PC" size="8.0" />
+                  <Font name="LG PC" size="18.0" />
                </font>
             </Button>
          </children>

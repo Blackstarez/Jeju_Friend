@@ -10,11 +10,6 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Sign_Controller">
    <children>
-      <ImageView fitHeight="605.0" fitWidth="857.0" layoutX="528.0" layoutY="203.0">
-         <image>
-            <Image url="@../../../../../../관련%20이미지/제주%20지도%20.png" />
-         </image>
-      </ImageView>
       <Label layoutX="799.0" layoutY="167.0" prefHeight="81.0" prefWidth="336.0" text="관심 지역 선택">
          <font>
             <Font name="LG PC" size="56.0" />
@@ -73,7 +68,7 @@
             </TextField>
          </children>
       </VBox>
-      <Button fx:id="applyBtn" layoutX="1310.0" layoutY="819.0" mnemonicParsing="false" onAction="#applyBtn_actioned" prefHeight="45.0" prefWidth="75.0" text="확인" wrapText="true">
+      <Button fx:id="applyBtn" layoutX="1310.0" layoutY="819.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" prefHeight="45.0" prefWidth="75.0" text="확인" wrapText="true">
          <font>
             <Font name="LG PC" size="18.0" />
          </font></Button>
@@ -94,5 +89,10 @@
       </Label>
       <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" />
       <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" />
+      <ImageView fitHeight="639.0" fitWidth="933.0" layoutX="493.0" layoutY="131.0">
+         <image>
+            <Image url="@../../../../../../../../Jeju_Friend/image/map.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
