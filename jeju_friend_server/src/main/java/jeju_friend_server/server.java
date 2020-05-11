@@ -1,12 +1,11 @@
-package Jeju_Friend_server;
+package jeju_friend_server;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-import Elements.Protocol;
-
+import jeju_friend_server.Elements.Protocol;
 
 
 public class server {
@@ -18,6 +17,7 @@ public class server {
         DBmanager Database = new DBmanager();
         APIManager apiManager = new APIManager();
         Database.startDB();
+        System.out.println("DB연결 완료");
         try {
             while(true)
             {

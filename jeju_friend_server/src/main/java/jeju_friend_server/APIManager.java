@@ -1,4 +1,4 @@
-package Jeju_Friend_server;
+package jeju_friend_server;
 
 public class APIManager {
     public APIManager()

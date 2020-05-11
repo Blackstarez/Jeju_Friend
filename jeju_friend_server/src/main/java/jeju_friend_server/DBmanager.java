@@ -1,11 +1,11 @@
-package Jeju_Friend_server;
+package jeju_friend_server;
 
 import java.sql.*;
 
 public class DBmanager {
-    private static String DB_ADDRESS = "jdbc:mysql://localhost/DB이름?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC";
-    private static String DB_ID = "admin";
-    private static String DB_PW = "admin";
+    private static String DB_ADDRESS = "jdbc:mysql://localhost/jeju?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static String DB_ID = "root";
+    private static String DB_PW = "root";
     Connection conn = null;
     Statement stmt = null;
 
