@@ -9,10 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class Login_Controller 
@@ -28,13 +31,23 @@ public class Login_Controller
 	
 	@FXML
 	private Button signBtn;
+
+	@FXML 
+	private Label pwLabel;
+
+	@FXML
+	private Label idLabel;
+
+
 	@FXML
 	private void idField_Typed(KeyEvent event)
 	{
 		if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) 
 		{
-			pwField.requestFocus();   
+			pwField.requestFocus();
+			pwLabel.setVisible(false);
 		}
+		idLabel.setVisible(false);
 	}
 	
 	@FXML
@@ -44,18 +57,34 @@ public class Login_Controller
 		{
 			login();
 		}
-		
+		pwLabel.setVisible(false);
 	}
 	@FXML
-	private void loginBtn_Cliked() throws Exception
+	private void pwField_Cliked(MouseEvent event)
+	{
+		pwLabel.setVisible(false);
+	}
+	@FXML
+	private void idField_Clicked(MouseEvent event)
+	{
+		idLabel.setVisible(false);
+	}
+
+	@FXML
+	private void loginBtn_Actioned() throws Exception
 	{
 		login();
 	}
 	@FXML
-	private void signBtn_Cliked() throws Exception
+	private void signBtn_Actioned() throws Exception
 	{
 		moveToSign();
 	}
+
+
+	// 로직
+
+
 	private void login() throws Exception
 	{
 		String inputID = idField.getText();
@@ -96,15 +125,17 @@ public class Login_Controller
 		Stage primaryStage = (Stage) loginBtn.getScene().getWindow(); 
         Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/MainView.fxml"));
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
         primaryStage.show();   
 	}
 	public void moveToSign() throws IOException
 	{
-		Stage primaryStage = (Stage) loginBtn.getScene().getWindow();
+		Stage primaryStage = (Stage) signBtn.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Sign.fxml"));
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
         primaryStage.show();   
 	}
 }
