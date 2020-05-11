@@ -40,6 +40,7 @@ public class Sign_Controller
 
 	@FXML
 	private Button applyBtn;
+
 	@FXML
 	private void idField_Typed(KeyEvent event)
 	{
@@ -68,7 +69,7 @@ public class Sign_Controller
 	}
 
 	@FXML
-	private void applyBtn_actioned() throws IOException
+	private void applyBtn_Actioned() throws IOException
 	{
 		createAccount();
 	}
@@ -92,6 +93,7 @@ public class Sign_Controller
 			alert.setHeaderText(null);
 			alert.setContentText("성별을 선택해 주세요!");
 			alert.showAndWait();
+			return;
 		}
 		else if(inputID.isEmpty())
 		{
@@ -101,6 +103,7 @@ public class Sign_Controller
 			alert.setContentText("아이디를 입력해 주세요!");
 			alert.showAndWait();
 			idField.requestFocus();
+			return;
 		}
 		else if(inputPW.isEmpty())
 		{
@@ -110,6 +113,7 @@ public class Sign_Controller
 			alert.setContentText("비밀번호를 입력해 주세요!");
 			alert.showAndWait();
 			pwField.requestFocus();
+			return;
 		}
 		else if(inputPW==inputConfirmPW)
 		{
@@ -119,6 +123,7 @@ public class Sign_Controller
 			alert.setContentText("비밀번호와 비밀번호 확인이 다릅니다!");
 			alert.showAndWait();
 			pwField.requestFocus();
+			return;
 		}
 		else if(inputName.isEmpty())
 		{
@@ -128,11 +133,23 @@ public class Sign_Controller
 			alert.setContentText("이름을 입력해주세요!");
 			alert.showAndWait();
 			nameField.requestFocus();
+			return;
 		}
-		//나이 선택 확인하는 코드 필요함. 근데 아직 초이스박스 구현을 안해놔서 일단 주석
-		else
-			moveToLogin();
-		// 이제 통신해서 DB에 새 계정 넣는 과정
+		// 나이 선택 확인하는 코드 필요함. 
+		// 선호지역 선택확인하는 코드 필요함. 
+		// 근데 아직 구현을 안해놔서 일단 주석
+
+		/* 이제 통신해서 DB에 새 계정 넣는 과정
+
+		주오가 할 일 ! 
+
+		*/
+		
+		moveToLogin(); 
+			// 이건 지금은 여기에 있는데 나중에 DB에 새 계정 넣는 과정 생기면 
+			// 아이디 생성 성공하면 로그인창으로 이동하도록 수정해야 함
+
+		
 		
 	}
 	public void moveToLogin() throws IOException

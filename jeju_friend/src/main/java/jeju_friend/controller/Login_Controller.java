@@ -59,11 +59,7 @@ public class Login_Controller
 		}
 		pwLabel.setVisible(false);
 	}
-	@FXML
-	private void pwField_Cliked(MouseEvent event)
-	{
-		pwLabel.setVisible(false);
-	}
+
 	@FXML
 	private void idField_Clicked(MouseEvent event)
 	{
@@ -71,16 +67,22 @@ public class Login_Controller
 	}
 
 	@FXML
+	private void pwField_Cliked(MouseEvent event)
+	{
+		pwLabel.setVisible(false);
+	}
+	
+	@FXML
 	private void loginBtn_Actioned() throws Exception
 	{
 		login();
 	}
+
 	@FXML
 	private void signBtn_Actioned() throws Exception
 	{
 		moveToSign();
 	}
-
 
 	// 로직
 

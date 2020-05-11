@@ -27,6 +27,11 @@
                   <Font name="LG PC" size="20.0" />
                </font>
             </PasswordField>
+            <Button fx:id="signBtn" layoutX="39.0" layoutY="500.0" mnemonicParsing="false" onAction="#signBtn_Actioned" prefHeight="33.0" prefWidth="149.0" text="회원가입">
+               <font>
+                  <Font name="LG PC" size="29.0" />
+               </font>
+            </Button>
             <Button fx:id="loginBtn" layoutX="219.0" layoutY="500.0" mnemonicParsing="false" onAction="#loginBtn_Actioned" prefHeight="33.0" prefWidth="149.0" text="로그인">
                <font>
                   <Font name="LG PC" size="29.0" />
@@ -42,11 +47,6 @@
                   <Font name="LG PC" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="signBtn" layoutX="39.0" layoutY="500.0" mnemonicParsing="false" onAction="#signBtn_Actioned" prefHeight="33.0" prefWidth="149.0" text="회원가입">
-               <font>
-                  <Font name="LG PC" size="29.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
    </children>
