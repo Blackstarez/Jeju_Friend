@@ -24,10 +24,13 @@ public class DBmanager {
     }
 
     // 로그인
-    public void getLoginInfo(String ID, String PW) throws SQLException
+    public boolean getLoginResult(String id, String pw) throws SQLException
     {
-        String sql = "select * from 로그인 where ID ='"+ID+"' && PW ='"+PW+"';";
+        String sql = "select * from 로그인 where ID ='"+id+"' && PW ='"+pw+"';";
         ResultSet result = stmt.executeQuery(sql);
+        if(result != null)
+            return true;
+        return false;
 
     }
 
