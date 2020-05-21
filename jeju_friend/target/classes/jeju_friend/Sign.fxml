@@ -87,11 +87,28 @@
             <Font name="LG PC" size="36.0" />
          </font>
       </Label>
-      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" />
-      <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" />
-      <ImageView fitHeight="639.0" fitWidth="933.0" layoutX="493.0" layoutY="131.0">
+      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@image/male_icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+      </ToggleButton>
+
+      <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/female_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+   </ToggleButton>
+      <ImageView fitHeight="513.0" fitWidth="748.0" layoutX="611.0" layoutY="265.0">
          <image>
-            <Image url="@../../../../../../../../Jeju_Friend/image/map.png" />
+            <Image url="@image/map.png" />
          </image>
       </ImageView>
    </children>
