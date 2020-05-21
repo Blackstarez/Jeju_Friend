@@ -7,16 +7,21 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #e8f6ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #e8f6ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Main_Controller">
    <children>
       <Pane layoutX="27.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(164, 92, 162);" />
       <Pane layoutX="556.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(43, 97, 82);" />
       <Pane layoutY="14.0" prefHeight="84.0" prefWidth="1440.0" style="-fx-background-color: rgb(26, 74, 106);">
          <children>
-            <TextField fx:id="searchField" layoutX="90.0" layoutY="20.0" onKeyTyped="#searchField_Typed" onMouseClicked="#searchField_Clicked" prefHeight="44.0" prefWidth="903.0" text="관심있는 관광지를 검색해보세요!">
+            <TextField fx:id="searchField" layoutX="90.0" layoutY="20.0" onKeyTyped="#searchField_Typed" onMouseClicked="#searchField_Clicked" prefHeight="44.0" prefWidth="903.0">
                <font>
                   <Font name="LG PC" size="22.0" />
                </font></TextField>
+            <Label fx:id="searchLabel" layoutX="106.0" layoutY="27.0" text="관심있는 관광지를 검색해 보세요!">
+               <font>
+                  <Font name="LG PC" size="25.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane layoutX="1121.0" prefHeight="900.0" prefWidth="321.0" style="-fx-background-color: rgb(156, 212, 201);">
@@ -36,7 +41,7 @@
                   <Font name="LG PC" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="logoutBtn" layoutX="209.0" layoutY="836.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="38.0" prefWidth="92.0" style="-fx-background-color: rgb(52, 152, 219);" text="로그아웃" textFill="WHITE">
+            <Button fx:id="logoutBtn" layoutX="209.0" layoutY="836.0" mnemonicParsing="false" onAction="#logoutBtn_Actioned" prefHeight="38.0" prefWidth="92.0" style="-fx-background-color: rgb(52, 152, 219);" text="로그아웃" textFill="WHITE">
                <font>
                   <Font name="LG PC" size="18.0" />
                </font>
