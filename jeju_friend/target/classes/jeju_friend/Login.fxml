@@ -8,6 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1367.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Login_Controller">
    <children>
       <Pane prefHeight="751.0" prefWidth="396.0" style="-fx-background-color: #b3e3d9;">
