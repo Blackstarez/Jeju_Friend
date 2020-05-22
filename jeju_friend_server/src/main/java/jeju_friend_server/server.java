@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-import jeju_friend_server.Elements.Protocol;
+import jeju_friend_server.Elements.*;
 
 
 public class server {
@@ -91,38 +91,116 @@ class SocketManager extends Thread
                 protocolType = buf[0];
                 switch(protocolType)
                 {
+                    // 종료 요청 수신 시
                     case Protocol.PT_EXIT:
                         isExit = true;
                         System.out.println("["+sock.getInetAddress()+"] : 종료 요청");
                         break;
-                    default:
+                    // 요청
+                    case Protocol.PT_REQUEST:
                         protocolCode = buf[1];
                         protocolCodeEx = buf[2];
                         protocolUser = buf[3];
-                        
-
-
-
-
+                        // 패킷의 Code에 따른 작업 수행
+                        switch(protocolCode)
+                        {
+                            // 로그인
+                            case Protocol.PT_SIGNIN:
+                                protocol.setPacket(buf);
+                                Login user = Login.toLogin(protocol.getBody());
+                                if(db.getLoginResult(user.getID(), user.getPW()))
+                                {
+                                    // 로그인 성공
+                                    protocol.setPacket(Protocol.PT_RESPONSE, Protocol.PT_SIGNIN, Protocol.PT_SUCCESS, Protocol.PT_UNKNOWN);
+                                    os.write(protocol.getPacket());
+                                    System.out.println("["+sock.getInetAddress()+", "+user.getID()+"] : 로그인 성공");
+                                }
+                                else
+                                {
+                                    // 로그인 실패
+                                    protocol.setPacket(Protocol.PT_RESPONSE, Protocol.PT_SIGNIN, Protocol.PT_FAIL, Protocol.PT_UNKNOWN);
+                                    os.write(protocol.getPacket());
+                                    System.out.println("["+sock.getInetAddress()+"] : 로그인 실패");
+                                }
+                                break;
+                            // 사용자 정보
+                            case Protocol.PT_USERINFO:
+                                switch(protocolCodeEx)
+                                {
+                                    case Protocol.PT_APPLY:
+                                        break;
+                                    case Protocol.PT_LOOKUP:
+                                        break;
+                                    case Protocol.PT_DELETE:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            // 관광지
+                            case Protocol.PT_TOURIST_SPOT:
+                                switch(protocolCodeEx)
+                                {
+                                    case Protocol.PT_APPLY:
+                                        break;
+                                    case Protocol.PT_LOOKUP:
+                                        break;
+                                    case Protocol.PT_DELETE:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            // 식당
+                            case Protocol.PT_RESTAURANT:
+                                switch(protocolCodeEx)
+                                {
+                                    case Protocol.PT_APPLY:
+                                        break;
+                                    case Protocol.PT_LOOKUP:
+                                        break;
+                                    case Protocol.PT_DELETE:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            // 날씨
+                            case Protocol.PT_WEATHER:
+                                switch(protocolCodeEx)
+                                {
+                                    case Protocol.PT_APPLY:
+                                        break;
+                                    case Protocol.PT_LOOKUP:
+                                        break;
+                                    case Protocol.PT_DELETE:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            // 여행일정
+                            case Protocol.PT_TOURPLAN:
+                                switch(protocolCodeEx)
+                                {
+                                    case Protocol.PT_APPLY:
+                                        break;
+                                    case Protocol.PT_LOOKUP:
+                                        break;
+                                    case Protocol.PT_DELETE:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            default:
+                                System.out.println("잘못된 패킷 수신");
+                                break;
+                        }
 
                 }
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             

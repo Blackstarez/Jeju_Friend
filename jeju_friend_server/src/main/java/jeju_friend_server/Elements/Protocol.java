@@ -24,6 +24,10 @@ public class Protocol {
     public static final byte PT_DELETE = 3;     // 삭제
     public static final byte PT_MODIFY = 4;     // 수정
 
+    
+    public static final byte PT_FAIL = 0;       // 실패
+    public static final byte PT_SUCCESS = 1;    // 성공
+
     // 사용자
     public static final byte PT_UNKNOWN = 0;    // 모름
     public static final byte PT_USER = 1;       // 사용자
@@ -70,6 +74,27 @@ public class Protocol {
         System.arraycopy(buffer, 0, this.packet, 0, buffer.length);
     }
 
+    public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser)
+    {   
+        this.packet = null;
+        packet = new byte[LEN_HEADER];
+        
+        this.protocolType = protocolType;
+        this.protocolCode = protocolCode;
+        this.protocolCodeExpansion = protocolCodeEx;
+        this.protocolUser = protocolUser;
+        this.bodyLength = 0;
+        
+        packet[0] = protocolType;
+        packet[0] = protocolCode;
+        packet[0] = protocolCodeEx;
+        packet[0] = protocolUser;
+        for(int i=4;i<8;i++)
+        {
+            packet[i]=0;
+        } 
+    }
+
     public void setPacket(byte[] packet)
     {
         this.packet = null;
@@ -89,10 +114,25 @@ public class Protocol {
         System.arraycopy(packet, 0, this.packet, 0, packet.length);
     }
 
+    public byte[] getPacket()
+    {
+        return this.packet;
+    }
 
+    // -------------------------------------- 패킷 추출 함수 -------------------------------------
+    public static byte[] getBody(byte[] packet,int bodyLength)
+    {
+        byte[] body = new byte[bodyLength];
+        System.arraycopy(packet, 8, body, 0, packet.length);
+        return body;
+    }
 
-
-
+    public byte[] getBody()
+    {
+        byte[] body = new byte[this.bodyLength];
+        System.arraycopy(packet, 8, body, 0, packet.length);
+        return body;
+    }
 
 
 
