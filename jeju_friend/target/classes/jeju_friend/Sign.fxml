@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -15,11 +16,11 @@
             <Font name="LG PC" size="56.0" />
          </font>
       </Label>
-      <Label layoutX="125.0" layoutY="248.0" text="남성">
+      <Label layoutX="135.0" layoutY="248.0" text="남성">
          <font>
             <Font name="LG PC" size="28.0" />
          </font></Label>
-      <Label layoutX="309.0" layoutY="248.0" text="여성">
+      <Label layoutX="321.0" layoutY="248.0" text="여성">
          <font>
             <Font name="LG PC" size="28.0" />
          </font></Label>
@@ -87,7 +88,7 @@
             <Font name="LG PC" size="36.0" />
          </font>
       </Label>
-      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0">
+      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" onAction="#maleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -97,7 +98,7 @@
           </graphic>
       </ToggleButton>
 
-      <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0">
+      <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" onAction="#femaleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>

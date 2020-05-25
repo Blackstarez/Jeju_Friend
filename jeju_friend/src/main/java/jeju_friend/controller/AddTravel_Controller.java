@@ -33,6 +33,7 @@ public class AddTravel_Controller {
     }
     @FXML
     public void addTravelBtn_Actioned() throws IOException {
+        makeTravel();
         addTravel();
     }
 
@@ -51,5 +52,9 @@ public class AddTravel_Controller {
     private void addTravel() throws IOException {
         String inputName = nameField.getText();
 
+    }
+    private void makeTravel()
+    {
+        
     }
 }
