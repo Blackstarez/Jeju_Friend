@@ -128,6 +128,22 @@ class SocketManager extends Thread
                                 switch(protocolCodeEx)
                                 {
                                     case Protocol.PT_APPLY:
+                                        protocol.setPacket(buf);
+                                        UserInfo userInfo = UserInfo.toUser(protocol.getBody());
+                                        if(db.userApply(userInfo.getId(), userInfo.getPw(), userInfo.getName(), userInfo.getAge(), userInfo.getGender()))
+                                        {
+                                            // 회원가입 완료
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
+                                            os.write(protocol.getPacket());
+                                            System.out.println("["+sock.getInetAddress()+"] : 회원가입 성공");
+                                        }
+                                        else 
+                                        {
+                                            // 회원가입 정상 등록 실패
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
+                                            os.write(protocol.getPacket());
+                                            System.out.println("["+sock.getInetAddress()+"] : 회원가입 실패");
+                                        }
                                         break;
                                     case Protocol.PT_LOOKUP:
                                         break;
