@@ -21,7 +21,7 @@ public class Sign_Controller
 
 	// 이벤트 처리
 	@FXML
-	private ToggleButton maleToggleBtn;
+	private ToggleButton maleToggleBtn = new ToggleButton();
 
 	@FXML 
 	private ToggleButton femaleToggleBtn;
@@ -74,6 +74,23 @@ public class Sign_Controller
 		createAccount();
 	}
 
+	@FXML
+	private void maleToggleBtn_Actioned() 
+	{
+		if(maleToggleBtn.isSelected())
+		{
+			femaleToggleBtn.setSelected(false);
+		}
+	}
+
+	@FXML
+	private void femaleToggleBtn_Actioned()
+	{
+		if(femaleToggleBtn.isSelected())
+		{
+			maleToggleBtn.setSelected(false);
+		}
+	}
 
 	// 로직
 	public void createAccount() throws IOException
