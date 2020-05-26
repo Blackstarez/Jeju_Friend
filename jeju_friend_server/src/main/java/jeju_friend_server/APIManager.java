@@ -13,7 +13,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class APIManager {
-    private final String key= "q3XgjsnsW%2BPm%2FflDB3%2FwM%2B9kF1zrmWAiwe7zjU99saeCWbsx6fX5oIBe%2FvyVvoYElCIegVEvwgDNntaoKGL8dA%3D%3D";
+    private final String weatherkey= "q3XgjsnsW%2BPm%2FflDB3%2FwM%2B9kF1zrmWAiwe7zjU99saeCWbsx6fX5oIBe%2FvyVvoYElCIegVEvwgDNntaoKGL8dA%3D%3D";
     public APIManager()
     {
         
@@ -65,7 +65,7 @@ public class APIManager {
     public String requestWeather(int x, int y) throws IOException {
         StringBuilder urlBuilder = new StringBuilder(
                 "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /* URL */
-        urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + this.key); /* Service Key */
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + this.weatherkey); /* Service Key */
         urlBuilder
                 .append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
         urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
