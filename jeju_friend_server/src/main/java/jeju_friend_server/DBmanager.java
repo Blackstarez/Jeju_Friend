@@ -50,11 +50,11 @@ public class DBmanager {
     // 사용자 관리 - 등록, 수정, 삭제, 조회
 
     // 사용자 등록
-    public boolean userApply(String id,String pw, String name, int age, boolean gender)
+    public boolean userApply(String id,String pw, String nickName, int age, boolean gender)
     {
         char sex = gender==true?'M':'F';
         try{
-            String sql = "Insert into user_info (ID,name,age,gender,권한) Values('"+id+"', '"+name+"', '"+age+"', '"+sex+"',0);";
+            String sql = "Insert into user_info (ID,nickName,age,gender,권한) Values('"+id+"', '"+nickName+"', '"+age+"', '"+sex+"',0);";
             stmt.executeQuery(sql);
             sql = "Insert into login (ID,PW) Values('"+id+"', '"+pw+");";
             stmt.executeQuery(sql);
@@ -73,9 +73,21 @@ public class DBmanager {
         ResultSet result = stmt.executeQuery(sql);
         UserInfo user = new UserInfo();
         user.setId(result.getString("ID"));
-        user.setName(result.getString("name"));
+        user.setNickname(result.getString("nickName"));
         user.setAge(result.getInt("age"));
         user.setGender(result.getString("gender")=="M"?true:false);
         return user;        
+    }
+
+
+    // 여행계획 조회
+    public TourPlan[] tourPlanLookup(String id) throws SQLException
+    {
+        String sql = "select * from 여행일정 where ID = '"+id+"';";
+        ResultSet results = stmt.executeQuery(sql);
+        
+
+
+        return null;
     }
 }

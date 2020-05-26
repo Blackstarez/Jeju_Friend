@@ -6,9 +6,9 @@ public class UserInfo {
     private static final long serialVersionUID = 1L;
     private String id;
     private String pw;
-    private String name;
-    private boolean gender;
-    private int age;
+    private String nickName;        // 닉네임
+    private boolean gender;         // true : 남성   false : 여성
+    private int age;                // 연령
 
     public UserInfo(){}
     
@@ -33,12 +33,12 @@ public class UserInfo {
         this.pw = pw;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickName) {
+        this.nickName = nickName;
     }
 
     public boolean getGender() {
@@ -93,6 +93,6 @@ public class UserInfo {
     // 객체 출력
     public void printInfo()
     {
-        System.out.printf("ID : %s\n이름 : %s\n나이 : %d\n성별 : %s\n",this.id, this.name, this.age, this.gender==true?"남성":"여성");
+        System.out.printf("ID : %s\n닉네임 : %s\n나이 : %d\n성별 : %s\n",this.id, this.nickName, this.age, this.gender==true?"남성":"여성");
     }
 }

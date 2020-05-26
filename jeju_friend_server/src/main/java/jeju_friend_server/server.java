@@ -130,7 +130,7 @@ class SocketManager extends Thread
                                     case Protocol.PT_APPLY:
                                         protocol.setPacket(buf);
                                         UserInfo userInfo = UserInfo.toUser(protocol.getBody());
-                                        if(db.userApply(userInfo.getId(), userInfo.getPw(), userInfo.getName(), userInfo.getAge(), userInfo.getGender()))
+                                        if(db.userApply(userInfo.getId(), userInfo.getPw(), userInfo.getNickname(), userInfo.getAge(), userInfo.getGender()))
                                         {
                                             // 회원가입 완료
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
