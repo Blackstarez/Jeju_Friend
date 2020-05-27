@@ -45,6 +45,9 @@ public class Sign_Controller
 	private Button applyBtn;
 
 	@FXML
+	private Button cancelBtn;
+
+	@FXML
 	private Slider slider;
 
 	@FXML
@@ -78,6 +81,12 @@ public class Sign_Controller
 		createAccount();
 	}
 
+	
+	@FXML
+	private void cancelBtn_Actioned() throws IOException {
+		moveToLogin();
+	}
+
 	@FXML
 	private void maleToggleBtn_Actioned() {
 		if (maleToggleBtn.isSelected()) {
@@ -102,6 +111,8 @@ public class Sign_Controller
 				ageLabel.setText(Integer.toString(inputAge));
 			} );
 	}
+
+
 	// 로직
 
 
@@ -116,7 +127,7 @@ public class Sign_Controller
 		final int inputAge = this.inputAge; 					// 나이
 
 		// 필수정보들 입력 했는지 아닌지 확인 과정
-		if (isMale == false && isFemale == false) {
+		if (isMale || isFemale) {
 			final Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
@@ -151,7 +162,7 @@ public class Sign_Controller
 			final Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
-			alert.setContentText("이름을 입력해주세요!");
+			alert.setContentText("닉네임을 입력해주세요!");
 			alert.showAndWait();
 			nameField.requestFocus();
 			return;
