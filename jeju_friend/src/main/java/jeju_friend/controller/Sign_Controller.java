@@ -2,7 +2,7 @@ package jeju_friend.controller;
 
 import java.io.IOException;
 
-import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,10 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Sign_Controller 
@@ -24,7 +29,7 @@ public class Sign_Controller
 
 	// 이벤트 처리
 	@FXML
-	private final ToggleButton maleToggleBtn = new ToggleButton();
+	private ToggleButton maleToggleBtn;
 
 	@FXML
 	private ToggleButton femaleToggleBtn;
@@ -54,6 +59,8 @@ public class Sign_Controller
 	private Label ageLabel;
 
 	private int inputAge = 12;
+	Image maleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));
+	Image maleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
 
 	@FXML
 	private void idField_Typed(final KeyEvent event) {
@@ -88,17 +95,28 @@ public class Sign_Controller
 	}
 
 	@FXML
-	private void maleToggleBtn_Actioned() {
-		if (maleToggleBtn.isSelected()) {
+	private void maleToggleBtn_Actioned() throws IOException{
+		if(maleToggleBtn.isSelected())
+		{
+			maleToggleBtn.setSelected(true);
 			femaleToggleBtn.setSelected(false);
+			maleToggleBtn.setGraphic(new ImageView(maleSelectedImage));
+		}	
+		else
+		{
+			maleToggleBtn.setGraphic(new ImageView(maleUnselectedImage));
 		}
 	}
 
 	@FXML
-	private void femaleToggleBtn_Actioned() {
-		if (femaleToggleBtn.isSelected()) {
+	private void femaleToggleBtn_Actioned() throws IOException{		
+		if(femaleToggleBtn.isSelected())
+		{
+			femaleToggleBtn.setSelected(true);
 			maleToggleBtn.setSelected(false);
+			maleToggleBtn.setGraphic(new ImageView(maleUnselectedImage));
 		}
+		
 	}
 
 	@FXML
