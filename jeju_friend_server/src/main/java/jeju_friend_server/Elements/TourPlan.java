@@ -8,12 +8,9 @@ public class TourPlan {
     private String tourPlanName;    //여행계획명
     private int tourWith;           //함께하는 사람
     private String tourForm;        //여행형태  구분자 ','
-    private boolean[] areaInterest; //관심지역
+    private int areaInterest; //관심지역
 
-    public TourPlan()
-    {
-        this.areaInterest = new boolean[5];
-    }
+    public TourPlan(){}
     // getter, setter
     public String getUserId() {
         return userId;
@@ -47,11 +44,11 @@ public class TourPlan {
         this.tourForm = tourForm;
     }
 
-    public boolean[] getAreaInterest() {
+    public int getAreaInterest() {
         return areaInterest;
     }
 
-    public void setAreaInterest(boolean[] areaInterest) {
+    public void setAreaInterest(int areaInterest) {
         this.areaInterest = areaInterest;
     }
     
@@ -74,12 +71,12 @@ public class TourPlan {
         return serializedMember;
     }
 
-    public static TourPlan toLogin(byte[] serializedMember)
+    public static TourPlan toLogin(byte[] serializedTourPlan)
     {
         TourPlan plan = null;
 
         try{
-            ByteArrayInputStream bais = new ByteArrayInputStream(serializedMember);
+            ByteArrayInputStream bais = new ByteArrayInputStream(serializedTourPlan);
             try {
                 ObjectInputStream ois = new ObjectInputStream(bais);
                 plan = (TourPlan)ois.readObject();
@@ -111,7 +108,7 @@ public class TourPlan {
                 with="혼자서";
                 break;
         }
-        System.out.printf("사용자ID : %s\n여행명 : %s\n함께하는 사람 : %s\n여행형태 : %s\n",this.userId,this.tourPlanName,with,this.tourForm);
+        System.out.printf("사용자ID : %s\n여행명 : %s\n함께하는 사람 : %s\n여행형태 : %s\n관심지역 : %s\n",this.userId,this.tourPlanName,with,this.tourForm,this.areaInterest);
     }
 
 

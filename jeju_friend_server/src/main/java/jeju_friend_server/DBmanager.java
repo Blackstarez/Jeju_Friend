@@ -50,14 +50,25 @@ public class DBmanager {
     // 사용자 관리 - 등록, 수정, 삭제, 조회
 
     // 사용자 등록
-    public boolean userApply(String id,String pw, String nickName, int age, boolean gender)
+    public boolean userApply(String id,String pw, String nickName, int age, boolean gender, int interestArea)
     {
         char sex = gender==true?'M':'F';
         try{
-            String sql = "Insert into user_info (ID,nickName,age,gender,권한) Values('"+id+"', '"+nickName+"', '"+age+"', '"+sex+"',0);";
-            stmt.executeQuery(sql);
-            sql = "Insert into login (ID,PW) Values('"+id+"', '"+pw+");";
-            stmt.executeQuery(sql);
+            String sql = "Insert into user_info (ID,nickName,age,gender,권한,관심지역) Values(?,?,?,?,?,?);";
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1,id);
+            prestmt.setString(2,nickName);
+            prestmt.setInt(3, age);
+            prestmt.setString(4, String.valueOf(sex));
+            prestmt.setInt(5,0);
+            prestmt.setInt(6,interestArea);
+            prestmt.executeUpdate();
+
+            sql = "Insert into login (ID,PW) Values(?,?);";
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1,id);
+            prestmt.setString(2,pw);
+            prestmt.executeUpdate();
         }catch(Exception e)
         {
             e.printStackTrace();
@@ -73,21 +84,93 @@ public class DBmanager {
         ResultSet result = stmt.executeQuery(sql);
         UserInfo user = new UserInfo();
         user.setId(result.getString("ID"));
-        user.setNickname(result.getString("nickName"));
+        user.setNickName(result.getString("nickName"));
         user.setAge(result.getInt("age"));
         user.setGender(result.getString("gender")=="M"?true:false);
+        user.setInterestArea(result.getInt("관심지역"));
         return user;        
     }
 
 
+    // 관광지 조회
+    public TouristSpot[] touristSpotLookup() throws SQLException
+    {
+        String sql = "select * from 관광지 where 구분 = 1";
+        ResultSet results = stmt.executeQuery(sql);
+        results.last();
+        int rowCount = results.getRow();
+        results.beforeFirst();
+        TouristSpot[] spotList = new TouristSpot[rowCount];
+        int index = 0;
+        while(results.next())
+        {
+            spotList[index] = new TouristSpot();
+            spotList[index].setTouristSpot(results.getString("관광지명"));
+            spotList[index].setAreaCode(results.getInt("지역코드"));
+            spotList[index].setContactInformation(results.getString("연락처"));
+            spotList[index].setLocation(results.getString("위치"));
+            spotList[index].setInformation(results.getString("정보"));
+            spotList[index].setChildAdmissionFee(results.getString("어린이관람료"));
+            spotList[index].setTeenagerAdmissionFee(results.getString("청소년관람료"));
+            spotList[index].setAdultAdmissionFee(results.getString("성인관람료"));
+            spotList[index].setHomepage(results.getString("홈페이지"));
+            spotList[index].setWeekdayViewingTime(results.getString("평일관람시간"));
+            spotList[index].setHolidayViewingTime(results.getString("휴일관람시간"));
+            spotList[index].setSortation(results.getInt("구분"));
+            spotList[index].setClosedInformation(results.getString("휴관정보"));
+            spotList[index].setEtc(results.getString("특이사항"));
+            spotList[index].setRecommendedNumber(results.getInt("추천수"));
+            index++;
+        }
+        return spotList;
+    }
+
+    // 음식점 조회
+    public TouristSpot[] foodSpotLookup() throws SQLException
+    {
+        String sql = "select * from 관광지 where 구분 = 2";
+        ResultSet results = stmt.executeQuery(sql);
+        results.last();
+        int rowCount = results.getRow();
+        results.beforeFirst();
+        TouristSpot[] spotList = new TouristSpot[rowCount];
+        int index = 0;
+        while(results.next())
+        {
+            spotList[index] = new TouristSpot();
+            spotList[index].setTouristSpot(results.getString("관광지명"));          // 음식점명으로 사용된다.
+            spotList[index].setAreaCode(results.getInt("지역코드"));
+            spotList[index].setContactInformation(results.getString("연락처"));
+            spotList[index].setLocation(results.getString("위치"));
+            spotList[index].setInformation(results.getString("정보"));
+            spotList[index].setSortation(results.getInt("구분"));
+            spotList[index].setEtc(results.getString("특이사항"));
+            spotList[index].setRecommendedNumber(results.getInt("추천수"));
+            index++;
+        }
+        return spotList;
+    }
+
     // 여행계획 조회
     public TourPlan[] tourPlanLookup(String id) throws SQLException
     {
-        String sql = "select * from 여행일정 where ID = '"+id+"';";
+        String sql = "select * from '여행일정' where ID = '"+id+"';";
         ResultSet results = stmt.executeQuery(sql);
-        
-
-
-        return null;
+        results.last();
+        int rowCount = results.getRow();
+        results.beforeFirst();
+        TourPlan[] tourPlanList = new TourPlan[rowCount];
+        int index = 0;
+        while(results.next())
+        {
+            tourPlanList[index] = new TourPlan();
+            tourPlanList[index].setUserId(results.getString("ID"));
+            tourPlanList[index].setTourPlanName(results.getString("여행명"));
+            tourPlanList[index].setTourWith(results.getInt("동행코드"));
+            tourPlanList[index].setTourForm(results.getString("여행목적"));
+            tourPlanList[index].setAreaInterest(results.getInt("관심지역"));
+            index++;
+        }
+        return tourPlanList;
     }
 }

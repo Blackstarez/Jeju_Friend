@@ -18,7 +18,7 @@ public class TouristSpot {
     private String information;             //정보
     private String location;                //위치
     private int recommendedNumber;          //추천수
-    private int sortation;               //구분
+    private int sortation;                  //구분
     
     public TouristSpot(){}
     
@@ -162,12 +162,12 @@ public class TouristSpot {
         return serializedMember;
     }
 
-    public static TouristSpot toLogin(byte[] serializedMember)
+    public static TouristSpot toLogin(byte[] serializedTouristSpot)
     {
         TouristSpot spot = null;
 
         try{
-            ByteArrayInputStream bais = new ByteArrayInputStream(serializedMember);
+            ByteArrayInputStream bais = new ByteArrayInputStream(serializedTouristSpot);
             try {
                 ObjectInputStream ois = new ObjectInputStream(bais);
                 spot = (TouristSpot)ois.readObject();
@@ -180,7 +180,7 @@ public class TouristSpot {
     // 객체 출력
     public void printInfo()
     {
-        String code = this.sortation == 1?"관광지":(this.sortation==2?"박물관미술관":"음식점");
+        String code = this.sortation == 1?"관광지":"음식점";
         System.out.println("------------------------");
         System.out.printf("관광지명 : %s\n지역코드 : %d\n",this.touristSpot,this.areaCode);
         System.out.printf("연락처 : %s\n홈페이지 : %s\n",this.contactInformation,this.homepage);
