@@ -73,7 +73,7 @@
          <font>
             <Font name="LG PC" size="18.0" />
          </font></Button>
-      <Button layoutX="1201.0" layoutY="819.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="75.0" text="취소" wrapText="true">
+      <Button fx:id="cancelBtn" layoutX="1201.0" layoutY="819.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" prefHeight="45.0" prefWidth="75.0" text="취소" wrapText="true">
          <font>
             <Font name="LG PC" size="18.0" />
          </font></Button>
@@ -87,15 +87,6 @@
             <Font name="LG PC" size="36.0" />
          </font>
       </Label>
-      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" onAction="#maleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
-         <graphic>
-            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@image/male_icon.png" />
-              </image>
-            </ImageView>
-          </graphic>
-      </ToggleButton>
 
       <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" onAction="#femaleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
          <graphic>
@@ -106,13 +97,25 @@
             </ImageView>
          </graphic>
    </ToggleButton>
+   
+      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" onAction="#maleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@image/male_icon.png" />
+              </image>
+            </ImageView>
+          </graphic>
+      </ToggleButton>
+
+     
       <ImageView fitHeight="513.0" fitWidth="748.0" layoutX="611.0" layoutY="265.0">
          <image>
             <Image url="@image/map.png" />
          </image>
       </ImageView>
-      <Slider layoutX="329.0" layoutY="749.0" prefHeight="27.0" prefWidth="180.0" />
-      <Label layoutX="165.0" layoutY="737.0" prefHeight="52.0" prefWidth="94.0" text="1">
+      <Slider fx:id="slider" layoutX="329.0" layoutY="749.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" prefHeight="27.0" prefWidth="180.0" showTickLabels="true" showTickMarks="true" value="20.0" />
+      <Label fx:id="ageLabel" layoutX="165.0" layoutY="737.0" prefHeight="52.0" prefWidth="94.0" text="1">
          <font>
             <Font size="28.0" />
          </font>
