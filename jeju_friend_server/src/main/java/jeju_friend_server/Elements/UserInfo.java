@@ -9,6 +9,7 @@ public class UserInfo {
     private String nickName;        // 닉네임
     private boolean gender;         // true : 남성   false : 여성
     private int age;                // 연령
+    private int interestArea;       // 관심지역 지도상으로 12시방향부터 시계방향으로 1~5
 
     public UserInfo(){}
     
@@ -33,14 +34,6 @@ public class UserInfo {
         this.pw = pw;
     }
 
-    public String getNickname() {
-        return nickName;
-    }
-
-    public void setNickname(String nickName) {
-        this.nickName = nickName;
-    }
-
     public boolean getGender() {
         return gender;
     }
@@ -55,6 +48,22 @@ public class UserInfo {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public int getInterestArea() {
+        return interestArea;
+    }
+
+    public void setInterestArea(int interestArea) {
+        this.interestArea = interestArea;
     }
 
     //직렬화 및 역직렬화
@@ -75,12 +84,12 @@ public class UserInfo {
         return serializedMember;
     }
 
-    public static UserInfo toUser(byte[] serializedMember)
+    public static UserInfo toUser(byte[] serializedUserInfo)
     {
         UserInfo user = null;
 
         try{
-            ByteArrayInputStream bais = new ByteArrayInputStream(serializedMember);
+            ByteArrayInputStream bais = new ByteArrayInputStream(serializedUserInfo);
             try {
                 ObjectInputStream ois = new ObjectInputStream(bais);
                 user = (UserInfo)ois.readObject();
@@ -95,4 +104,6 @@ public class UserInfo {
     {
         System.out.printf("ID : %s\n닉네임 : %s\n나이 : %d\n성별 : %s\n",this.id, this.nickName, this.age, this.gender==true?"남성":"여성");
     }
+
+
 }
