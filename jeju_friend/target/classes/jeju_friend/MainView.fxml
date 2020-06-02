@@ -60,7 +60,7 @@
                   <Font name="LG PC" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="42.0" layoutY="836.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="98.0" text="날씨 확인">
+            <Button fx:id="weatherBtn" layoutX="42.0" layoutY="836.0" mnemonicParsing="false" onAction="#weatherBtn_Actioned" prefHeight="38.0" prefWidth="98.0" text="날씨 확인">
                <font>
                   <Font name="LG PC" size="18.0" />
                </font>
