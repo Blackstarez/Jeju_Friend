@@ -54,16 +54,13 @@ public class Protocol {
 
 
     // -----------------------------------  함수  ----------------------------------
-    public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser, byte[] buffer)
+    // 데이터를 포함하여 송신하는 경우 사용
+    public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser, byte[] body)
     {   
         this.packet = null;
-        packet = new byte[buffer.length];
+        packet = new byte[body.length+LEN_HEADER];
         
-        byte[] bodyLength = new byte[4];
-        bodyLength[0] = buffer[4];
-        bodyLength[1] = buffer[5];
-        bodyLength[2] = buffer[6];
-        bodyLength[3] = buffer[7];
+        byte[] bodyLength = intToByteArray(body.length);
 
         this.protocolType = protocolType;
         this.protocolCode = protocolCode;
@@ -71,9 +68,10 @@ public class Protocol {
         this.protocolUser = protocolUser;
         this.bodyLength = byteArrayToint(bodyLength);
        
-        System.arraycopy(buffer, 0, this.packet, 0, buffer.length);
+        System.arraycopy(body, 0, this.packet, 8, body.length);
     }
 
+    // 데이터를 포함하지 않고 송신하는 경우 사용
     public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser)
     {   
         this.packet = null;
@@ -95,6 +93,7 @@ public class Protocol {
         } 
     }
 
+    // 수신한 패킷을 그대로 복사하는 경우 사용
     public void setPacket(byte[] packet)
     {
         this.packet = null;

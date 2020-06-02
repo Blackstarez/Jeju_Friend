@@ -4,20 +4,21 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
+import jeju_friend_server.Elements.Weather;
+
 
 public class APIManager {
     private final String weatherkey= "q3XgjsnsW%2BPm%2FflDB3%2FwM%2B9kF1zrmWAiwe7zjU99saeCWbsx6fX5oIBe%2FvyVvoYElCIegVEvwgDNntaoKGL8dA%3D%3D";
-    public APIManager()
-    {
-        
-    }
+    public APIManager() {   }
     public String getDay()
     {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -36,6 +37,109 @@ public class APIManager {
         return Integer.toString(result);
         
     }
+
+    public ArrayList<Weather> getWeather(String jsonData) throws java.text.ParseException
+    {
+        ArrayList<Weather> weatherInfoList = new ArrayList<Weather>();
+        try { JSONParser jsonParse = new JSONParser(); 
+            JSONObject jsonObj = (JSONObject) jsonParse.parse(jsonData);  
+            JSONObject jsonObj2 = (JSONObject)jsonParse.parse(jsonObj.get("response").toString());
+            JSONObject jsonObj3 = (JSONObject)jsonParse.parse(jsonObj2.get("body").toString());
+            JSONObject jsonObj4 = (JSONObject)jsonParse.parse(jsonObj3.get("items").toString());
+            System.out.println("json item : "+jsonObj3.get("item"));
+            
+
+            JSONArray weatherArray =  (JSONArray)jsonObj4.get("item");
+            
+            boolean isEqual = true;
+            String fcstTime = new String();
+            Weather tmp = null;
+            DateFormat df = new SimpleDateFormat("yyyymmdd");
+            for(int i=0; i < weatherArray.size(); i++) 
+            { 
+                JSONObject weatherObject = (JSONObject) weatherArray.get(i);
+                
+                
+                /*System.out.println("======== weather : " + i + " ========"); 
+                
+                System.out.println("날짜 : "+weatherObject.get("fcstDate")); 
+                System.out.println("시각 : "+weatherObject.get("fcstTime"));
+                System.out.println("분류 : "+weatherObject.get("category"));
+                System.out.println("값 : "+weatherObject.get("fcstValue"));*/
+
+                 
+                if(i==0)
+                {
+                    tmp = new Weather();
+                    fcstTime = String.valueOf(weatherObject.get("fcstTime"));
+                }
+
+                if(fcstTime.compareTo(String.valueOf(weatherObject.get("fcstTime"))) == 0)
+                    isEqual = true;
+                else
+                {
+                    isEqual = false;
+                    fcstTime = String.valueOf(weatherObject.get("fcstTime"));
+                }
+
+                
+                
+                if(!isEqual)
+                {
+                    System.out.println("시간이 같지 않음");
+                    weatherInfoList.add(tmp);
+                    tmp = new Weather();
+                    //weatherInfoList.get(weatherInfoList.size()-1).printInfo();
+                }
+                
+                
+                tmp.setDay(df.parse(String.valueOf(weatherObject.get("fcstDate"))));
+                tmp.setTime(Integer.parseInt(String.valueOf(weatherObject.get("fcstTime")))/100);
+                String category = String.valueOf(weatherObject.get("category"));
+                switch(category)
+                {
+                    case "POP": // 강수확률
+                        tmp.setRainfallProbability(Integer.parseInt(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "PTY": // 강수형태
+                        tmp.setRainfallForm(Integer.parseInt(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "REH": // 습도
+                        tmp.setHumidity(Integer.parseInt(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "SKY": // 하늘상태
+                        tmp.setSky(Integer.parseInt(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "T3H": // 3시간 기온
+                        tmp.setTemperature(Float.parseFloat(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "TMN": // 아침 최저기온
+                        tmp.setLowestTemperature(Float.parseFloat(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "TMX": // 낮 최고기온
+                        tmp.setHighestTemperature(Float.parseFloat(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "VEC": // 풍향
+                        tmp.setWindDirection(Integer.parseInt(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    case "WSD": // 풍속
+                        tmp.setWindSpeed(Float.parseFloat(String.valueOf(weatherObject.get("fcstValue"))));
+                        break;
+                    default:
+                        continue;
+                }
+
+                if(i == weatherArray.size()-1)
+                {
+                    weatherInfoList.add(tmp);
+                    //weatherInfoList.get(weatherInfoList.size()-1).printInfo();
+                }
+            } 
+        } catch (ParseException e) { e.printStackTrace(); }
+
+        return weatherInfoList;
+    }
+
     public String jsonParsor(String jsonData)
     {
         try { JSONParser jsonParse = new JSONParser(); 
@@ -104,8 +208,34 @@ public class APIManager {
         return sb.toString();
     }
 
+    public Weather[] getWeatherInfo(int x, int y) throws IOException
+    {
+        APIManager a = new APIManager();
+        String weatherJson = a.requestWeather(x,y);
+        Weather[] weatherInfo = null;
+        try {
+            ArrayList<Weather> weatherInfoList = a.getWeather(weatherJson);
+            weatherInfo = new Weather[weatherInfoList.size()];
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return weatherInfo;
+    }
+
     public static void main(String[] args) throws IOException {
         APIManager a = new APIManager();
-        a.jsonParsor(a.requestWeather(91, 134));
+        String weatherJson = a.requestWeather(91,134);
+        a.jsonParsor(weatherJson);
+        try {
+            ArrayList<Weather> weatherInfoList = a.getWeather(weatherJson);
+            for(Weather w : weatherInfoList)
+            {
+                System.out.println("\n-------------------------");
+                w.printInfo();
+                System.out.println("-------------------------\n");
+            }
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -173,4 +173,17 @@ public class DBmanager {
         }
         return tourPlanList;
     }
+
+
+
+    // 지역코드 - 격자 x, 격자 y 조회
+    public int[] getXY(int areaCode) throws SQLException
+    {
+        String sql = "select X, Y from 지역코드 where 지역코드.지역코드 = '"+areaCode+"';";
+        ResultSet result = stmt.executeQuery(sql);
+        int[] xy = new int[2];
+        xy[0] = result.getInt("X");
+        xy[1] = result.getInt("Y");
+        return xy;
+    }
 }
