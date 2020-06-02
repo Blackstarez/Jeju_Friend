@@ -153,7 +153,7 @@ class SocketManager extends Thread
                                         break;
                                 }
                                 break;
-                            // 관광지
+                            // 관광지 - 등록, 삭제의 경우 추후 추가할 기능(확장성)으로 남겨둠.
                             case Protocol.PT_TOURIST_SPOT:
                                 switch(protocolCodeEx)
                                 {
@@ -167,7 +167,7 @@ class SocketManager extends Thread
                                         break;
                                 }
                                 break;
-                            // 식당
+                            // 식당 - 등록, 삭제의 경우 추후 추가할 기능(확장성)으로 남겨둠.
                             case Protocol.PT_RESTAURANT:
                                 switch(protocolCodeEx)
                                 {
@@ -181,19 +181,19 @@ class SocketManager extends Thread
                                         break;
                                 }
                                 break;
-                            // 날씨
+                            // 날씨 - 조회밖에 없음
                             case Protocol.PT_WEATHER:
-                                switch(protocolCodeEx)
-                                {
-                                    case Protocol.PT_APPLY:
-                                        break;
-                                    case Protocol.PT_LOOKUP:
-                                        break;
-                                    case Protocol.PT_DELETE:
-                                        break;
-                                    default:
-                                        break;
-                                }
+                                protocol.setPacket(buf);
+                                // 수신된 패킷으로 부터 Weather클래스 획득
+                                Weather w = Weather.toWeather(protocol.getBody());
+                                APIManager tmp = new APIManager();
+                                // 수신된 지역코드로부터 격자X, 격자Y를 획득
+                                int[] area = db.getXY(w.getAreaCode());
+                                // 격자 X, 격자 Y를 통해 API로 해당 지역의 날씨 정보를 획득
+                                Weather[] weatherList = tmp.getWeatherInfo(area[0], area[1]);
+                                
+                                protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_WEATHER,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN,Weather.getBytes(weatherList));
+                                os.write(protocol.getPacket());
                                 break;
                             // 여행일정
                             case Protocol.PT_TOURPLAN:
