@@ -24,6 +24,8 @@ public class Main_Controller {
     private Button addTravelBtn;
     @FXML
     private Button logoutBtn;
+    @FXML
+    private Button weatherBtn;
     // 이벤트 핸들러
 
     @FXML
@@ -49,6 +51,13 @@ public class Main_Controller {
         moveToLogin();
     }
 
+    @FXML
+    public void weatherBtn_Actioned() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/weatherView.fxml"));
+        Parent root = loader.load();
+        Weather_Controller weatherController = loader.getController();
+        weatherBtn.getScene().setRoot(root);
+    }
     // 로직
 
     public void moveToSearch() {
@@ -73,6 +82,5 @@ public class Main_Controller {
 		primaryStage.setResizable(false);
         primaryStage.show(); 
     }
-
 
 }
