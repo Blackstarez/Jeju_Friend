@@ -8,34 +8,33 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1367.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Login_Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Login_Controller">
    <children>
-      <Pane prefHeight="751.0" prefWidth="396.0" style="-fx-background-color: #b3e3d9;">
+      <Pane prefHeight="672.0" prefWidth="333.0" style="-fx-background-color: #b3e3d9;">
          <children>
             <Label fx:id="pwLable" layoutX="29.0" layoutY="166.0" prefHeight="58.0" prefWidth="404.0" text="제주 친구 " textOverrun="CLIP">
                <font>
                   <Font name="LG PC" size="42.0" />
                </font>
             </Label>
-            <TextField fx:id="idField" layoutX="29.0" layoutY="267.0" onKeyTyped="#idField_Typed" onMouseClicked="#idField_Clicked" prefHeight="61.0" prefWidth="339.0">
+            <TextField fx:id="idField" layoutX="29.0" layoutY="267.0" onKeyTyped="#idField_Typed" onMouseClicked="#idField_Clicked" prefHeight="61.0" prefWidth="282.0">
                <font>
                   <Font name="LG PC" size="20.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="pwField" layoutX="29.0" layoutY="366.0" onKeyTyped="#pwField_Typed" onMouseClicked="#pwField_Cliked" prefHeight="61.0" prefWidth="339.0">
+            <PasswordField fx:id="pwField" layoutX="29.0" layoutY="366.0" onKeyTyped="#pwField_Typed" onMouseClicked="#pwField_Cliked" prefHeight="61.0" prefWidth="282.0">
                <font>
                   <Font name="LG PC" size="20.0" />
                </font>
             </PasswordField>
-            <Button fx:id="signBtn" layoutX="39.0" layoutY="500.0" mnemonicParsing="false" onAction="#signBtn_Actioned" prefHeight="33.0" prefWidth="149.0" text="회원가입">
+            <Button fx:id="signBtn" layoutX="39.0" layoutY="567.0" mnemonicParsing="false" onAction="#signBtn_Actioned" prefHeight="43.0" prefWidth="120.0" text="회원가입">
                <font>
-                  <Font name="LG PC" size="29.0" />
+                  <Font name="LG PC" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="loginBtn" layoutX="219.0" layoutY="500.0" mnemonicParsing="false" onAction="#loginBtn_Actioned" prefHeight="33.0" prefWidth="149.0" text="로그인">
+            <Button fx:id="loginBtn" layoutX="184.0" layoutY="567.0" mnemonicParsing="false" onAction="#loginBtn_Actioned" prefHeight="43.0" prefWidth="120.0" text="로그인">
                <font>
-                  <Font name="LG PC" size="29.0" />
+                  <Font name="LG PC" size="22.0" />
                </font>
             </Button>
             <Label fx:id="pwLabel" layoutX="52.0" layoutY="385.0" text="비밀번호">

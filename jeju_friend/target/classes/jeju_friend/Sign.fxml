@@ -9,9 +9,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Sign_Controller">
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Sign_Controller">
    <children>
-      <Label layoutX="799.0" layoutY="167.0" prefHeight="81.0" prefWidth="336.0" text="관심 지역 선택">
+      <Label layoutX="799.0" layoutY="167.0" text="관심 지역 선택">
          <font>
             <Font name="LG PC" size="56.0" />
          </font>
@@ -30,8 +30,11 @@
                <font>
                   <Font name="LG PC" size="30.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </Label>
-            <TextField fx:id="idField" minHeight="0.0" onKeyTyped="#idField_Typed" prefHeight="36.0" prefWidth="393.0">
+            <TextField fx:id="idField" onKeyTyped="#idField_Typed">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></TextField>
@@ -40,7 +43,7 @@
                   <Font name="LG PC" size="30.0" />
                </font>
             </Label>
-            <PasswordField fx:id="pwField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwField_Typed" prefHeight="36.0" prefWidth="393.0">
+            <PasswordField fx:id="pwField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwField_Typed">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
@@ -53,7 +56,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </Label>
-            <PasswordField fx:id="pwConfirmField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwConfirmField_Typed" prefHeight="36.0" />
+            <PasswordField fx:id="pwConfirmField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwConfirmField_Typed" />
             <Label text="닉네임">
                <font>
                   <Font name="LG PC" size="30.0" />
@@ -62,33 +65,25 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="nameField" maxHeight="-Infinity" minHeight="0.0" prefHeight="36.0" prefWidth="219.0">
+            <TextField fx:id="nameField" maxHeight="-Infinity">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
          </children>
       </VBox>
-      <Button fx:id="applyBtn" layoutX="1310.0" layoutY="819.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" prefHeight="45.0" prefWidth="75.0" text="확인" wrapText="true">
-         <font>
-            <Font name="LG PC" size="18.0" />
-         </font></Button>
-      <Button fx:id="cancelBtn" layoutX="1201.0" layoutY="819.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" prefHeight="45.0" prefWidth="75.0" text="취소" wrapText="true">
-         <font>
-            <Font name="LG PC" size="18.0" />
-         </font></Button>
-      <Label layoutX="48.0" layoutY="741.0" text="나이">
+      <Label layoutX="45.0" layoutY="702.0" text="나이">
          <font>
             <Font name="LG PC" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="268.0" layoutY="741.0" text="세">
+      <Label layoutX="209.0" layoutY="703.0" text="세">
          <font>
             <Font name="LG PC" size="36.0" />
          </font>
       </Label>
 
-      <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" onAction="#femaleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
+      <ToggleButton fx:id="femaleToggleBtn" layoutX="296.0" layoutY="153.0" mnemonicParsing="false" onAction="#femaleToggleBtn_Actioned">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -98,7 +93,7 @@
          </graphic>
    </ToggleButton>
    
-      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" onAction="#maleToggleBtn_Actioned" prefHeight="70.0" prefWidth="70.0">
+      <ToggleButton fx:id="maleToggleBtn" layoutX="112.0" layoutY="153.0" mnemonicParsing="false" onAction="#maleToggleBtn_Actioned">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -109,16 +104,33 @@
       </ToggleButton>
 
      
-      <ImageView fitHeight="513.0" fitWidth="748.0" layoutX="611.0" layoutY="265.0">
+      <ImageView fitHeight="513.0" fitWidth="748.0" layoutX="595.0" layoutY="210.0">
          <image>
             <Image url="@image/map.png" />
          </image>
       </ImageView>
-      <Slider fx:id="slider" layoutX="329.0" layoutY="749.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" prefHeight="27.0" prefWidth="180.0" showTickLabels="true" showTickMarks="true" value="20.0" />
-      <Label fx:id="ageLabel" layoutX="165.0" layoutY="737.0" prefHeight="52.0" prefWidth="94.0" text="1">
+      <Slider fx:id="slider" layoutX="45.0" layoutY="809.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" showTickLabels="true" showTickMarks="true" value="20.0" />
+      <Label fx:id="ageLabel" layoutX="159.0" layoutY="706.0" text="1">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
+      <Pane layoutX="1149.0" layoutY="798.0" prefHeight="99.0" prefWidth="234.0">
+         <children>
+            <Button fx:id="cancelBtn" layoutX="31.0" layoutY="29.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소" wrapText="true">
+               <font>
+                  <Font name="LG PC" size="26.0" />
+               </font>
+            </Button>
+            <Button fx:id="applyBtn" layoutX="129.0" layoutY="29.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" text="확인" wrapText="true">
+               <font>
+                  <Font name="LG PC" size="26.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </Pane>
    </children>
 </Pane>
