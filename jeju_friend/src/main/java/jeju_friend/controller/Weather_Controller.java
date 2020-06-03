@@ -26,18 +26,14 @@ public class Weather_Controller {
     @FXML
     private Button backBtn;
 
-    // 이벤트 처리
+    
     @FXML
-    public void start() {
-        Calendar calendar = Calendar.getInstance();
+    public void view() {
+       
 
-        dateLabel1.setText("오늘 (" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DATE) + ")");
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        dateLabel2.setText("내일 (" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DATE) + ")");
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        dateLabel3.setText("모레 (" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DATE) + ")");
     }
 
+    // 이벤트 처리
     @FXML
     public void backBtn_Actioned() throws IOException {
         moveToMain();
@@ -48,7 +44,7 @@ public class Weather_Controller {
     public void moveToMain() throws IOException
     {
         final Stage primaryStage = (Stage) backBtn.getScene().getWindow();
-        final Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/MainView.fxml"));
+        final Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Main.fxml"));
         final Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);

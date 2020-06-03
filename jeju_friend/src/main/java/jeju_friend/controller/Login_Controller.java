@@ -124,10 +124,11 @@ public class Login_Controller
 	public void moveToMain() throws IOException
 	{
 		Stage primaryStage = (Stage) loginBtn.getScene().getWindow(); 
-        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Main.fxml"));
         Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
         primaryStage.show();   
 	}
 	public void moveToSign() throws IOException

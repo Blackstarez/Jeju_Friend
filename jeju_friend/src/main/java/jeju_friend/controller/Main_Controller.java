@@ -26,6 +26,8 @@ public class Main_Controller {
     private Button logoutBtn;
     @FXML
     private Button weatherBtn;
+    @FXML
+    private Button setUpBtn;
     // 이벤트 핸들러
 
     @FXML
@@ -57,7 +59,7 @@ public class Main_Controller {
         Parent root = loader.load();
         Weather_Controller weatherController = loader.getController();
         weatherBtn.getScene().setRoot(root);
-        weatherController.start();
+        weatherController.view();
     }
     // 로직
 
@@ -76,12 +78,11 @@ public class Main_Controller {
     }
     public void moveToAddTrevel() throws IOException
     {
-        Stage primaryStage = (Stage) addTravelBtn.getScene().getWindow(); 
-        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/AddTravel.fxml"));
-        Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-        primaryStage.show(); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/AddTravel.fxml"));
+        Parent root = loader.load();
+        AddTravel_Controller controller = loader.getController();
+        weatherBtn.getScene().setRoot(root);
+        controller.view();
     }
 
 }
