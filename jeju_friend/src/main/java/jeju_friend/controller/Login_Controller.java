@@ -138,6 +138,7 @@ public class Login_Controller
         Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
         primaryStage.show();   
 	}
 }
