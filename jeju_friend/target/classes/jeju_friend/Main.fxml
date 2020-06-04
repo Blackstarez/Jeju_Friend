@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #e8f6ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Main_Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #e8f6ff;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Main_Controller">
     <children>
         <Pane layoutX="27.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(164, 92, 162);">
             <children>
@@ -54,7 +54,7 @@
             </Pane>
             <Pane layoutY="27.0" prefHeight="50.0" prefWidth="503.0" style="-fx-background-color: white;">
                <children>
-                  <Label alignment="CENTER" layoutX="227.0" layoutY="6.0" text="제목" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="leftPaneLabel" alignment="CENTER" layoutX="227.0" layoutY="6.0" text="제목" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="LG PC" size="32.0" />
                      </font>
@@ -67,7 +67,7 @@
          <children>
             <Pane layoutY="31.0" prefHeight="50.0" prefWidth="503.0" style="-fx-background-color: white;">
                <children>
-                  <Label alignment="CENTER" layoutX="227.0" layoutY="6.0" text="제목" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="rightPaneLabel" alignment="CENTER" layoutX="227.0" layoutY="6.0" text="제목" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="LG PC" size="32.0" />
                      </font>
@@ -81,7 +81,7 @@
                <font>
                   <Font name="LG PC" size="22.0" />
                </font></TextField>
-            <Label fx:id="searchLabel" layoutX="106.0" layoutY="27.0" text="관심있는 관광지를 검색해 보세요!">
+            <Label fx:id="searchLabel" layoutX="110.0" layoutY="24.0" text="관심있는 관광지를 검색해 보세요!">
                <font>
                   <Font name="LG PC" size="25.0" />
                </font>
@@ -100,7 +100,7 @@
                  <Font name="LG PC" size="26.0" />
               </font>
            </Label>
-           <Button fx:id="addTravelBtn" layoutX="209.0" layoutY="190.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" prefHeight="38.0" prefWidth="92.0" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
+           <Button fx:id="addTravelBtn" layoutX="196.0" layoutY="190.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
               <font>
                  <Font name="LG PC" size="19.0" />
               </font>
@@ -110,7 +110,7 @@
                  <Font name="LG PC" size="18.0" />
               </font>
            </Button>
-           <Button fx:id="weatherBtn" layoutX="42.0" layoutY="836.0" mnemonicParsing="false" onAction="#weatherBtn_Actioned" prefHeight="38.0" prefWidth="98.0" style="-fx-background-color: #67F0D1;" text="날씨 확인">
+           <Button fx:id="weatherBtn" layoutX="42.0" layoutY="836.0" mnemonicParsing="false" onAction="#weatherBtn_Actioned" style="-fx-background-color: #67F0D1;" text="날씨 확인">
               <font>
                  <Font name="LG PC" size="18.0" />
               </font>

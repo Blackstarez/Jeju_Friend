@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Noto Sans CJK KR Bold';
+    src: url('Noto.otf');
+}
+
+#mainLabel{
+    -fx-font-family:"Noto Sans CJK KR Bold" ;
+    -fx-font-size: 42px;
+}
+
+.text{
+    -fx-font-family:"Noto Sans CJK KR Bold" ;
+}
+
