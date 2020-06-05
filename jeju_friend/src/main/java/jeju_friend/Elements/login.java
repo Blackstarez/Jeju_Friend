@@ -8,6 +8,8 @@ public class Login implements Serializable, Cloneable{
     private String ID;
     private String PW;
 
+    public Login(){}
+
     public Login(String id, String pw)
     {
         this.ID = id;
