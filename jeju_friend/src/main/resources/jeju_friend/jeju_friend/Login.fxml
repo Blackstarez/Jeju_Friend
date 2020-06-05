@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="1183.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Login_Controller">
+   <children>     
+      <Pane prefHeight="672.0" prefWidth="333.0" style="-fx-background-color: #b3e3d9;">
+         <children>
+            <Label fx:id="mainLabel" layoutX="29.0" layoutY="166.0" prefHeight="58.0" prefWidth="404.0" stylesheets="@font.css" text="제주 친구 " textOverrun="CLIP">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+            <TextField fx:id="idField" layoutX="29.0" layoutY="267.0" onKeyTyped="#idField_Typed" onMouseClicked="#idField_Clicked" prefHeight="61.0" prefWidth="282.0" stylesheets="@font.css">
+               <font>
+                  <Font name="LG PC" size="20.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="pwField" layoutX="29.0" layoutY="366.0" onKeyTyped="#pwField_Typed" onMouseClicked="#pwField_Cliked" prefHeight="61.0" prefWidth="282.0">
+               <font>
+                  <Font name="LG PC" size="20.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="signBtn" layoutX="39.0" layoutY="567.0" mnemonicParsing="false" onAction="#signBtn_Actioned" prefHeight="43.0" prefWidth="120.0" text="회원가입">
+               <font>
+                  <Font name="LG PC" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="loginBtn" layoutX="184.0" layoutY="567.0" mnemonicParsing="false" onAction="#loginBtn_Actioned" prefHeight="43.0" prefWidth="120.0" text="로그인">
+               <font>
+                  <Font name="LG PC" size="22.0" />
+               </font>
+            </Button>
+            <Label fx:id="pwLabel" layoutX="52.0" layoutY="385.0" text="비밀번호">
+               <font>
+                  <Font name="LG PC" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="idLabel" layoutX="52.0" layoutY="286.0" text="아이디">
+               <font>
+                  <Font name="LG PC" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>

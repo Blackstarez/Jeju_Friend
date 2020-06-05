@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #e8f6ff;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Main_Controller">
+    <children>
+        <Pane layoutX="27.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(164, 92, 162);">
+            <children>
+            <Pane layoutX="24.0" layoutY="105.0" prefHeight="293.0" prefWidth="215.0" style="-fx-background-color: white;">
+               <children>
+                  <FlowPane layoutX="8.0" layoutY="210.0" prefHeight="66.0" prefWidth="200.0">
+                     <children>
+                        <Label text="#태그" wrapText="true">
+                           <font>
+                              <Font name="LG PC" size="19.0" />
+                           </font>
+                           <FlowPane.margin>
+                              <Insets bottom="10.0" right="10.0" top="5.0" />
+                           </FlowPane.margin>
+                        </Label>
+                        <Label />
+                        <Label text="#태그" wrapText="true">
+                           <font>
+                              <Font name="LG PC" size="19.0" />
+                           </font>
+                           <FlowPane.margin>
+                              <Insets bottom="10.0" right="10.0" top="5.0" />
+                           </FlowPane.margin>
+                        </Label>
+                     </children>
+                  </FlowPane>
+                  <Pane fx:id="imagePane" layoutX="13.0" layoutY="14.0" prefHeight="147.0" prefWidth="190.0" style="-fx-background-color: #E3FFF8;" />
+                  <Label layoutX="14.0" layoutY="176.0" text="사진제목">
+                     <font>
+                        <Font name="LG PC" size="22.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="-23.0" prefHeight="58.0" prefWidth="60.0">
+                     <children>
+                        <ImageView fitHeight="60.0" fitWidth="60.0">
+                           <image>
+                              <Image url="@image/pin.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane layoutY="27.0" prefHeight="50.0" prefWidth="503.0" style="-fx-background-color: white;">
+               <children>
+                  <Label fx:id="leftPaneLabel" alignment="CENTER" layoutX="227.0" layoutY="6.0" text="제목" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="LG PC" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            </children>
+      </Pane>
+        <Pane layoutX="556.0" layoutY="130.0" prefHeight="739.0" prefWidth="503.0" style="-fx-background-color: rgb(43, 97, 82);">
+         <children>
+            <Pane layoutY="31.0" prefHeight="50.0" prefWidth="503.0" style="-fx-background-color: white;">
+               <children>
+                  <Label fx:id="rightPaneLabel" alignment="CENTER" layoutX="227.0" layoutY="6.0" text="제목" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="LG PC" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children></Pane>
+         <Pane layoutY="14.0" prefHeight="84.0" prefWidth="1440.0" style="-fx-background-color: rgb(26, 74, 106);">
+         <children>
+            <TextField fx:id="searchField" layoutX="90.0" layoutY="20.0" onKeyTyped="#searchField_Typed" onMouseClicked="#searchField_Clicked" prefHeight="44.0" prefWidth="903.0">
+               <font>
+                  <Font name="LG PC" size="22.0" />
+               </font></TextField>
+            <Label fx:id="searchLabel" layoutX="110.0" layoutY="24.0" text="관심있는 관광지를 검색해 보세요!">
+               <font>
+                  <Font name="LG PC" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="1121.0" prefHeight="900.0" prefWidth="321.0" style="-fx-background-color: rgb(156, 212, 201);">
+        <children>
+           <Label fx:id="concernedAreaLabel" layoutX="5.0" layoutY="58.0" prefHeight="44.0" prefWidth="310.0" text="현재관심지역 :">
+              <font>
+                 <Font name="LG PC" size="24.0" />
+              </font>
+           </Label>
+           <Label fx:id="myTravelLabel" layoutX="5.0" layoutY="163.0" prefHeight="38.0" prefWidth="144.0" text="나의 여행 일정">
+              <font>
+                 <Font name="LG PC" size="26.0" />
+              </font>
+           </Label>
+           <Button fx:id="addTravelBtn" layoutX="197.0" layoutY="160.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" prefHeight="44.0" prefWidth="101.0" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
+              <font>
+                 <Font name="LG PC" size="19.0" />
+              </font>
+           </Button>
+           <Button fx:id="logoutBtn" layoutX="209.0" layoutY="836.0" mnemonicParsing="false" onAction="#logoutBtn_Actioned" prefHeight="38.0" prefWidth="92.0" style="-fx-background-color: rgb(52, 152, 219);" text="로그아웃" textFill="WHITE">
+              <font>
+                 <Font name="LG PC" size="18.0" />
+              </font>
+           </Button>
+           <Button fx:id="weatherBtn" layoutX="42.0" layoutY="836.0" mnemonicParsing="false" onAction="#weatherBtn_Actioned" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #67F0D1;" text="날씨 확인">
+              <font>
+                 <Font name="LG PC" size="18.0" />
+              </font>
+           </Button>
+            <Button fx:id="setUpBtn" layoutX="232.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="66.0" text="설정">
+               <font>
+                  <Font name="LG PC" size="21.0" />
+               </font>
+            </Button>
+        </children>
+     </Pane>
+
+
+    </children>
+</Pane>

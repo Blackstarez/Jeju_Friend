@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Noto Sans CJK KR Bold';
+    src: url('Noto.otf');
+}
+.text{
+    -fx-font-family:"Noto Sans CJK KR Bold" ;
+    -fx-font-size: 18px
+}
+
+#leftPaneLabel, #rightPaneLabel{
+    -fx-font-size: 30px
+}
+
+#searchLabel{
+    -fx-font-size: 23px;
+}
+
+#myTravelLabel, #concernedAreaLabel{
+    -fx-font-size: 20px;
+}

@@ -90,17 +90,17 @@
       </Pane>
       <Pane layoutX="1121.0" prefHeight="900.0" prefWidth="321.0" style="-fx-background-color: rgb(156, 212, 201);">
         <children>
-           <Label layoutX="5.0" layoutY="58.0" prefHeight="44.0" prefWidth="310.0" text="현재관심지역 :">
+           <Label fx:id="concernedAreaLabel" layoutX="5.0" layoutY="58.0" prefHeight="44.0" prefWidth="310.0" text="현재관심지역 :">
               <font>
                  <Font name="LG PC" size="24.0" />
               </font>
            </Label>
-           <Label layoutX="5.0" layoutY="163.0" prefHeight="38.0" prefWidth="144.0" text="나의 여행 일정">
+           <Label fx:id="myTravelLabel" layoutX="5.0" layoutY="163.0" prefHeight="38.0" prefWidth="144.0" text="나의 여행 일정">
               <font>
                  <Font name="LG PC" size="26.0" />
               </font>
            </Label>
-           <Button fx:id="addTravelBtn" layoutX="196.0" layoutY="190.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
+           <Button fx:id="addTravelBtn" layoutX="197.0" layoutY="160.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" prefHeight="44.0" prefWidth="101.0" style="-fx-background-color: rgb(26, 188, 156);" text="여행 추가" textFill="WHITE">
               <font>
                  <Font name="LG PC" size="19.0" />
               </font>
@@ -110,12 +110,12 @@
                  <Font name="LG PC" size="18.0" />
               </font>
            </Button>
-           <Button fx:id="weatherBtn" layoutX="42.0" layoutY="836.0" mnemonicParsing="false" onAction="#weatherBtn_Actioned" style="-fx-background-color: #67F0D1;" text="날씨 확인">
+           <Button fx:id="weatherBtn" layoutX="42.0" layoutY="836.0" mnemonicParsing="false" onAction="#weatherBtn_Actioned" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #67F0D1;" text="날씨 확인">
               <font>
                  <Font name="LG PC" size="18.0" />
               </font>
            </Button>
-            <Button fx:id="setUpBtn" layoutX="241.0" layoutY="14.0" mnemonicParsing="false" text="설정">
+            <Button fx:id="setUpBtn" layoutX="232.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="66.0" text="설정">
                <font>
                   <Font name="LG PC" size="21.0" />
                </font>

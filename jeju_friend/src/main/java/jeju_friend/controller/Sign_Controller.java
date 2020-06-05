@@ -61,6 +61,8 @@ public class Sign_Controller
 	private int inputAge = 12;
 	Image maleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));
 	Image maleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
+	Image femaleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
+	Image femaleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
 
 	@FXML
 	private void idField_Typed(final KeyEvent event) {
@@ -98,9 +100,9 @@ public class Sign_Controller
 	private void maleToggleBtn_Actioned() throws IOException{
 		if(maleToggleBtn.isSelected())
 		{
-			maleToggleBtn.setSelected(true);
 			femaleToggleBtn.setSelected(false);
 			maleToggleBtn.setGraphic(new ImageView(maleSelectedImage));
+			femaleToggleBtn.setGraphic(new ImageView(femaleUnselectedImage));
 		}	
 		else
 		{
@@ -112,11 +114,14 @@ public class Sign_Controller
 	private void femaleToggleBtn_Actioned() throws IOException{		
 		if(femaleToggleBtn.isSelected())
 		{
-			femaleToggleBtn.setSelected(true);
+			femaleToggleBtn.setGraphic(new ImageView(femaleSelectedImage));
 			maleToggleBtn.setSelected(false);
 			maleToggleBtn.setGraphic(new ImageView(maleUnselectedImage));
 		}
-		
+		else
+		{
+			femaleToggleBtn.setGraphic(new ImageView(femaleUnselectedImage));
+		}
 	}
 
 	@FXML
@@ -145,7 +150,7 @@ public class Sign_Controller
 		final int inputAge = this.inputAge; 					// 나이
 
 		// 필수정보들 입력 했는지 아닌지 확인 과정
-		if (isMale || isFemale) {
+		if ((isMale!=true) &&  (isFemale!=true)) {
 			final Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
