@@ -16,6 +16,7 @@ public class FrontStart extends Application{
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("제주 친구");
 		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
 		primaryStage.show();
 
 	}

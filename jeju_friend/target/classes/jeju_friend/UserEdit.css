@@ -2,11 +2,10 @@
     font-family: 'Noto Sans CJK KR Bold';
     src: url('Noto.otf');
 }
-
 .text{
     -fx-font-family:"Noto Sans CJK KR Bold" ;
-    -fx-font-size : 17px;
+    -fx-font-size: 18px
 }
-.label{
-    -fx-font-size: 25px;
+.button{
+    -fx-font-size: 12px
 }

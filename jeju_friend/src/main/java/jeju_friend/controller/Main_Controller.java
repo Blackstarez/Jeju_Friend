@@ -55,11 +55,11 @@ public class Main_Controller {
 
     @FXML
     public void weatherBtn_Actioned() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/weatherView.fxml"));
-        Parent root = loader.load();
-        Weather_Controller weatherController = loader.getController();
-        weatherBtn.getScene().setRoot(root);
-        weatherController.view();
+        moveToWeather();
+    }
+    @FXML
+    public void userEditBtn_Actioned() throws IOException {
+        moveToUserEdit();
     }
     // 로직
 
@@ -82,7 +82,24 @@ public class Main_Controller {
         Parent root = loader.load();
         AddTravel_Controller controller = loader.getController();
         weatherBtn.getScene().setRoot(root);
-        controller.view();
+    }
+    
+    public void moveToWeather() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/weatherView.fxml"));
+        Parent root = loader.load();
+        Weather_Controller weatherController = loader.getController();
+        weatherBtn.getScene().setRoot(root);
+        weatherController.view();
     }
 
+    public void moveToUserEdit() throws IOException
+    {
+        Stage primaryStage = (Stage) logoutBtn.getScene().getWindow(); 
+        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/userEdit.fxml"));
+        Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+        primaryStage.show();  
+    }
 }

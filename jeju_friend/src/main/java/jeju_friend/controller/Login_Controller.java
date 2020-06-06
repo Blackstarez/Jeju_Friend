@@ -1,6 +1,7 @@
 package jeju_friend.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import jeju_friend.Elements.Login;
+import jeju_friend.Elements.Protocol;
+import jeju_friend.application.SocketHandler;
+
+import java.net.Socket;
+
 
 public class Login_Controller 
 {
@@ -36,7 +43,6 @@ public class Login_Controller
 
 	@FXML
 	private Label idLabel;
-
 
 	@FXML
 	private void idField_Typed(KeyEvent event)
@@ -113,12 +119,10 @@ public class Login_Controller
         	pwField.requestFocus();
             return;
         }
-		
-		// 주오가 네트워킹해서 아이디 입력 해서 로그인되는지 확인해야해 ^-^
-		
+		// 시리얼라이즈해서 전송 ㄱㄱ~★
+		tryLogin(inputID, inputPW);
 		//일단 아무거나 입력하면 무조건 되는걸로 하고 메인페이지로 ㄱㄱ
 		moveToMain();
-		
 	}
 	
 	public void moveToMain() throws IOException
@@ -140,5 +144,15 @@ public class Login_Controller
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
         primaryStage.show();   
+	}
+	
+	public void tryLogin(String inputID, String inputPW) throws IOException
+	{
+		Socket sock = null;
+		Protocol protocol = new Protocol();
+		Login loginInfo = new Login(inputID, inputPW);
+		protocol.setPacket(Protocol.PT_REQUEST, protocol.PT_SIGNIN, protocol.PT_APPLY, Protocol.PT_USER,loginInfo.toBytes());
+		SocketHandler socketHandler = new SocketHandler(sock);
+		socketHandler.request(protocol);
 	}
 }

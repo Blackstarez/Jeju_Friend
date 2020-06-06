@@ -5,5 +5,6 @@ module jeju_friend {
 
     opens jeju_friend.application to javafx.fxml;
     exports jeju_friend.application;
+    exports jeju_friend.Elements;
     opens jeju_friend.controller to javafx.fxml;
 }
