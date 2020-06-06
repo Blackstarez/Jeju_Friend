@@ -36,14 +36,20 @@ public class DBmanager {
     }
 
     // 아이디 조회 - 회원가입시 아이디 중복을 방지하기 위함.
-    public boolean isLoginIdExist(String id) throws SQLException 
+    public boolean isLoginIdExist(String id) 
     {
+        try{
         String sql = "select * from 로그인 where ID ='" + id + "';";
         ResultSet result;
 
         result = stmt.executeQuery(sql);
         if(result != null)
             return true;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
         return false;
     }
 
@@ -52,6 +58,18 @@ public class DBmanager {
     // 사용자 등록
     public boolean userApply(String id,String pw, String nickName, int age, boolean gender, int interestArea)
     {
+        if(isLoginIdExist(id))
+        {
+            return false;
+        }
+        try{
+            String sql = "select * from user_info where ID='"+id+"';";
+            ResultSet result = stmt.executeQuery(sql);
+            if(result==null)
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         char sex = gender==true?'M':'F';
         try{
             String sql = "Insert into user_info (ID,nickName,age,gender,권한,관심지역) Values(?,?,?,?,?,?);";
@@ -89,6 +107,43 @@ public class DBmanager {
         user.setGender(result.getString("gender")=="M"?true:false);
         user.setInterestArea(result.getInt("관심지역"));
         return user;        
+    }
+
+    // 사용자 삭제(개인별)
+    public boolean userInfoDelete(String id) throws SQLException
+    {
+        String sql = "delete from user_info where ID = '"+id+"';";
+        int result = stmt.executeUpdate(sql);
+        if(result > 0)
+            return true;
+        else
+            return false;
+    }
+
+    // 사용자 수정
+    public boolean userInfoModify(String id,String pw, String nickName, int age, boolean gender, int interestArea)
+    {
+        char sex = gender==true?'M':'F';
+        try{
+            String sql = "update user_info set nickName=? , age=?, gender=?, 관심지역=? Where ID=?;";
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1,nickName);
+            prestmt.setInt(2,age);
+            prestmt.setString(3, String.valueOf(sex));
+            prestmt.setInt(4, interestArea);
+            prestmt.setString(5,id);
+            prestmt.executeUpdate();
+
+            sql = "update login set PW=? where ID=?;";
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1, pw);
+            prestmt.setString(2,id);
+            prestmt.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 
