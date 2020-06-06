@@ -4,7 +4,7 @@
 }
 .text{
     -fx-font-family:"Noto Sans CJK KR Bold" ;
-    -fx-font-size: 18px
+    -fx-font-size: 15px
 }
 
 #leftPaneLabel, #rightPaneLabel{

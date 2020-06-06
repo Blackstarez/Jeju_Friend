@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="805.0" stylesheets="@UserEdit.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.UserEdit_Controller">
+   <children>
+      <Label layoutX="482.0" layoutY="82.0" prefHeight="35.0" prefWidth="103.0" stylesheets="@userEdit.css" text="관심지역" />
+      <Button layoutX="721.0" layoutY="473.0" mnemonicParsing="false" text="저장" />
+      <Button layoutX="649.0" layoutY="473.0" mnemonicParsing="false" text="취소" />
+      <Label layoutX="23.0" layoutY="32.0" prefHeight="35.0" prefWidth="103.0" stylesheets="@userEdit.css" text="여행 일정" />
+      <VBox layoutX="33.0" layoutY="103.0" prefHeight="380.0" prefWidth="230.0" />
+      <Button fx:id="travelPlusBtn" layoutX="123.0" layoutY="32.0" mnemonicParsing="false" onAction="#travelPlusBtn_Actioned" text="추가" wrapText="true" />
+      <Button fx:id="travelDeleteBtn" layoutX="186.0" layoutY="32.0" mnemonicParsing="false" onAction="#travelDeleteBtn_Actioned" text="삭제" wrapText="true">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Button>
+      <Label layoutX="459.0" layoutY="435.0" text="비밀번호" />
+      <TextField fx:id="PWArea" layoutX="459.0" layoutY="477.0" />
+      <Label layoutX="278.0" layoutY="435.0" text="닉네임" />
+      <TextField fx:id="nameArea" layoutX="278.0" layoutY="477.0" />
+      <ImageView fitHeight="358.0" fitWidth="496.0" layoutX="297.0" layoutY="82.0">
+         <image>
+            <Image url="@image/map.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

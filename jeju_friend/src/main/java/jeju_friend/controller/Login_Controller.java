@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import jeju_friend.Elements.Login;
 
 public class Login_Controller 
 {
@@ -113,12 +114,13 @@ public class Login_Controller
         	pwField.requestFocus();
             return;
         }
+		Login login = new Login(inputID, inputPW);
+		login.toBytes();
 		
-		// 주오가 네트워킹해서 아이디 입력 해서 로그인되는지 확인해야해 ^-^
-		
+		// 시리얼라이즈해서 전송 ㄱㄱ~★
+
 		//일단 아무거나 입력하면 무조건 되는걸로 하고 메인페이지로 ㄱㄱ
 		moveToMain();
-		
 	}
 	
 	public void moveToMain() throws IOException

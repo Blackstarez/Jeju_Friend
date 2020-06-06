@@ -14,199 +14,63 @@
             <Font name="LG PC" size="44.0" />
          </font>
       </Label>
-      <VBox layoutX="33.0" layoutY="180.0">
-         <children>
-            <Pane fx:id="firstPane" style="-fx-background-color: #DFF1D7;">
-               <children>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="307.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="14.0" layoutY="14.0" text="삼척시">
-                     <font>
-                        <Font name="LG PC" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="315.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="560.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="814.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="568.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="822.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Pane>
-            <Pane fx:id="firstPane1" style="-fx-background-color: #DFF1D7;">
-               <children>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="307.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="14.0" layoutY="14.0" text="삼척시">
-                     <font>
-                        <Font name="LG PC" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="315.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="560.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="814.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="568.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="822.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane fx:id="firstPane2" style="-fx-background-color: #DFF1D7;">
-               <children>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="307.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="14.0" layoutY="14.0" text="삼척시">
-                     <font>
-                        <Font name="LG PC" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="315.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="560.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="814.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="568.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="822.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane fx:id="firstPane3" style="-fx-background-color: #DFF1D7;">
-               <children>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="307.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="14.0" layoutY="14.0" text="삼척시">
-                     <font>
-                        <Font name="LG PC" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="315.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="560.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="94.0" fitWidth="99.0" layoutX="814.0" layoutY="20.0">
-                     <image>
-                        <Image url="@image/rain_sun.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="568.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="822.0" layoutY="114.0" text="00 / 00">
-                     <font>
-                        <Font name="LG PC" size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </children>
-         <padding>
-            <Insets bottom="20.0" right="20.0" />
-         </padding>
-      </VBox>
-      <Label fx:id="dateLabel1" layoutX="328.0" layoutY="125.0" text="오늘 (날짜)">
+      <ChoiceBox layoutX="53.0" layoutY="128.0" />
+      <ChoiceBox layoutX="222.0" layoutY="128.0" />
+      <TabPane layoutX="53.0" layoutY="202.0" prefHeight="506.0" prefWidth="903.0" style="-fx-background-color: gray;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="오늘">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="14.0" layoutY="7.0" prefHeight="453.0" prefWidth="855.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="9시" />
+                            <TableColumn prefWidth="75.0" text="11시" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="내일">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="436.0" prefWidth="855.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="9시" />
+                            <TableColumn prefWidth="75.0" text="11시" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="모레">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="26.0" layoutY="34.0" prefHeight="407.0" prefWidth="843.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="backBtn" layoutX="855.0" layoutY="35.0" mnemonicParsing="false" onAction="#backBtn_Actioned" prefHeight="22.0" prefWidth="92.0" style="-fx-background-color: #FA963C;" text="뒤로" textFill="WHITE">
          <font>
             <Font name="LG PC" size="29.0" />
          </font>
-      </Label>
-      <Label fx:id="dateLabel2" layoutX="583.0" layoutY="125.0" text="내일 (날짜)">
-         <font>
-            <Font name="LG PC" size="29.0" />
-         </font>
-      </Label>
-      <Label fx:id="dateLabel3" layoutX="839.0" layoutY="125.0" text="모레 (날짜)">
-         <font>
-            <Font name="LG PC" size="29.0" />
-         </font>
-      </Label>
-      <Pane layoutX="1247.0" layoutY="14.0" prefHeight="163.0" prefWidth="186.0">
-         <children>
-            <Button layoutY="94.0" mnemonicParsing="false" style="-fx-background-color: #40C78F;" text="지역 추가" textFill="WHITE">
-               <font>
-                  <Font name="LG PC" size="29.0" />
-               </font>
-            </Button>
-            <Button fx:id="backBtn" layoutX="54.0" layoutY="15.0" mnemonicParsing="false" onAction="#backBtn_Actioned" style="-fx-background-color: #FA963C;" text="뒤로" textFill="WHITE">
-               <font>
-                  <Font name="LG PC" size="29.0" />
-               </font>
-            </Button>
-         </children></Pane>
+      </Button>
    </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </Pane>
