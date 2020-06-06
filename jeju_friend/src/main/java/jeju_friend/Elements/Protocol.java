@@ -24,6 +24,10 @@ public class Protocol {
     public static final byte PT_DELETE = 3;     // 삭제
     public static final byte PT_MODIFY = 4;     // 수정
 
+    
+    public static final byte PT_FAIL = 0;       // 실패
+    public static final byte PT_SUCCESS = 1;    // 성공
+
     // 사용자
     public static final byte PT_UNKNOWN = 0;    // 모름
     public static final byte PT_USER = 1;       // 사용자
@@ -50,16 +54,13 @@ public class Protocol {
 
 
     // -----------------------------------  함수  ----------------------------------
-    public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser, byte[] buffer)
+    // 데이터를 포함하여 송신하는 경우 사용
+    public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser, byte[] body)
     {   
         this.packet = null;
-        packet = new byte[buffer.length];
+        packet = new byte[body.length+LEN_HEADER];
         
-        byte[] bodyLength = new byte[4];
-        bodyLength[0] = buffer[4];
-        bodyLength[1] = buffer[5];
-        bodyLength[2] = buffer[6];
-        bodyLength[3] = buffer[7];
+        byte[] bodyLength = intToByteArray(body.length);
 
         this.protocolType = protocolType;
         this.protocolCode = protocolCode;
@@ -67,9 +68,32 @@ public class Protocol {
         this.protocolUser = protocolUser;
         this.bodyLength = byteArrayToint(bodyLength);
        
-        System.arraycopy(buffer, 0, this.packet, 0, buffer.length);
+        System.arraycopy(body, 0, this.packet, 8, body.length);
     }
 
+    // 데이터를 포함하지 않고 송신하는 경우 사용
+    public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser)
+    {   
+        this.packet = null;
+        packet = new byte[LEN_HEADER];
+        
+        this.protocolType = protocolType;
+        this.protocolCode = protocolCode;
+        this.protocolCodeExpansion = protocolCodeEx;
+        this.protocolUser = protocolUser;
+        this.bodyLength = 0;
+        
+        packet[0] = protocolType;
+        packet[0] = protocolCode;
+        packet[0] = protocolCodeEx;
+        packet[0] = protocolUser;
+        for(int i=4;i<8;i++)
+        {
+            packet[i]=0;
+        } 
+    }
+
+    // 수신한 패킷을 그대로 복사하는 경우 사용
     public void setPacket(byte[] packet)
     {
         this.packet = null;
@@ -89,10 +113,25 @@ public class Protocol {
         System.arraycopy(packet, 0, this.packet, 0, packet.length);
     }
 
+    public byte[] getPacket()
+    {
+        return this.packet;
+    }
 
+    // -------------------------------------- 패킷 추출 함수 -------------------------------------
+    public static byte[] getBody(byte[] packet,int bodyLength)
+    {
+        byte[] body = new byte[bodyLength];
+        System.arraycopy(packet, 8, body, 0, packet.length);
+        return body;
+    }
 
-
-
+    public byte[] getBody()
+    {
+        byte[] body = new byte[this.bodyLength];
+        System.arraycopy(packet, 8, body, 0, packet.length);
+        return body;
+    }
 
 
 
