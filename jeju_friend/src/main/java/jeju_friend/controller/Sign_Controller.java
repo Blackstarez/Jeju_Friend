@@ -285,7 +285,7 @@ public class Sign_Controller
 			alert.showAndWait();
 			pwField.requestFocus();
 			return;
-		} else if (inputPW == inputConfirmPW) {
+		} else if (inputPW != inputConfirmPW) {
 			final Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
