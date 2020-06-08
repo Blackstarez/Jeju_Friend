@@ -1,4 +1,4 @@
-package jeju_friend_server;
+package jeju_friend;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-import jeju_friend_server.Elements.Weather;
+import jeju_friend.Elements.Weather;
 
 
 public class APIManager {

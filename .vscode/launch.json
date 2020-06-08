@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - server",
+            "request": "launch",
+            "mainClass": "jeju_friend.server",
+            "projectName": "jeju_friend_server"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - APIManager",
             "request": "launch",
             "mainClass": "jeju_friend_server.APIManager",

@@ -1,11 +1,11 @@
-package jeju_friend_server;
+package jeju_friend;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-import jeju_friend_server.Elements.*;
+import jeju_friend.Elements.*;
 
 
 public class server {
@@ -72,7 +72,7 @@ class SocketManager extends Thread
 
                 // 1.수신한 패킷을 buf에 저장.
                 int bytesRead = is.read(buf,0,buf.length);  //현재 읽어온 byte크기를 저장.
-
+                System.out.println(bytesRead);
                 // 2. 수신한 패킷의 헤더로부터 body 길이를 추출
                 int body_length = Protocol.byteArrayToint(Arrays.copyOfRange(buf,4,Protocol.LEN_HEADER));
                 
@@ -89,6 +89,11 @@ class SocketManager extends Thread
 
                 // 수신한 패킷의 Type을 추출
                 protocolType = buf[0];
+                Protocol t = new Protocol();
+                t.setPacket(buf);
+                System.out.println("수신한 데이터 길이 : "+t.getProtocolType());
+                System.out.println("수신한 타입 : "+protocolType);
+                t.printPacket();
                 switch(protocolType)
                 {
                     // 종료 요청 수신 시
@@ -108,6 +113,7 @@ class SocketManager extends Thread
                             case Protocol.PT_SIGNIN:
                                 protocol.setPacket(buf);
                                 Login user = Login.toLogin(protocol.getBody());
+                                user.printInfo();
                                 if(db.getLoginResult(user.getID(), user.getPW()))
                                 {
                                     // 로그인 성공
