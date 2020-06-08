@@ -73,12 +73,10 @@ public class Protocol {
         this.packet[2] = protocolCodeEx;
         this.packet[3] = protocolUser;
        
-        System.out.println("패킷 설정중 -------");
+
         System.arraycopy(bodyLength, 0, this.packet, 4, LEN_BODY_LENGTH_FIELD);
-        printPacket();
-        System.out.println("-------구분자---------");
         System.arraycopy(body, 0, this.packet, 8, body.length);
-        printPacket();
+
     }
 
     // 데이터를 포함하지 않고 송신하는 경우 사용

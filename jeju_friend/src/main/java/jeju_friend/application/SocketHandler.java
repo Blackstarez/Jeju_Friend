@@ -28,7 +28,6 @@ public class SocketHandler {
         Protocol result = new Protocol();
         try {
             System.out.println("설정한 type : "+protocol.getProtocolType());
-            protocol.printPacket();
             socket.getOutputStream().write(protocol.getPacket());   //송신
 
             // ------------------ 수신 ---------------------------
