@@ -15,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -100,16 +101,16 @@ public class Sign_Controller
 	Image femaleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
 	Image femaleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
 	
-	Image map1SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));
-	Image map1UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
-	Image map2SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
-	Image map2UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
-	Image map3SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
-	Image map3UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
-	Image map4SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
-	Image map4UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
-	Image map5SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
-	Image map5unSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
+	Image map1SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1_selected.png"));
+	Image map1UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1.png"));
+	Image map2SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_2_selected.png"));
+	Image map2UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_2.png"));
+	Image map3SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_3_selected.png"));
+	Image map3UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_3.png"));
+	Image map4SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_4_selected.png"));
+	Image map4UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_4.png"));
+	Image map5SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_5_selected.png"));
+	Image map5UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_5.png"));
 
 	@FXML
 	private void idField_Typed(final KeyEvent event) {

@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.ToggleGroup?>
 
-<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Sign_Controller">
+<Pane stylesheets="@Sign.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Sign_Controller">
    <children>
-      <Label layoutX="592.0" layoutY="182.0" text="관심 지역 선택">
+      <Label layoutX="739.0" layoutY="182.0" prefHeight="18.0" prefWidth="76.0" text="관심 지역 선택">
          <font>
             <Font name="LG PC" size="56.0" />
          </font>
@@ -130,34 +130,34 @@
             <Image url="@image/map_3.png" />
          </image>
       </ImageView>
-      <ToggleButton fx:id="regionBtn1" layoutX="784.0" layoutY="329.0" mnemonicParsing="false" onAction="#regionBtn1_Actioned" prefHeight="33.0" prefWidth="76.0" text="신나는 제주">
+      <ToggleButton fx:id="regionBtn1" layoutX="826.0" layoutY="329.0" mnemonicParsing="false" onAction="#regionBtn1_Actioned" prefHeight="33.0" prefWidth="84.0" text="신나는 제주" wrapText="true">
          <toggleGroup>
-            <ToggleGroup fx:id="regionGroup"/>
+            <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
       <ToggleButton fx:id="regionBtn2" layoutX="946.0" layoutY="345.0" mnemonicParsing="false" onAction="#regionBtn2_Actioned" prefHeight="33.0" prefWidth="93.0" text="익스트림제주">
          <toggleGroup>
-            <ToggleGroup fx:id="regionGroup"/>
+            <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
       <ToggleButton fx:id="regionBtn4" layoutX="557.0" layoutY="485.0" mnemonicParsing="false" onAction="#regionBtn4_Actioned" prefHeight="33.0" prefWidth="76.0" text="힐링 제주">
          <toggleGroup>
-            <ToggleGroup fx:id="regionGroup"/>
+            <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
       <ToggleButton fx:id="regionBtn5" layoutX="844.0" layoutY="427.0" mnemonicParsing="false" onAction="#regionBtn5_Actioned" text="숲속 제주">
          <toggleGroup>
-            <ToggleGroup fx:id="regionGroup"/>
+            <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
       <ToggleButton fx:id="regionBtn3" layoutX="793.0" layoutY="536.0" mnemonicParsing="false" onAction="#regionBtn3_Actioned" text="열대 제주">
          <toggleGroup>
-            <ToggleGroup fx:id="regionGroup"/>
+            <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
 
       <Slider fx:id="slider" layoutX="51.0" layoutY="675.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" prefHeight="48.0" prefWidth="286.0" value="20.0" />
-      <Label fx:id="ageLabel" layoutX="160.0" layoutY="619.0" prefHeight="34.0" prefWidth="36.0" text="12" wrapText="true">
+      <Label fx:id="ageLabel" layoutX="159.0" layoutY="607.0" prefHeight="34.0" prefWidth="36.0" text="12" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
