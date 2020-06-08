@@ -186,35 +186,65 @@ public class Sign_Controller
 	@FXML
 	private void regionBtn1_Actioned(){
 		if(regionBtn1.isSelected())
+		{
 			view1.setImage(map1SelectedImage);
+			view2.setImage(map2UnselectedImage);
+			view3.setImage(map3UnselectedImage);
+			view4.setImage(map4UnselectedImage);
+			view5.setImage(map5UnselectedImage);
+		}	
 		else
 			view1.setImage(map1UnselectedImage);
 	}
 	@FXML
 	private void regionBtn2_Actioned(){
 		if(regionBtn2.isSelected())
+		{
+			view1.setImage(map1UnselectedImage);
 			view2.setImage(map2SelectedImage);
+			view3.setImage(map3UnselectedImage);
+			view4.setImage(map4UnselectedImage);
+			view5.setImage(map5UnselectedImage);
+		}		
 		else
 			view2.setImage(map2UnselectedImage);
 	}
 	@FXML
 	private void regionBtn3_Actioned(){
 		if(regionBtn3.isSelected())
+		{
+			view1.setImage(map1UnselectedImage);
+			view2.setImage(map2UnselectedImage);
 			view3.setImage(map3SelectedImage);
+			view4.setImage(map4UnselectedImage);
+			view5.setImage(map5UnselectedImage);
+		}			
 		else
 			view3.setImage(map3UnselectedImage);
 	}
 	@FXML
 	private void regionBtn4_Actioned(){
 		if(regionBtn4.isSelected())
+		{
+			view1.setImage(map1UnselectedImage);
+			view2.setImage(map2UnselectedImage);
+			view3.setImage(map3UnselectedImage);
 			view4.setImage(map4SelectedImage);
+			view5.setImage(map5UnselectedImage);
+		}
 		else
 			view4.setImage(map4UnselectedImage);
 	}
 	@FXML
 	private void regionBtn5_Actioned(){
 		if(regionBtn5.isSelected())
+		{
+			view1.setImage(map1UnselectedImage);
+			view2.setImage(map2UnselectedImage);
+			view3.setImage(map3UnselectedImage);
+			view4.setImage(map4UnselectedImage);
 			view5.setImage(map5SelectedImage);
+		}
 		else
 			view5.setImage(map5UnselectedImage);
 	}
