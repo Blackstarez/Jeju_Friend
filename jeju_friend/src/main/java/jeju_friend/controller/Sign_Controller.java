@@ -197,7 +197,8 @@ public class Sign_Controller
 			view1.setImage(map1UnselectedImage);
 	}
 	@FXML
-	private void regionBtn2_Actioned(){
+	private void regionBtn2_Actioned()
+	{
 		if(regionBtn2.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);

@@ -27,7 +27,7 @@ public class Main_Controller {
     @FXML
     private Button weatherBtn;
     @FXML
-    private Button setUpBtn;
+    private Button userEditBtn;
     // 이벤트 핸들러
 
     @FXML
@@ -97,7 +97,7 @@ public class Main_Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/UserEdit.fxml"));
         Parent root = loader.load();
         UserEdit_Controller controller = loader.getController();
-        setUpBtn.getScene().setRoot(root); 
+        userEditBtn.getScene().setRoot(root); 
         controller.enter();
     }
 }
