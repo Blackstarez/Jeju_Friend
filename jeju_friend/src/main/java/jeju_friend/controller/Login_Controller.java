@@ -1,6 +1,7 @@
 package jeju_friend.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import javafx.fxml.FXML;
@@ -23,136 +24,146 @@ import jeju_friend.application.SocketHandler;
 
 import java.net.Socket;
 
-
-public class Login_Controller 
-{
+public class Login_Controller {
 	@FXML
 	private TextField idField;
-	
+
 	@FXML
 	private PasswordField pwField;
-	
+
 	@FXML
 	private Button loginBtn;
-	
+
 	@FXML
 	private Button signBtn;
 
-	@FXML 
+	@FXML
 	private Label pwLabel;
 
 	@FXML
 	private Label idLabel;
 
 	@FXML
-	private void idField_Typed(KeyEvent event)
-	{
-		if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) 
-		{
+	private void idField_Typed(KeyEvent event) {
+		if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
 			pwField.requestFocus();
 			pwLabel.setVisible(false);
 		}
 		idLabel.setVisible(false);
 	}
-	
+
 	@FXML
-	private void pwField_Typed(KeyEvent event) throws Exception
-	{
-		if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) 
-		{
+	private void pwField_Typed(KeyEvent event) throws Exception {
+		if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
 			login();
 		}
 		pwLabel.setVisible(false);
 	}
 
 	@FXML
-	private void idField_Clicked(MouseEvent event)
-	{
+	private void idField_Clicked(MouseEvent event) {
 		idLabel.setVisible(false);
 	}
 
 	@FXML
-	private void pwField_Cliked(MouseEvent event)
-	{
+	private void pwField_Cliked(MouseEvent event) {
 		pwLabel.setVisible(false);
 	}
-	
+
 	@FXML
-	private void loginBtn_Actioned() throws Exception
-	{
+	private void loginBtn_Actioned() throws Exception {
 		login();
 	}
 
 	@FXML
-	private void signBtn_Actioned() throws Exception
-	{
+	private void signBtn_Actioned() throws Exception {
 		moveToSign();
 	}
 
 	// 로직
 
-
-	private void login() throws Exception
-	{
+	private void login() throws Exception {
 		String inputID = idField.getText();
 		String inputPW = pwField.getText();
-		
-		//id,pw 잘 입력했나 확인
-		
-		if (inputID.isEmpty()) 
-		{
+
+		// id,pw 잘 입력했나 확인
+
+		if (inputID.isEmpty()) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("로그인 오류");
 			alert.setHeaderText(null);
 			alert.setContentText("아이디를 입력해 주세요!");
 			alert.showAndWait();
 			idField.requestFocus();
-            return;
-        } 
-		else if (inputPW.isEmpty()) 
-		{
-        	Alert alert = new Alert(AlertType.INFORMATION);
+			return;
+		} else if (inputPW.isEmpty()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("로그인 오류");
 			alert.setHeaderText(null);
 			alert.setContentText("비밀번호를 입력해 주세요!");
 			alert.showAndWait();
-        	pwField.requestFocus();
-            return;
-        }
+			pwField.requestFocus();
+			return;
+		}
 		// 시리얼라이즈해서 전송 ㄱㄱ~★
-		tryLogin(inputID, inputPW);
-		//일단 아무거나 입력하면 무조건 되는걸로 하고 메인페이지로 ㄱㄱ
-		moveToMain();
+		tryLogin(inputID, inputPW);		
 	}
-	
-	public void moveToMain() throws IOException
-	{
-		Stage primaryStage = (Stage) loginBtn.getScene().getWindow(); 
-        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Main.fxml"));
-        Scene scene = new Scene(root);
+
+	public void moveToMain() throws IOException {
+		Stage primaryStage = (Stage) loginBtn.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Main.fxml"));
+		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
-        primaryStage.show();   
+		primaryStage.show();
 	}
-	public void moveToSign() throws IOException
-	{
+
+	public void moveToSign() throws IOException {
 		Stage primaryStage = (Stage) signBtn.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Sign.fxml"));
-        Scene scene = new Scene(root);
+		Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Sign.fxml"));
+		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
-        primaryStage.show();   
+		primaryStage.show();
 	}
-	
-	public void tryLogin(String inputID, String inputPW) throws IOException
-	{
+
+	public void tryLogin(String inputID, String inputPW) throws IOException {
 		Socket sock = null;
 		Protocol protocol = new Protocol();
+		Protocol resultProtocol = new Protocol();
 		Login loginInfo = new Login(inputID, inputPW);
-		protocol.setPacket(Protocol.PT_REQUEST, protocol.PT_SIGNIN, protocol.PT_APPLY, Protocol.PT_USER,loginInfo.toBytes());
+		
+		//로그인 요청
+		protocol.setPacket(Protocol.PT_REQUEST, protocol.PT_SIGNIN, protocol.PT_APPLY, Protocol.PT_USER,
+				loginInfo.toBytes());
 		SocketHandler socketHandler = new SocketHandler(sock);
-		socketHandler.request(protocol);
+		try {
+			resultProtocol = socketHandler.request(protocol);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		//로그인 성공 여부 체크
+		InputStream is = sock.getInputStream();
+		byte buf[] = new byte[Protocol.LEN_PACKET];
+		int bytesRead = is.read(buf,0,buf.length);
+		byte protocolCodeEx = buf[2];
+
+		if(protocolCodeEx == 1)
+		{
+			moveToMain();
+		}
+		else
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("로그인 오류");
+			alert.setHeaderText(null);
+			alert.setContentText("아이디 비밀번호를 다시 입력해 주세요!");
+			alert.showAndWait();
+			idField.requestFocus();
+			return;
+		}
 	}
 }

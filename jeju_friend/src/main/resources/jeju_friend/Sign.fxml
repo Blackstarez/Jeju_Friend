@@ -110,7 +110,7 @@
          </image>
       </ImageView>
       <Slider fx:id="slider" layoutX="51.0" layoutY="675.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" prefHeight="48.0" prefWidth="286.0" value="20.0" />
-      <Label fx:id="ageLabel" layoutX="159.0" layoutY="706.0" wrapText="true">
+      <Label fx:id="ageLabel" layoutX="160.0" layoutY="619.0" prefHeight="34.0" prefWidth="36.0" text="12" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
