@@ -12,25 +12,19 @@
 
 <Pane stylesheets="@Sign.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.Sign_Controller">
    <children>
-      <Label layoutX="739.0" layoutY="182.0" prefHeight="18.0" prefWidth="76.0" text="관심 지역 선택">
+      <Label layoutX="739.0" layoutY="182.0" prefHeight="39.0" prefWidth="172.0" style="-fx-font-size: 25;" text="관심 지역 선택" wrapText="true">
          <font>
             <Font name="LG PC" size="56.0" />
          </font>
       </Label>
-      <Label layoutX="135.0" layoutY="182.0" text="남성">
-         <font>
-            <Font name="LG PC" size="28.0" />
-         </font></Label>
-      <Label layoutX="321.0" layoutY="182.0" text="여성">
-         <font>
-            <Font name="LG PC" size="28.0" />
-         </font></Label>
+      <Label layoutX="139.0" layoutY="182.0" style="-fx-font-size: 20;" text="남성">
+        </Label>
+      <Label layoutX="321.0" layoutY="182.0" style="-fx-font-size: 20;" text="여성">
+         </Label>
       <VBox layoutX="51.0" layoutY="248.0" prefHeight="351.0" prefWidth="393.0">
          <children>
-            <Label text="아이디  ">
-               <font>
-                  <Font name="LG PC" size="30.0" />
-               </font>
+            <Label style="-fx-font-size: 15;" text="아이디  ">
+              
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -39,29 +33,23 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></TextField>
-            <Label text="비밀번호">
-               <font>
-                  <Font name="LG PC" size="30.0" />
-               </font>
+            <Label style="-fx-font-size: 15;" text="비밀번호">
+               
             </Label>
             <PasswordField fx:id="pwField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwField_Typed" prefHeight="35.0">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </PasswordField>
-            <Label text="비밀번호 확인">
-               <font>
-                  <Font name="LG PC" size="30.0" />
-               </font>
+            <Label style="-fx-font-size: 15;" text="비밀번호 확인">
+               
                <padding>
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </Label>
             <PasswordField fx:id="pwConfirmField" maxHeight="-Infinity" minHeight="-Infinity" onKeyTyped="#pwConfirmField_Typed" prefHeight="35.0" />
-            <Label text="닉네임">
-               <font>
-                  <Font name="LG PC" size="30.0" />
-               </font>
+            <Label style="-fx-font-size: 15;" text="닉네임">
+               
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -73,12 +61,12 @@
             </TextField>
          </children>
       </VBox>
-      <Label layoutX="56.0" layoutY="615.0" text="나이">
+      <Label layoutX="56.0" layoutY="615.0" style="-fx-font-size: 15;" text="나이">
          <font>
             <Font name="LG PC" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="208.0" layoutY="615.0" text="세">
+      <Label layoutX="208.0" layoutY="615.0" style="-fx-font-size: 15;" text="세">
          <font>
             <Font name="LG PC" size="36.0" />
          </font>
@@ -157,17 +145,17 @@
       </ToggleButton>
 
       <Slider fx:id="slider" layoutX="51.0" layoutY="675.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" prefHeight="48.0" prefWidth="286.0" value="20.0" />
-      <Label fx:id="ageLabel" layoutX="159.0" layoutY="607.0" prefHeight="34.0" prefWidth="36.0" text="12" wrapText="true">
+      <Label fx:id="ageLabel" layoutX="170.0" layoutY="608.0" prefHeight="34.0" prefWidth="36.0" style="-fx-font-size: 20;" text="12" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="applyBtn" layoutX="1017.0" layoutY="660.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" text="확인" wrapText="true">
+      <Button fx:id="applyBtn" layoutX="1017.0" layoutY="660.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" style="-fx-font-size: 15;" text="확인" wrapText="true">
          <font>
             <Font name="LG PC" size="26.0" />
          </font>
       </Button>
-      <Button fx:id="cancelBtn" layoutX="958.0" layoutY="660.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소" wrapText="true">
+      <Button fx:id="cancelBtn" layoutX="958.0" layoutY="660.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" style="-fx-font-size: 15;" text="취소" wrapText="true">
          <font>
             <Font name="LG PC" size="26.0" />
          </font>

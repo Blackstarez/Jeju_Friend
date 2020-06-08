@@ -12,12 +12,12 @@
    <children>     
       <Pane prefHeight="672.0" prefWidth="333.0" style="-fx-background-color: #b3e3d9;">
          <children>
-            <Label fx:id="mainLabel" layoutX="29.0" layoutY="166.0" prefHeight="58.0" prefWidth="404.0" stylesheets="@font.css" text="제주 친구 " textOverrun="CLIP">
+            <Label fx:id="mainLabel" layoutX="29.0" layoutY="166.0" prefHeight="58.0" prefWidth="404.0"  text="제주 친구 " textOverrun="CLIP">
                <font>
                   <Font size="42.0" />
                </font>
             </Label>
-            <TextField fx:id="idField" layoutX="29.0" layoutY="267.0" onKeyTyped="#idField_Typed" onMouseClicked="#idField_Clicked" prefHeight="61.0" prefWidth="282.0" stylesheets="@font.css">
+            <TextField fx:id="idField" layoutX="29.0" layoutY="267.0" onKeyTyped="#idField_Typed" onMouseClicked="#idField_Clicked" prefHeight="61.0" prefWidth="282.0">
                <font>
                   <Font name="LG PC" size="20.0" />
                </font>

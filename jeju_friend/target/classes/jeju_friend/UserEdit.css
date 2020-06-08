@@ -4,8 +4,14 @@
 }
 .text{
     -fx-font-family:"Noto Sans CJK KR Bold" ;
+    -fx-font-size: 11px
+}
+#travelPlusBtn, #travelDeleteBtn, #cancelBtn #saveBtn{
     -fx-font-size: 18px
 }
-.button{
-    -fx-font-size: 12px
+#regionLabel{
+    -fx-font-size: 23px
+}
+#travelLabel{
+    -fx-font-size: 20px
 }

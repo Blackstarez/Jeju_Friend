@@ -86,7 +86,7 @@ public class Main_Controller {
     
     public void moveToWeather() throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/weatherView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/WeatherView.fxml"));
         Parent root = loader.load();
         Weather_Controller weatherController = loader.getController();
         weatherBtn.getScene().setRoot(root);

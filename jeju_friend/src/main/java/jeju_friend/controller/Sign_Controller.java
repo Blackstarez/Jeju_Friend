@@ -260,7 +260,7 @@ public class Sign_Controller
 		final String inputConfirmPW = pwConfirmField.getText(); // 비번확인
 		final String inputName = nameField.getText(); 			// 이름
 		final int inputAge = this.inputAge; 					// 나이
-
+		final int interestArea = getSelectedRegion();
 		// 필수정보들 입력 했는지 아닌지 확인 과정
 		if ((isMale!=true) &&  (isFemale!=true)) {
 			final Alert alert = new Alert(AlertType.INFORMATION);
@@ -309,6 +309,7 @@ public class Sign_Controller
 			userInfo.setGender(isMale);
 			userInfo.setId(inputPW);
 			userInfo.setNickName(inputName);
+			userInfo.setInterestArea(interestArea);
 			tryToSign(userInfo);
 		}
 	}
@@ -349,6 +350,21 @@ public class Sign_Controller
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
         primaryStage.show();   
+	}
+
+	public int getSelectedRegion() {
+		
+		if(regionBtn1.isSelected())
+			return 1;
+		else if(regionBtn2.isSelected())
+			return 2;
+		else if(regionBtn3.isSelected())
+			return 3;
+		else if(regionBtn4.isSelected())
+			return 4;
+		else if(regionBtn5.isSelected())
+			return 5;
+		return 0;
 	}
 }
 
