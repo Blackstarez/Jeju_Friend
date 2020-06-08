@@ -86,6 +86,36 @@ public class TourPlan {
         return plan;
     }
 
+    public static TourPlan[] toTourPlanList(byte[] data){
+		TourPlan[] tourPlanList = null;
+		try {
+			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+			try {
+				ObjectInputStream ois = new ObjectInputStream(bais);
+				tourPlanList = (TourPlan[]) ois.readObject();
+			} catch (Exception e) { }
+		} catch (Exception e) { }
+		return tourPlanList;
+	}
+
+	public static byte[] getBytes(TourPlan[] tourPlanList) {
+
+		byte[] result = null;
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try
+            {
+                ObjectOutputStream oos = new ObjectOutputStream(baos);
+                oos.writeObject(tourPlanList);
+                result = baos.toByteArray();
+            }catch(Exception e) { }
+        }catch(Exception e) { }
+		return result;
+	}
+
+
+
+
     // 객체 출력
     public void printInfo()
     {   

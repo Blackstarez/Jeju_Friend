@@ -177,6 +177,34 @@ public class TouristSpot {
         return spot;
     }
 
+    public static TouristSpot[] toTouristSpotList(byte[] data){
+		TouristSpot[] touristSpotList = null;
+		try {
+			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+			try {
+				ObjectInputStream ois = new ObjectInputStream(bais);
+				touristSpotList = (TouristSpot[]) ois.readObject();
+			} catch (Exception e) { }
+		} catch (Exception e) { }
+		return touristSpotList;
+	}
+
+	public static byte[] getBytes(TouristSpot[] touristSpotList) {
+
+		byte[] result = null;
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try
+            {
+                ObjectOutputStream oos = new ObjectOutputStream(baos);
+                oos.writeObject(touristSpotList);
+                result = baos.toByteArray();
+            }catch(Exception e) { }
+        }catch(Exception e) { }
+		return result;
+	}
+
+
     // 객체 출력
     public void printInfo()
     {

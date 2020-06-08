@@ -125,43 +125,75 @@ class SocketManager extends Thread
                                 break;
                             // 사용자 정보
                             case Protocol.PT_USERINFO:
+                                UserInfo userInfo;
                                 switch(protocolCodeEx)
                                 {
                                     case Protocol.PT_APPLY:
                                         protocol.setPacket(buf);
-                                        UserInfo userInfo = UserInfo.toUser(protocol.getBody());
+                                        userInfo = UserInfo.toUser(protocol.getBody());
                                         if(db.userApply(userInfo.getId(), userInfo.getPw(), userInfo.getNickName(), userInfo.getAge(), userInfo.getGender(),userInfo.getInterestArea()))
                                         {
                                             // 회원가입 완료
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
-                                            os.write(protocol.getPacket());
                                             System.out.println("["+sock.getInetAddress()+"] : 회원가입 성공");
                                         }
                                         else 
                                         {
                                             // 회원가입 정상 등록 실패
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
-                                            os.write(protocol.getPacket());
                                             System.out.println("["+sock.getInetAddress()+"] : 회원가입 실패");
                                         }
+                                        os.write(protocol.getPacket());
                                         break;
                                     case Protocol.PT_LOOKUP:
+                                        protocol.setPacket(buf);
+                                        userInfo = UserInfo.toUser(protocol.getBody());
+                                        userInfo = db.userInfoLookup(userInfo.getId());
+                                        protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN,userInfo.toBytes());
+                                        os.write(protocol.getPacket());
+                                        System.out.println("["+sock.getInetAddress()+"] : 회원 정보 조회");
                                         break;
                                     case Protocol.PT_DELETE:
+                                        protocol.setPacket(buf);
+                                        userInfo = UserInfo.toUser(protocol.getBody());
+                                        db.userInfoDelete(userInfo.getId());
+                                        protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
+                                        os.write(protocol.getPacket());
+                                        System.out.println("["+sock.getInetAddress()+"] : 회원 정보 삭제");
+                                        break;
+                                    case Protocol.PT_MODIFY:
+                                        protocol.setPacket(buf);
+                                        userInfo = UserInfo.toUser(protocol.getBody());
+                                        if(db.userInfoModify(userInfo.getId(), userInfo.getPw(), userInfo.getNickName(), userInfo.getAge(), userInfo.getGender(),userInfo.getInterestArea()))
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
+                                            System.out.println("["+sock.getInetAddress()+"] : 회원 정보 수정 성공");
+                                        }
+                                        else
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_USERINFO,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
+                                            System.out.println("["+sock.getInetAddress()+"] : 회원 정보 수정 실패");
+                                        }
+                                        os.write(protocol.getPacket());
                                         break;
                                     default:
                                         break;
                                 }
                                 break;
-                            // 관광지 - 등록, 삭제의 경우 추후 추가할 기능(확장성)으로 남겨둠.
+                            // 관광지 - 등록, 삭제, 수정의 경우 추후 추가할 기능(확장성)으로 남겨둠.
                             case Protocol.PT_TOURIST_SPOT:
                                 switch(protocolCodeEx)
                                 {
                                     case Protocol.PT_APPLY:
                                         break;
                                     case Protocol.PT_LOOKUP:
+                                        TouristSpot[] touristspotList = db.touristSpotLookup();
+                                        protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURIST_SPOT,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN,TouristSpot.getBytes(touristspotList));
+                                        os.write(protocol.getPacket());
                                         break;
                                     case Protocol.PT_DELETE:
+                                        break;
+                                    case Protocol.PT_MODIFY:
                                         break;
                                     default:
                                         break;
@@ -174,8 +206,13 @@ class SocketManager extends Thread
                                     case Protocol.PT_APPLY:
                                         break;
                                     case Protocol.PT_LOOKUP:
+                                        TouristSpot[] foodSpotList = db.foodSpotLookup();
+                                        protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURIST_SPOT,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN,TouristSpot.getBytes(foodSpotList));
+                                        os.write(protocol.getPacket());
                                         break;
                                     case Protocol.PT_DELETE:
+                                        break;
+                                    case Protocol.PT_MODIFY:
                                         break;
                                     default:
                                         break;
@@ -204,6 +241,8 @@ class SocketManager extends Thread
                                     case Protocol.PT_LOOKUP:
                                         break;
                                     case Protocol.PT_DELETE:
+                                        break;
+                                    case Protocol.PT_MODIFY:
                                         break;
                                     default:
                                         break;
