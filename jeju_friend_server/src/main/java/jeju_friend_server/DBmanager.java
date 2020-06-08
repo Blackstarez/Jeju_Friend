@@ -206,6 +206,65 @@ public class DBmanager {
         return spotList;
     }
 
+    // 여행계획 등록
+    public boolean tourPlanApply(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest)
+    {
+        try{
+            String sql = "insert into 여행계획 (userId,tourPlanName,tourWith,tourForm,areaInterest) Values(?,?,?,?,?);";
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1, userId);
+            prestmt.setString(2,tourPlanName);
+            prestmt.setInt(3, tourWith);
+            prestmt.setString(4,tourForm);
+            prestmt.setInt(5, areaInterest);
+            prestmt.executeUpdate();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    // 여행계획 삭제
+    public boolean tourPlanDelete(String userId, String tourPlanName)
+    {
+        try{
+            String sql = "delete from 여행계획 where userId=? && tourPlanName=?;";
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1, userId);
+            prestmt.setString(2,tourPlanName);
+            prestmt.executeUpdate();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    // 여행계획 수정
+    public boolean tourPlanModify(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest)
+    {
+        try{
+            String sql = "update 여행계획 set tourPlanName=?, tourWith=?,tourForm=?, areaInterest=? where userId=? && tourPlanName=?;";
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1, tourPlanName);
+            prestmt.setInt(2,tourWith);
+            prestmt.setString(3, tourForm);
+            prestmt.setInt(4,areaInterest);
+            prestmt.setString(5, userId);
+            prestmt.setString(6, tourPlanName);
+            prestmt.executeUpdate();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
     // 여행계획 조회
     public TourPlan[] tourPlanLookup(String id) throws SQLException
     {

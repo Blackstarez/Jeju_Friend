@@ -3,6 +3,7 @@ package jeju_friend.application;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
 import jeju_friend.Elements.Protocol;
@@ -11,10 +12,15 @@ public class SocketHandler {
     public final static String SERVER_IP = "127.0.0.1";
     public final static int port = 12345;
     private Socket socket;
-    
-    public SocketHandler(Socket socket)
-    {
-        this.socket = socket;
+
+    public SocketHandler() {
+        try {
+            this.socket = new Socket(SERVER_IP, port);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Protocol request(Protocol protocol) throws Exception {
@@ -39,11 +45,27 @@ public class SocketHandler {
             }
             result.setPacket(buf);
 
+
+            // 서버와 연결 끊기
+            disconnect();
+
             return result;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private void disconnect()
+    {
+        Protocol p = new Protocol();
+        p.setPacket(Protocol.PT_EXIT, Protocol.PT_EMPTY, Protocol.PT_EMPTY, Protocol.PT_EMPTY);
+        try {
+            socket.getOutputStream().write(p.getPacket());   
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

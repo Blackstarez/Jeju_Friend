@@ -234,15 +234,61 @@ class SocketManager extends Thread
                                 break;
                             // 여행일정
                             case Protocol.PT_TOURPLAN:
+                                TourPlan plan;
                                 switch(protocolCodeEx)
                                 {
                                     case Protocol.PT_APPLY:
+                                        protocol.setPacket(buf);
+                                        plan = TourPlan.toTourPlan(protocol.getBody());
+                                        if(db.tourPlanApply(plan.getUserId(), plan.getTourPlanName(), plan.getTourWith(), plan.getTourForm(), plan.getAreaInterest()))
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
+                                        }
+                                        else
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
+                                        }
+                                        os.write(protocol.getPacket());
                                         break;
                                     case Protocol.PT_LOOKUP:
+                                        protocol.setPacket(buf);
+                                        plan = TourPlan.toTourPlan(protocol.getBody());
+                                        TourPlan[] tourPlanList = db.tourPlanLookup(plan.getUserId());
+                                        if(tourPlanList.length == 0)
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE, Protocol.PT_TOURPLAN, Protocol.PT_SUCCESS, Protocol.PT_UNKNOWN, TourPlan.getBytes(tourPlanList));
+                                        }
+                                        else
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
+                                        }
+                                        os.write(protocol.getPacket());
                                         break;
                                     case Protocol.PT_DELETE:
+                                        protocol.setPacket(buf);
+                                        plan = TourPlan.toTourPlan(protocol.getBody());
+                                        if(db.tourPlanDelete(plan.getUserId(), plan.getTourPlanName()))
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
+                                        }
+                                        else
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
+                                        }
+                                        os.write(protocol.getPacket());
                                         break;
                                     case Protocol.PT_MODIFY:
+                                        protocol.setPacket(buf);
+                                        plan = TourPlan.toTourPlan(protocol.getBody());
+                                        if(db.tourPlanModify(plan.getUserId(), plan.getTourPlanName(), plan.getTourWith(), plan.getTourForm(), plan.getAreaInterest()))
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
+                                        }
+                                        else
+                                        {
+                                            protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
+                                        }
+                                        os.write(protocol.getPacket());
                                         break;
                                     default:
                                         break;
@@ -252,13 +298,8 @@ class SocketManager extends Thread
                                 System.out.println("잘못된 패킷 수신");
                                 break;
                         }
-
                 }
-
-            }
-
-
-            
+            }            
         } catch (Exception e) {
             e.printStackTrace();
         }

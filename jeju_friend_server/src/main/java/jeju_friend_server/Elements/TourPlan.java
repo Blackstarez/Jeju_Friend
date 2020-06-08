@@ -71,7 +71,7 @@ public class TourPlan {
         return serializedMember;
     }
 
-    public static TourPlan toLogin(byte[] serializedTourPlan)
+    public static TourPlan toTourPlan(byte[] serializedTourPlan)
     {
         TourPlan plan = null;
 
