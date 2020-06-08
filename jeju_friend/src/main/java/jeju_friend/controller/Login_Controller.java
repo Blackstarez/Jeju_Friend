@@ -105,8 +105,8 @@ public class Login_Controller {
 			pwField.requestFocus();
 			return;
 		}
-		// 시리얼라이즈해서 전송 ㄱㄱ~★
-		tryLogin(inputID, inputPW);		
+		else
+			tryLogin(inputID, inputPW);		
 	}
 
 	public void moveToMain() throws IOException {
@@ -130,15 +130,14 @@ public class Login_Controller {
 	}
 
 	public void tryLogin(String inputID, String inputPW) throws IOException {
-		Socket sock = null;
 		Protocol protocol = new Protocol();
 		Protocol resultProtocol = new Protocol();
 		Login loginInfo = new Login(inputID, inputPW);
 		
 		//로그인 요청
-		protocol.setPacket(Protocol.PT_REQUEST, protocol.PT_SIGNIN, protocol.PT_APPLY, Protocol.PT_USER,
+		protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_SIGNIN, Protocol.PT_APPLY, Protocol.PT_USER,
 				loginInfo.toBytes());
-		SocketHandler socketHandler = new SocketHandler(sock);
+		SocketHandler socketHandler = new SocketHandler();
 		try {
 			resultProtocol = socketHandler.request(protocol);
 		} catch (Exception e) {
@@ -146,12 +145,7 @@ public class Login_Controller {
 		}
 
 		//로그인 성공 여부 체크
-		InputStream is = sock.getInputStream();
-		byte buf[] = new byte[Protocol.LEN_PACKET];
-		int bytesRead = is.read(buf,0,buf.length);
-		byte protocolCodeEx = buf[2];
-
-		if(protocolCodeEx == 1)
+		if(resultProtocol.getProtocolCodeExpansion() == Protocol.PT_SUCCESS)
 		{
 			moveToMain();
 		}
@@ -163,7 +157,6 @@ public class Login_Controller {
 			alert.setContentText("아이디 비밀번호를 다시 입력해 주세요!");
 			alert.showAndWait();
 			idField.requestFocus();
-			return;
 		}
 	}
 }

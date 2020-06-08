@@ -153,5 +153,37 @@ public class Protocol {
 				+ (int) ((bytearr[3] & 0xff) << 24));
 	}
 
+    public byte getProtocolType() {
+        return protocolType;
+    }
+
+    public void setProtocolType(byte protocolType) {
+        this.protocolType = protocolType;
+    }
+
+    public byte getProtocolCode() {
+        return protocolCode;
+    }
+
+    public void setProtocolCode(byte protocolCode) {
+        this.protocolCode = protocolCode;
+    }
+
+    public byte getProtocolCodeExpansion() {
+        return protocolCodeExpansion;
+    }
+
+    public void setProtocolCodeExpansion(byte protocolCodeExpansion) {
+        this.protocolCodeExpansion = protocolCodeExpansion;
+    }
+
+    public int getBodyLength() {
+        return bodyLength;
+    }
+
+    public void setBodyLength(int bodyLength) {
+        this.bodyLength = bodyLength;
+    }
+
 
 }

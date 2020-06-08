@@ -8,12 +8,16 @@ public class UserEdit_Controller {
     Button travelPlusBtn;
     Button traveldeleteBtn;
 
+    public void enter()
+    {
+        // 유저 기본 정보 받아와야 함.
+    }
 
     //이벤트 핸들러
 
     public void travelEditBtn_Actioned()
     {
-
+        
     }
     public void travelPlusBtn_Actioned()
     {
@@ -26,5 +30,6 @@ public class UserEdit_Controller {
 
 
     //로직
+
 
 }

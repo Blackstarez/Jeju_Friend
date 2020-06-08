@@ -33,7 +33,7 @@ public class Main_Controller {
     @FXML
     public void searchField_Typed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
-            // 검색창으로
+            lookUp();
         }
         searchLabel.setVisible(false);
     }
@@ -63,10 +63,10 @@ public class Main_Controller {
     }
     // 로직
 
-    public void moveToSearch() {
-
+    public void lookUp()
+    {
+        
     }
-
     public void moveToLogin() throws IOException
     {
         Stage primaryStage = (Stage) logoutBtn.getScene().getWindow(); 
@@ -81,7 +81,7 @@ public class Main_Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/AddTravel.fxml"));
         Parent root = loader.load();
         AddTravel_Controller controller = loader.getController();
-        weatherBtn.getScene().setRoot(root);
+        addTravelBtn.getScene().setRoot(root);
     }
     
     public void moveToWeather() throws IOException
@@ -90,16 +90,14 @@ public class Main_Controller {
         Parent root = loader.load();
         Weather_Controller weatherController = loader.getController();
         weatherBtn.getScene().setRoot(root);
-        weatherController.view();
     }
 
     public void moveToUserEdit() throws IOException
     {
-        Stage primaryStage = (Stage) logoutBtn.getScene().getWindow(); 
-        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/userEdit.fxml"));
-        Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-        primaryStage.show();  
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/UserEdit.fxml"));
+        Parent root = loader.load();
+        UserEdit_Controller controller = loader.getController();
+        setUpBtn.getScene().setRoot(root); 
+        controller.enter();
     }
 }

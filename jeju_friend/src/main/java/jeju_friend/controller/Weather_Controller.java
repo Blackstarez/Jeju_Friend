@@ -26,12 +26,6 @@ public class Weather_Controller {
     @FXML
     private Button backBtn;
 
-    
-    @FXML
-    public void view() {
-       
-
-    }
 
     // 이벤트 처리
     @FXML

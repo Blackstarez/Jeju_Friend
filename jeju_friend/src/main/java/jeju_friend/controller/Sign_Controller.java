@@ -15,14 +15,16 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import jeju_friend.Elements.Protocol;
+import jeju_friend.Elements.UserInfo;
+import jeju_friend.application.SocketHandler;
 
 public class Sign_Controller 
 {
@@ -58,11 +60,56 @@ public class Sign_Controller
 	@FXML
 	private Label ageLabel;
 
+	@FXML
+	private ToggleButton regionBtn1;
+
+	@FXML
+	private ToggleButton regionBtn2;
+
+	@FXML
+	private ToggleButton regionBtn3;
+
+	@FXML
+	private ToggleButton regionBtn4;
+
+	@FXML
+	private ToggleButton regionBtn5;
+
+	@FXML
+	private ImageView view1;
+	
+	@FXML
+	private ImageView view2;
+
+	@FXML
+	private ImageView view3;
+
+	@FXML
+	private ImageView view4;
+
+	@FXML
+	private ImageView view5;
+
+	@FXML
+	private ToggleGroup regionGroup;
+
+
 	private int inputAge = 12;
 	Image maleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));
 	Image maleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
 	Image femaleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
 	Image femaleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
+	
+	Image map1SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));
+	Image map1UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
+	Image map2SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
+	Image map2UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
+	Image map3SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
+	Image map3UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
+	Image map4SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
+	Image map4UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon_selected.png"));
+	Image map5SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
+	Image map5unSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/female_icon.png"));
 
 	@FXML
 	private void idField_Typed(final KeyEvent event) {
@@ -87,7 +134,7 @@ public class Sign_Controller
 
 	@FXML
 	private void applyBtn_Actioned() throws IOException {
-		createAccount();
+		checkValid();
 	}
 
 	
@@ -135,12 +182,46 @@ public class Sign_Controller
 			} );
 	}
 
-
+	@FXML
+	private void regionBtn1_Actioned(){
+		if(regionBtn1.isSelected())
+			view1.setImage(map1SelectedImage);
+		else
+			view1.setImage(map1UnselectedImage);
+	}
+	@FXML
+	private void regionBtn2_Actioned(){
+		if(regionBtn2.isSelected())
+			view2.setImage(map2SelectedImage);
+		else
+			view2.setImage(map2UnselectedImage);
+	}
+	@FXML
+	private void regionBtn3_Actioned(){
+		if(regionBtn3.isSelected())
+			view3.setImage(map3SelectedImage);
+		else
+			view3.setImage(map3UnselectedImage);
+	}
+	@FXML
+	private void regionBtn4_Actioned(){
+		if(regionBtn4.isSelected())
+			view4.setImage(map4SelectedImage);
+		else
+			view4.setImage(map4UnselectedImage);
+	}
+	@FXML
+	private void regionBtn5_Actioned(){
+		if(regionBtn5.isSelected())
+			view5.setImage(map5SelectedImage);
+		else
+			view5.setImage(map5UnselectedImage);
+	}
 	// 로직
 
 
 	//아이디 만들기
-	public void createAccount() throws IOException {
+	public void checkValid() throws IOException {
 		final boolean isMale = maleToggleBtn.isSelected();		// 남자눌렀냐? 성별이 남자면 T 여자면 F므로 이게 곧 성별임. 
 		final boolean isFemale = femaleToggleBtn.isSelected();	// 여자눌렀냐?
 		final String inputID = idField.getText();				// 아이디
@@ -190,23 +271,46 @@ public class Sign_Controller
 			nameField.requestFocus();
 			return;
 		} 
-
-		// 선호지역 선택확인하는 코드 필요함.
-		// 근데 아직 구현을 안해놔서 일단 주석
-
-		/*
-		 * 이제 통신해서 DB에 새 계정 넣는 과정
-		 * 
-		 * 주오가 할 일 !
-		 * 
-		 */
-
-		moveToLogin();
-		// 이건 지금은 여기에 있는데 나중에 DB에 새 계정 넣는 과정 생기면
-		// 아이디 생성 성공하면 로그인창으로 이동하도록 수정해야 함
-
+		else
+		{
+			UserInfo userInfo = new UserInfo();
+			userInfo.setAge(inputAge);
+			userInfo.setGender(isMale);
+			userInfo.setId(inputPW);
+			userInfo.setNickName(inputName);
+			tryToSign(userInfo);
+		}
 	}
 
+	public void tryToSign(UserInfo userInfo) throws IOException {
+		Protocol protocol = new Protocol();
+		Protocol resultProtocol = new Protocol();
+		protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_APPLY, Protocol.PT_UNKNOWN, userInfo.toBytes());
+		
+		SocketHandler socketHandler = new SocketHandler();
+		try {
+			resultProtocol = socketHandler.request(protocol);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		//회원가입 성공 여부 체크
+		if(resultProtocol.getProtocolCodeExpansion() == Protocol.PT_SUCCESS)
+		{
+			moveToLogin();
+		}
+		else
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("로그인 오류");
+			alert.setHeaderText(null);
+			alert.setContentText("아이디 비밀번호를 다시 입력해 주세요!");
+			alert.showAndWait();
+			idField.requestFocus();
+			return;
+		}
+
+	}
 	public void moveToLogin() throws IOException {
 		final Stage primaryStage = (Stage) applyBtn.getScene().getWindow();
 		final Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Login.fxml"));
