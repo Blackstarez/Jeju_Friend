@@ -27,6 +27,8 @@ public class SocketHandler {
         InputStream is = socket.getInputStream();
         Protocol result = new Protocol();
         try {
+            System.out.println("설정한 type : "+protocol.getProtocolType());
+            protocol.printPacket();
             socket.getOutputStream().write(protocol.getPacket());   //송신
 
             // ------------------ 수신 ---------------------------
@@ -47,7 +49,6 @@ public class SocketHandler {
 
 
             // 서버와 연결 끊기
-            disconnect();
 
             return result;
         } catch (IOException e) {

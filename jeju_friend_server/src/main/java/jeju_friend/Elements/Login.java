@@ -1,4 +1,4 @@
-package jeju_friend_server.Elements;
+package jeju_friend.Elements;
 
 import java.io.*;
 
@@ -60,9 +60,9 @@ public class Login implements Serializable, Cloneable{
             try {
                 ObjectInputStream ois = new ObjectInputStream(bais);
                 member = (Login)ois.readObject();
-            } catch (Exception e) {}
-        }catch(Exception e){}
-
+            } catch (Exception e) {e.printStackTrace();}
+        }catch(Exception e){e.printStackTrace();}
+        System.out.println(member);
         return member;
     }
 

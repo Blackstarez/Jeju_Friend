@@ -58,7 +58,7 @@ public class Protocol {
     public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser, byte[] body)
     {   
         this.packet = null;
-        packet = new byte[body.length+LEN_HEADER];
+        this.packet = new byte[body.length+LEN_HEADER];
         
         byte[] bodyLength = intToByteArray(body.length);
 
@@ -67,15 +67,25 @@ public class Protocol {
         this.protocolCodeExpansion = protocolCodeEx;
         this.protocolUser = protocolUser;
         this.bodyLength = byteArrayToint(bodyLength);
+
+        this.packet[0] = protocolType;
+        this.packet[1] = protocolCode;
+        this.packet[2] = protocolCodeEx;
+        this.packet[3] = protocolUser;
        
+        System.out.println("패킷 설정중 -------");
+        System.arraycopy(bodyLength, 0, this.packet, 4, LEN_BODY_LENGTH_FIELD);
+        printPacket();
+        System.out.println("-------구분자---------");
         System.arraycopy(body, 0, this.packet, 8, body.length);
+        printPacket();
     }
 
     // 데이터를 포함하지 않고 송신하는 경우 사용
     public void setPacket(byte protocolType, byte protocolCode, byte protocolCodeEx, byte protocolUser)
     {   
         this.packet = null;
-        packet = new byte[LEN_HEADER];
+        this.packet = new byte[LEN_HEADER];
         
         this.protocolType = protocolType;
         this.protocolCode = protocolCode;
@@ -83,34 +93,34 @@ public class Protocol {
         this.protocolUser = protocolUser;
         this.bodyLength = 0;
         
-        packet[0] = protocolType;
-        packet[0] = protocolCode;
-        packet[0] = protocolCodeEx;
-        packet[0] = protocolUser;
+        this.packet[0] = protocolType;
+        this.packet[1] = protocolCode;
+        this.packet[2] = protocolCodeEx;
+        this.packet[3] = protocolUser;
         for(int i=4;i<8;i++)
         {
-            packet[i]=0;
+            this.packet[i]=0;
         } 
     }
 
     // 수신한 패킷을 그대로 복사하는 경우 사용
     public void setPacket(byte[] packet)
     {
-        this.packet = null;
-
-        byte[] bodyLength = new byte[4];
-        bodyLength[0] = packet[4];
-        bodyLength[1] = packet[5];
-        bodyLength[2] = packet[6];
-        bodyLength[3] = packet[7];
+        byte[] bodyLengthTmp = new byte[4];
+        bodyLengthTmp[0] = packet[4];
+        bodyLengthTmp[1] = packet[5];
+        bodyLengthTmp[2] = packet[6];
+        bodyLengthTmp[3] = packet[7];
 
         this.protocolType = packet[0];
         this.protocolCode = packet[1];
         this.protocolCodeExpansion = packet[2];
         this.protocolUser = packet[3];
-        this.bodyLength = byteArrayToint(bodyLength);
+        this.bodyLength = byteArrayToint(bodyLengthTmp);
 
-        System.arraycopy(packet, 0, this.packet, 0, packet.length);
+        this.packet = new byte[this.bodyLength+LEN_HEADER];
+
+        System.arraycopy(packet, 0, this.packet, 0, this.packet.length);
     }
 
     public byte[] getPacket()
@@ -122,14 +132,14 @@ public class Protocol {
     public static byte[] getBody(byte[] packet,int bodyLength)
     {
         byte[] body = new byte[bodyLength];
-        System.arraycopy(packet, 8, body, 0, packet.length);
+        System.arraycopy(packet, 8, body, 0, packet.length-LEN_HEADER);
         return body;
     }
 
     public byte[] getBody()
     {
         byte[] body = new byte[this.bodyLength];
-        System.arraycopy(packet, 8, body, 0, packet.length);
+        System.arraycopy(packet, 8, body, 0, packet.length-LEN_HEADER);
         return body;
     }
 
@@ -151,7 +161,16 @@ public class Protocol {
 	public static int byteArrayToint(byte[] bytearr) {
 		return ((int) (bytearr[0] & 0xff) + (int) ((bytearr[1] & 0xff) << 8) + (int) ((bytearr[2] & 0xff) << 16)
 				+ (int) ((bytearr[3] & 0xff) << 24));
-	}
+    }
+    
+    // this.packet을 출력하는 함수
+    public void printPacket()
+    {
+        for(int i =0; i < packet.length;i++)
+        {
+            System.out.print(packet[i]);
+        }
+    }
 
     public byte getProtocolType() {
         return protocolType;
@@ -184,6 +203,4 @@ public class Protocol {
     public void setBodyLength(int bodyLength) {
         this.bodyLength = bodyLength;
     }
-
-
 }

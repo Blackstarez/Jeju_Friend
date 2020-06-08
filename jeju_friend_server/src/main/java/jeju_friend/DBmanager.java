@@ -1,7 +1,7 @@
-package jeju_friend_server;
+package jeju_friend;
 
 import java.sql.*;
-import jeju_friend_server.Elements.*;
+import jeju_friend.Elements.*;
 
 public class DBmanager {
     private static String DB_ADDRESS = "jdbc:mysql://localhost/jeju?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true";
@@ -11,8 +11,7 @@ public class DBmanager {
     Statement stmt = null;
 
     // DB와 연결을 실행하는 함수 - 제일 처음 실행
-    public void startDB() 
-    {
+    public void startDB() {
         try {
             conn = DriverManager.getConnection(DB_ADDRESS, DB_ID, DB_PW);
             System.out.println("\n- MySQL Connction");
@@ -25,12 +24,18 @@ public class DBmanager {
     }
 
     // 로그인
-    public boolean getLoginResult(String id, String pw) throws SQLException 
-    {
-        String sql = "select * from 로그인 where ID ='" + id + "' && PW ='" + pw + "';";
-        ResultSet result = stmt.executeQuery(sql);
-        if (result != null)
-            return true;
+    public boolean getLoginResult(String id, String pw) {
+        String sql = "select * from login where ID ='" + id + "' && PW ='" + pw + "';";
+        ResultSet result;
+        try {
+            result = stmt.executeQuery(sql);
+            result.last();
+            if (result.getRow() != 0)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
         return false;
 
     }
@@ -43,7 +48,8 @@ public class DBmanager {
         ResultSet result;
 
         result = stmt.executeQuery(sql);
-        if(result != null)
+        result.last();
+        if (result.getRow() != 0)
             return true;
         }catch(SQLException e)
         {
@@ -62,14 +68,7 @@ public class DBmanager {
         {
             return false;
         }
-        try{
-            String sql = "select * from user_info where ID='"+id+"';";
-            ResultSet result = stmt.executeQuery(sql);
-            if(result==null)
-                return false;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        
         char sex = gender==true?'M':'F';
         try{
             String sql = "Insert into user_info (ID,nickName,age,gender,권한,관심지역) Values(?,?,?,?,?,?);";

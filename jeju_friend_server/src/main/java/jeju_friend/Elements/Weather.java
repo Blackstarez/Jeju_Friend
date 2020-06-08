@@ -1,4 +1,4 @@
-package jeju_friend_server.Elements;
+package jeju_friend.Elements;
 
 import java.util.Date;
 import java.io.*;
