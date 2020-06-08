@@ -364,6 +364,7 @@ public class Sign_Controller
 			return 4;
 		else if(regionBtn5.isSelected())
 			return 5;
+		else
 		return 0;
 	}
 }
