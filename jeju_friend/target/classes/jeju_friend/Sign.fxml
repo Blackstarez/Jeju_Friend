@@ -162,12 +162,12 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="applyBtn" layoutX="801.0" layoutY="633.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" text="확인" wrapText="true">
+      <Button fx:id="applyBtn" layoutX="1017.0" layoutY="660.0" mnemonicParsing="false" onAction="#applyBtn_Actioned" text="확인" wrapText="true">
          <font>
             <Font name="LG PC" size="26.0" />
          </font>
       </Button>
-      <Button fx:id="cancelBtn" layoutX="708.0" layoutY="633.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소" wrapText="true">
+      <Button fx:id="cancelBtn" layoutX="958.0" layoutY="660.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소" wrapText="true">
          <font>
             <Font name="LG PC" size="26.0" />
          </font>
