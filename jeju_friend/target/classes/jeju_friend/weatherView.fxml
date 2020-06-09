@@ -65,7 +65,7 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="66.0">
                                  <children>
-                                    <GridPane fx:id="grid11" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <GridPane fx:id="grid2" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label text="시간" wrapText="true" />
                                           <Label text="강수확률" wrapText="true" GridPane.columnIndex="1" />
@@ -104,7 +104,7 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="66.0">
                                  <children>
-                                    <GridPane fx:id="grid111" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <GridPane fx:id="grid3" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label text="시간" wrapText="true" />
                                           <Label text="강수확률" wrapText="true" GridPane.columnIndex="1" />
