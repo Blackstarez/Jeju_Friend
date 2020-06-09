@@ -14,41 +14,41 @@
             <Font name="LG PC" size="44.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="53.0" layoutY="128.0" />
-      <ChoiceBox layoutX="222.0" layoutY="128.0" />
+      <ChoiceBox fx:id="cityBox" layoutX="53.0" layoutY="128.0" />
+      <ChoiceBox fx:id="townBox" layoutX="153.0" layoutY="129.0" onMouseClicked="#townBox_Cliked" />
       <TabPane layoutX="53.0" layoutY="202.0" prefHeight="506.0" prefWidth="903.0" style="-fx-background-color: gray;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="오늘">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.0876803551609323" layoutX="1.0" layoutY="-5.0" prefHeight="466.0" prefWidth="903.0">
+                        <SplitPane layoutX="1.0" layoutY="-5.0" prefHeight="466.0" prefWidth="903.0">
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="66.0">
                                  <children>
-                                    <VBox layoutX="-18.0" layoutY="67.0" prefHeight="464.0" prefWidth="82.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <GridPane fx:id="grid1" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
-                                          <Label prefHeight="37.0" prefWidth="80.0" />
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="80.0" text="기온" />
-                                          <Label prefHeight="37.0" prefWidth="80.0" text="기상상태" />
+                                          <Label text="시간" wrapText="true" />
+                                          <Label text="강수확률" wrapText="true" GridPane.columnIndex="1" />
+                                          <Label text="강수형태" wrapText="true" GridPane.columnIndex="2" />
+                                          <Label text="기온" wrapText="true" GridPane.columnIndex="3" />
+                                          <Label text="풍속" wrapText="true" GridPane.columnIndex="4" />
+                                          <Label text="풍향" wrapText="true" GridPane.columnIndex="5" />
+                                          <Label text="습도" wrapText="true" GridPane.columnIndex="6" />
                                        </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <TableView layoutX="-72.0" layoutY="-68.0" prefHeight="464.0" prefWidth="809.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="3시" />
-                                        <TableColumn prefWidth="75.0" text="6시" />
-                                          <TableColumn prefWidth="75.0" text="9시" />
-                                          <TableColumn prefWidth="75.0" text="12시" />
-                                          <TableColumn prefWidth="75.0" text="15시" />
-                                          <TableColumn prefWidth="75.0" text="18시" />
-                                          <TableColumn prefWidth="75.0" text="21시" />
-                                          <TableColumn prefWidth="75.0" text="24시" />
-                                      </columns>
-                                    </TableView>
+                                    </GridPane>
                                  </children>
                               </AnchorPane>
                           </items>
@@ -61,14 +61,37 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="436.0" prefWidth="855.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="9시" />
-                            <TableColumn prefWidth="75.0" text="11시" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
-                          </columns>
-                        </TableView>
+                        <SplitPane prefHeight="466.0" prefWidth="903.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="66.0">
+                                 <children>
+                                    <GridPane fx:id="grid11" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label text="시간" wrapText="true" />
+                                          <Label text="강수확률" wrapText="true" GridPane.columnIndex="1" />
+                                          <Label text="강수형태" wrapText="true" GridPane.columnIndex="2" />
+                                          <Label text="기온" wrapText="true" GridPane.columnIndex="3" />
+                                          <Label text="풍속" wrapText="true" GridPane.columnIndex="4" />
+                                          <Label text="풍향" wrapText="true" GridPane.columnIndex="5" />
+                                          <Label text="습도" wrapText="true" GridPane.columnIndex="6" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
                      </children>
                   </AnchorPane>
             </content>
@@ -77,24 +100,49 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="26.0" layoutY="34.0" prefHeight="407.0" prefWidth="843.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <SplitPane prefHeight="466.0" prefWidth="903.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="66.0">
+                                 <children>
+                                    <GridPane fx:id="grid111" layoutX="45.0" layoutY="14.0" prefHeight="464.0" prefWidth="901.0" style="-fx-grid-lines-visible: true;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label text="시간" wrapText="true" />
+                                          <Label text="강수확률" wrapText="true" GridPane.columnIndex="1" />
+                                          <Label text="강수형태" wrapText="true" GridPane.columnIndex="2" />
+                                          <Label text="기온" wrapText="true" GridPane.columnIndex="3" />
+                                          <Label text="풍속" wrapText="true" GridPane.columnIndex="4" />
+                                          <Label text="풍향" wrapText="true" GridPane.columnIndex="5" />
+                                          <Label text="습도" wrapText="true" GridPane.columnIndex="6" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="backBtn" layoutX="855.0" layoutY="35.0" mnemonicParsing="false" onAction="#backBtn_Actioned" prefHeight="22.0" prefWidth="92.0" style="-fx-background-color: #FA963C;" text="뒤로" textFill="WHITE">
+      <Button fx:id="backBtn" layoutX="855.0" layoutY="35.0" mnemonicParsing="false" onAction="#backBtn_Actioned" style="-fx-background-color: #FA963C;" text="뒤로" textFill="WHITE">
          <font>
             <Font name="LG PC" size="29.0" />
          </font>
       </Button>
-      <Button fx:id="lookUpBtn" layoutX="406.0" layoutY="128.0" mnemonicParsing="false" onAction="#lookUpBtn_Actioned" text="조회" />
+      <Button fx:id="lookUpBtn" layoutX="356.0" layoutY="122.0" mnemonicParsing="false" onAction="#lookUpBtn_Actioned" prefHeight="46.0" prefWidth="76.0" text="조회" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

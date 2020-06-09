@@ -163,7 +163,7 @@ public class Weather {
 
 
 
-    public static Weather[] toWaitLists(byte[] data){
+    public static Weather[] toWeatherlists(byte[] data){
 		Weather[] weatherList = null;
 		try {
 			ByteArrayInputStream bais = new ByteArrayInputStream(data);

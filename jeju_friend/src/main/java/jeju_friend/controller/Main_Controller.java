@@ -90,6 +90,7 @@ public class Main_Controller {
         Parent root = loader.load();
         Weather_Controller weatherController = loader.getController();
         weatherBtn.getScene().setRoot(root);
+        weatherController.enter();
     }
 
     public void moveToUserEdit() throws IOException
