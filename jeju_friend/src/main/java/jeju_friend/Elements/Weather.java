@@ -22,6 +22,8 @@ public class Weather {
     private WindDirection windDirection;    // 풍향
     private float windSpeed;                // 풍속
 
+    public Weather(){}
+    public Weather(int areaCode){this.areaCode = areaCode;}
 
     //getter, setter
     public int getAreaCode() {

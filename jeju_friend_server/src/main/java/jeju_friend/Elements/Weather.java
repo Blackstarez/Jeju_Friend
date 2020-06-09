@@ -22,6 +22,8 @@ public class Weather {
     private WindDirection windDirection;    // 풍향
     private float windSpeed;                // 풍속
 
+    public Weather(){}
+    public Weather(int areaCode){this.areaCode = areaCode;}
 
     //getter, setter
     public int getAreaCode() {
@@ -161,7 +163,7 @@ public class Weather {
 
 
 
-    public static Weather[] toWeatherLists(byte[] data){
+    public static Weather[] toWaitLists(byte[] data){
 		Weather[] weatherList = null;
 		try {
 			ByteArrayInputStream bais = new ByteArrayInputStream(data);
