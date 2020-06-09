@@ -11,7 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import jeju_friend.Elements.Weather;
 
 public class Weather_Controller {
     @FXML
@@ -26,6 +29,35 @@ public class Weather_Controller {
     @FXML
     private Button backBtn;
 
+    @FXML 
+    private Button lookUpBtn;
+
+    @FXML
+    private TableView table1;
+
+    @FXML
+    private TableColumn h3;
+
+    @FXML
+    private TableColumn h6;
+
+    @FXML
+    private TableColumn h9;
+
+    @FXML
+    private TableColumn h12;
+
+    @FXML
+    private TableColumn h15;
+
+    @FXML
+    private TableColumn h18;
+
+    @FXML
+    private TableColumn h21;
+
+    @FXML
+    private TableColumn h24;
 
     // 이벤트 처리
     @FXML
@@ -35,6 +67,10 @@ public class Weather_Controller {
 
     // 로직
 
+    public void lookUpBtn_Actioned()
+    {
+        private Weather weather = new Weather();
+    }
     public void moveToMain() throws IOException
     {
         final Stage primaryStage = (Stage) backBtn.getScene().getWindow();
