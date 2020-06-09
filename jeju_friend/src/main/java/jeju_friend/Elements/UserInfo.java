@@ -12,7 +12,15 @@ public class UserInfo {
     private int interestArea;       // 관심지역 지도상으로 12시방향부터 시계방향으로 1~5
 
     public UserInfo(){}
-    
+    public UserInfo(String id, String pw, String nickName, boolean gender, int age, int interestArea)
+    {
+        this.id = id;
+        this.pw = pw;
+        this.nickName = nickName;
+        this.gender = gender;
+        this.age = age;
+        this.interestArea = interestArea;
+    }
 
     public static long getSerialversionuid() {
         return serialVersionUID;
