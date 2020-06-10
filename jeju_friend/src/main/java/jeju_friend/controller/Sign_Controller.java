@@ -94,7 +94,6 @@ public class Sign_Controller
 	@FXML
 	private ToggleGroup regionGroup;
 
-
 	private int inputAge = 12;
 	Image maleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));
 	Image maleUnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon.png"));
@@ -185,6 +184,8 @@ public class Sign_Controller
 
 	@FXML
 	private void regionBtn1_Actioned(){
+
+		regionBtn1.setToggleGroup(regionGroup);
 		if(regionBtn1.isSelected())
 		{
 			view1.setImage(map1SelectedImage);
@@ -199,6 +200,7 @@ public class Sign_Controller
 	@FXML
 	private void regionBtn2_Actioned()
 	{
+		regionBtn2.setToggleGroup(regionGroup);
 		if(regionBtn2.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
@@ -212,6 +214,7 @@ public class Sign_Controller
 	}
 	@FXML
 	private void regionBtn3_Actioned(){
+		regionBtn3.setToggleGroup(regionGroup);
 		if(regionBtn3.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
@@ -225,6 +228,7 @@ public class Sign_Controller
 	}
 	@FXML
 	private void regionBtn4_Actioned(){
+		regionBtn4.setToggleGroup(regionGroup);
 		if(regionBtn4.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
@@ -238,6 +242,7 @@ public class Sign_Controller
 	}
 	@FXML
 	private void regionBtn5_Actioned(){
+		regionBtn5.setToggleGroup(regionGroup);
 		if(regionBtn5.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);

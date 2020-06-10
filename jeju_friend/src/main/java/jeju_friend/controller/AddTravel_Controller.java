@@ -2,6 +2,7 @@ package jeju_friend.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.concurrent.ExecutionException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,83 +32,74 @@ public class AddTravel_Controller {
 
     // 이벤트 핸들러
     @FXML
-    public void cancelBtn_Actioned() throws IOException {
+    public void cancelBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
         moveToMain();
     }
+
     @FXML
-    public void addTravelBtn_Actioned() throws IOException {
+    public void addTravelBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
         checkValid();
     }
 
     // 로직
-  
 
-    public void checkValid() throws IOException {
+    public void checkValid() throws IOException, InterruptedException, ExecutionException {
         String inputName = nameField.getText();
         LocalDate date = datePicker.getValue();
         // 선호 지역 골라야 함.
-        if(inputName.isEmpty())
-        {
+        if (inputName.isEmpty()) {
             Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("여행 생성 오류");
-			alert.setHeaderText(null);
-			alert.setContentText("여행 이름을 입력해 주세요!");
-			alert.showAndWait();
-			nameField.requestFocus();
+            alert.setTitle("여행 생성 오류");
+            alert.setHeaderText(null);
+            alert.setContentText("여행 이름을 입력해 주세요!");
+            alert.showAndWait();
+            nameField.requestFocus();
             return;
-        }
-        else if (date == null)
-        {
+        } else if (date == null) {
             Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("여행 생성 오류");
-			alert.setHeaderText(null);
-			alert.setContentText("여행 시작일을 선택해 주세요!");
-			alert.showAndWait();
-			nameField.requestFocus();
+            alert.setTitle("여행 생성 오류");
+            alert.setHeaderText(null);
+            alert.setContentText("여행 시작일을 선택해 주세요!");
+            alert.showAndWait();
+            nameField.requestFocus();
             return;
-        }
-        else
-        {
+        } else {
             TourPlan tourPlan = new TourPlan();
             tourPlan.setTourPlanName(inputName);
             // 여행 시작일 추가해야함.
             addTravel(tourPlan);
-        }            
+        }
     }
 
-    public void addTravel(TourPlan tourPlan) throws IOException
-    {
+    public void addTravel(TourPlan tourPlan) throws IOException, InterruptedException, ExecutionException {
         Protocol protocol = new Protocol();
         Protocol resultProtocol = new Protocol();
-        protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_APPLY, Protocol.PT_USER,tourPlan.toBytes());
-		SocketHandler socketHandler = new SocketHandler();
-		try {
-			resultProtocol = socketHandler.request(protocol);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_APPLY, Protocol.PT_USER,
+                tourPlan.toBytes());
+        SocketHandler socketHandler = new SocketHandler();
+        try {
+            resultProtocol = socketHandler.request(protocol);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		//여행 추가 성공 여부 체크
-		if(resultProtocol.getProtocolCodeExpansion() == Protocol.PT_SUCCESS)
-		{
-			moveToMain();
-		}
-		else
-		{
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("여행추가 오류");
-			alert.setHeaderText(null);
-			alert.setContentText("다시 시도해 주세요!");
+        // 여행 추가 성공 여부 체크
+        if (resultProtocol.getProtocolCodeExpansion() == Protocol.PT_SUCCESS) {
+            moveToMain();
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("여행추가 오류");
+            alert.setHeaderText(null);
+            alert.setContentText("다시 시도해 주세요!");
             alert.showAndWait();
-		}
+        }
     }
-    
-    public void moveToMain() throws IOException {
-        final Stage primaryStage = (Stage) cancelBtn.getScene().getWindow();
-        final Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Main.fxml"));
-        final Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-        primaryStage.show(); 
+
+    public void moveToMain() throws IOException, InterruptedException, ExecutionException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
+        Parent root = loader.load();
+        Main_Controller controller = loader.getController();
+        cancelBtn.getScene().setRoot(root); 
+        controller.lookUp();
     }
 }

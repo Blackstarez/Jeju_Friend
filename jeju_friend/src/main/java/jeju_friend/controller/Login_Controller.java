@@ -23,6 +23,7 @@ import jeju_friend.Elements.Protocol;
 import jeju_friend.application.SocketHandler;
 
 import java.net.Socket;
+import java.util.concurrent.ExecutionException;
 
 public class Login_Controller {
 	@FXML
@@ -73,7 +74,7 @@ public class Login_Controller {
 	@FXML
 	private void loginBtn_Actioned() throws Exception {
 		moveToMain();
-		//login();
+		// login();
 	}
 
 	@FXML
@@ -105,19 +106,16 @@ public class Login_Controller {
 			alert.showAndWait();
 			pwField.requestFocus();
 			return;
-		}
-		else
-			tryLogin(inputID, inputPW);		
+		} else
+			tryLogin(inputID, inputPW);
 	}
 
-	public void moveToMain() throws IOException {
-		Stage primaryStage = (Stage) loginBtn.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/Main.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.centerOnScreen();
-		primaryStage.show();
+	public void moveToMain() throws IOException, InterruptedException, ExecutionException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
+        Parent root = loader.load();
+        Main_Controller controller = loader.getController();
+        loginBtn.getScene().setRoot(root); 
+        controller.lookUp();
 	}
 
 	public void moveToSign() throws IOException {
@@ -130,7 +128,7 @@ public class Login_Controller {
 		primaryStage.show();
 	}
 
-	public void tryLogin(String inputID, String inputPW) throws IOException {
+	public void tryLogin(String inputID, String inputPW) throws IOException, InterruptedException, ExecutionException {
 		Protocol protocol = new Protocol();
 		Protocol resultProtocol = new Protocol();
 		Login loginInfo = new Login(inputID, inputPW);

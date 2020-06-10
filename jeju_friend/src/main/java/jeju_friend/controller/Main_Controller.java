@@ -1,7 +1,11 @@
 package jeju_friend.controller;
 
 import java.io.IOException;
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,10 +13,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jeju_friend.Elements.Protocol;
+import jeju_friend.Elements.TouristSpot;
+import jeju_friend.application.SocketHandler;
 
 public class Main_Controller {
 
@@ -28,14 +39,27 @@ public class Main_Controller {
     private Button weatherBtn;
     @FXML
     private Button userEditBtn;
+    @FXML
+    private Button refreshBtn;
+    @FXML
+    private VBox vBox;
+    @FXML
+    private Pane mainPane;
+    @FXML
+    private Pane searchBar;
+
     // 이벤트 핸들러
 
     @FXML
-    public void searchField_Typed(KeyEvent event) {
+    public void searchField_Typed(KeyEvent event) throws InterruptedException, ExecutionException {
         if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
             lookUp();
         }
         searchLabel.setVisible(false);
+    }
+    @FXML
+    public void refreshBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
+        refresh();
     }
 
     @FXML
@@ -57,16 +81,176 @@ public class Main_Controller {
     public void weatherBtn_Actioned() throws IOException {
         moveToWeather();
     }
+
     @FXML
     public void userEditBtn_Actioned() throws IOException {
         moveToUserEdit();
     }
     // 로직
 
-    public void lookUp()
-    {
+    public void lookUp() throws InterruptedException, ExecutionException {
         
+        TouristSpot[] tourList = getTouristSpotList();
+        TouristSpot[] foodList = getFoodSpotList();
+        TouristSpot tourSpot = getTouristSpot(tourList);
+        TouristSpot foodSpot = getTouristSpot(foodList);
+        addVBox(tourSpot);
+        addVBox(foodSpot);
     }
+
+    public TouristSpot[] getTouristSpotList() throws InterruptedException, ExecutionException 
+    {
+        Task<TouristSpot[]> task = new Task<TouristSpot[]>() {
+
+			@Override
+			protected TouristSpot[] call() throws Exception {
+
+				Protocol protocol = new Protocol();
+                Protocol resultProtocol = new Protocol();
+                
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER);
+                SocketHandler socketHandler = new SocketHandler();
+                try {
+                    resultProtocol = socketHandler.request(protocol);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                TouristSpot[] list = TouristSpot.toTouristSpotList(resultProtocol.getBody());  
+                return list; 
+            }   
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        return task.get();
+    }
+
+    public TouristSpot[] getFoodSpotList() throws InterruptedException, ExecutionException 
+    {
+        Task<TouristSpot[]> task = new Task<TouristSpot[]>() {
+
+			@Override
+			protected TouristSpot[] call() throws Exception {
+
+				Protocol protocol = new Protocol();
+                Protocol resultProtocol = new Protocol();
+                
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER);
+                SocketHandler socketHandler = new SocketHandler();
+                try {
+                    resultProtocol = socketHandler.request(protocol);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                TouristSpot[] list = TouristSpot.toTouristSpotList(resultProtocol.getBody());  
+                return list; 
+            }   
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        return task.get();
+    }
+
+    public TouristSpot getTouristSpot(TouristSpot[] list)
+    {
+        int max = list.length;
+        int index;
+        TouristSpot result;
+        Random random = new Random(System.currentTimeMillis());
+        index = random.nextInt(max);
+        result = list[index];
+        return result;
+    }
+
+    public void addVBox(TouristSpot tour)
+    {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {                
+                VBox vBox = new VBox();
+                Label tourName = new Label(tour.getTouristSpot());
+                //String imageSource = tour.getImageUrl();
+                //Image image = new Image(imageSource);
+                //ImageView tourImage = new ImageView(image);
+                Platform.runLater(() -> {
+                    mainPane.setLayoutY(searchBar.getLayoutY()+80);
+                    //tourImage.setFitWidth(200);
+                    //tourImage.setFitHeight(150);
+                    vBox.getChildren().addAll(tourName); //  pane.getChildren().addAll(tourName, tourImage);
+                    if(tour.getContactInformation() != null)
+                    {
+                        Label text = new Label("연락처 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getHomepage() != null)
+                    {
+                        Label text = new Label("홈페이지 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getWeekdayViewingTime() != null)
+                    {
+                        Label text = new Label("평일영업시간 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getHolidayViewingTime() != null)
+                    {
+                        Label text = new Label("휴일영업시간 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getClosedInformation() != null)
+                    {
+                        Label text = new Label("휴일정보 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getChildAdmissionFee() != null)
+                    {
+                        Label text = new Label("어린이요금 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getTeenagerAdmissionFee() != null)
+                    {
+                        Label text = new Label("청소년요금 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getAdultAdmissionFee()!= null)
+                    {
+                        Label text = new Label("성인요금 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getEtc() != null)
+                    {
+                        Label text = new Label("기타사항 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getInformation() != null)
+                    {
+                        Label text = new Label("정보 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                    if(tour.getLocation() != null)
+                    {
+                        Label text = new Label("위치 : " + tour.getContactInformation());
+                        text.setWrapText(true);
+                        vBox.getChildren().add(text);
+                    }
+                });
+            }
+        };
+        thread.setDaemon(true);
+        thread.start();
+    }
+
     public void moveToLogin() throws IOException
     {
         Stage primaryStage = (Stage) logoutBtn.getScene().getWindow(); 
@@ -101,4 +285,14 @@ public class Main_Controller {
         userEditBtn.getScene().setRoot(root); 
         controller.enter();
     }
+
+        
+    private void refresh() throws IOException, InterruptedException, ExecutionException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
+        Parent root = loader.load();
+        Main_Controller controller = loader.getController();
+        userEditBtn.getScene().setRoot(root); 
+        controller.lookUp();
+    }
+
 }

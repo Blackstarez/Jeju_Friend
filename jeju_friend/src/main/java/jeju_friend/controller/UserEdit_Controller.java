@@ -77,6 +77,7 @@ public class UserEdit_Controller {
 
     @FXML
 	private void regionBtn1_Actioned(){
+		regionBtn1.setToggleGroup(regionGroup);
 		if(regionBtn1.isSelected())
 		{
 			view1.setImage(map1SelectedImage);
@@ -90,6 +91,7 @@ public class UserEdit_Controller {
 	}
 	@FXML
 	private void regionBtn2_Actioned(){
+		regionBtn2.setToggleGroup(regionGroup);
 		if(regionBtn2.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
@@ -103,6 +105,7 @@ public class UserEdit_Controller {
 	}
 	@FXML
 	private void regionBtn3_Actioned(){
+		regionBtn3.setToggleGroup(regionGroup);
 		if(regionBtn3.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
@@ -116,6 +119,7 @@ public class UserEdit_Controller {
 	}
 	@FXML
 	private void regionBtn4_Actioned(){
+		regionBtn4.setToggleGroup(regionGroup);
 		if(regionBtn4.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
@@ -129,6 +133,7 @@ public class UserEdit_Controller {
 	}
 	@FXML
 	private void regionBtn5_Actioned(){
+		regionBtn5.setToggleGroup(regionGroup);
 		if(regionBtn5.isSelected())
 		{
 			view1.setImage(map1UnselectedImage);
