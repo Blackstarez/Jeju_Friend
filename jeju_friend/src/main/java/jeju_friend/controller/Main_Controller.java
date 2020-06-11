@@ -278,7 +278,7 @@ public class Main_Controller {
         weatherController.enter();
     }
 
-    public void moveToUserEdit() throws IOException
+    public void moveToUserEdit() throws IOException, InterruptedException, ExecutionException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/UserEdit.fxml"));
         Parent root = loader.load();

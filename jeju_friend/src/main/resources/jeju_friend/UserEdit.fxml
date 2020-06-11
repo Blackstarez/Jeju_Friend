@@ -11,10 +11,10 @@
    <children>
       <Label fx:id="regionLabel" layoutX="482.0" layoutY="82.0" prefHeight="35.0" prefWidth="55.0" text="관심지역" />
       <Button fx:id="saveBtn" layoutX="721.0" layoutY="473.0" mnemonicParsing="false" text="저장" />
-      <Button fx:id="cancelBtn" layoutX="649.0" layoutY="473.0" mnemonicParsing="false" text="취소" />
+      <Button fx:id="cancelBtn" onAction="cancelBtn_Actioned" layoutX="649.0" layoutY="473.0" mnemonicParsing="false" text="취소" />
       <Label fx:id="travelLabel" layoutX="23.0" layoutY="32.0" prefHeight="35.0" prefWidth="103.0" stylesheets="@userEdit.css" text="여행 일정" />
-      <VBox layoutX="33.0" layoutY="103.0" prefHeight="380.0" prefWidth="230.0" />
-      <Button fx:id="travelPlusBtn" layoutX="123.0" layoutY="32.0" mnemonicParsing="false" onAction="#travelPlusBtn_Actioned" text="추가" wrapText="true" />
+      <VBox fx:id="travelBox" layoutX="33.0" layoutY="103.0" prefHeight="380.0" prefWidth="230.0" />
+      <Button fx:id="addTravelBtn" layoutX="123.0" layoutY="32.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" text="추가" wrapText="true" />
       <Button fx:id="travelDeleteBtn" layoutX="186.0" layoutY="32.0" mnemonicParsing="false" onAction="#travelDeleteBtn_Actioned" text="삭제" wrapText="true">
          <font>
             <Font size="9.0" />

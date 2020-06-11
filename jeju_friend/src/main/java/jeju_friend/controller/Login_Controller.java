@@ -73,8 +73,7 @@ public class Login_Controller {
 
 	@FXML
 	private void loginBtn_Actioned() throws Exception {
-		moveToMain();
-		// login();
+		login();
 	}
 
 	@FXML

@@ -45,7 +45,7 @@ public class AddTravel_Controller {
 
     public void checkValid() throws IOException, InterruptedException, ExecutionException {
         String inputName = nameField.getText();
-        LocalDate date = datePicker.getValue();
+        LocalDate tourDay = datePicker.getValue();
         // 선호 지역 골라야 함.
         if (inputName.isEmpty()) {
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -55,7 +55,7 @@ public class AddTravel_Controller {
             alert.showAndWait();
             nameField.requestFocus();
             return;
-        } else if (date == null) {
+        } else if (tourDay == null) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("여행 생성 오류");
             alert.setHeaderText(null);
@@ -66,7 +66,7 @@ public class AddTravel_Controller {
         } else {
             TourPlan tourPlan = new TourPlan();
             tourPlan.setTourPlanName(inputName);
-            // 여행 시작일 추가해야함.
+            // tourPlan.setTourDay(date)
             addTravel(tourPlan);
         }
     }
