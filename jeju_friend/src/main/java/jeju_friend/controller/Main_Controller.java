@@ -53,7 +53,7 @@ public class Main_Controller {
     @FXML
     public void searchField_Typed(KeyEvent event) throws InterruptedException, ExecutionException {
         if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
-            lookUp();
+            //검색기능 수행
         }
         searchLabel.setVisible(false);
     }
@@ -168,7 +168,7 @@ public class Main_Controller {
         Thread thread = new Thread() {
             @Override
             public void run() {                
-                VBox vBox = new VBox();
+                VBox newV = new VBox();
                 Label tourName = new Label(tour.getTouristSpot());
                 //String imageSource = tour.getImageUrl();
                 //Image image = new Image(imageSource);
@@ -177,73 +177,74 @@ public class Main_Controller {
                     mainPane.setLayoutY(searchBar.getLayoutY()+80);
                     //tourImage.setFitWidth(200);
                     //tourImage.setFitHeight(150);
-                    vBox.getChildren().addAll(tourName); //  pane.getChildren().addAll(tourName, tourImage);
+                    newV.getChildren().addAll(tourName); //  newV.getChildren().addAll(tourName, tourImage);
                     if(tour.getContactInformation() != null)
                     {
                         Label text = new Label("연락처 : " + tour.getContactInformation());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getHomepage() != null)
                     {
-                        Label text = new Label("홈페이지 : " + tour.getContactInformation());
+                        Label text = new Label("홈페이지 : " + tour.getHomepage());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getWeekdayViewingTime() != null)
                     {
-                        Label text = new Label("평일영업시간 : " + tour.getContactInformation());
+                        Label text = new Label("평일영업시간 : " + tour.getWeekdayViewingTime());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getHolidayViewingTime() != null)
                     {
-                        Label text = new Label("휴일영업시간 : " + tour.getContactInformation());
+                        Label text = new Label("휴일영업시간 : " + tour.getHolidayViewingTime());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getClosedInformation() != null)
                     {
-                        Label text = new Label("휴일정보 : " + tour.getContactInformation());
+                        Label text = new Label("휴일정보 : " + tour.getClosedInformation());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getChildAdmissionFee() != null)
                     {
-                        Label text = new Label("어린이요금 : " + tour.getContactInformation());
+                        Label text = new Label("어린이요금 : " + tour.getChildAdmissionFee());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getTeenagerAdmissionFee() != null)
                     {
-                        Label text = new Label("청소년요금 : " + tour.getContactInformation());
+                        Label text = new Label("청소년요금 : " + tour.getTeenagerAdmissionFee());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getAdultAdmissionFee()!= null)
                     {
-                        Label text = new Label("성인요금 : " + tour.getContactInformation());
+                        Label text = new Label("성인요금 : " + tour.getAdultAdmissionFee());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getEtc() != null)
                     {
-                        Label text = new Label("기타사항 : " + tour.getContactInformation());
+                        Label text = new Label("기타사항 : " + tour.getEtc());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getInformation() != null)
                     {
-                        Label text = new Label("정보 : " + tour.getContactInformation());
+                        Label text = new Label("정보 : " + tour.getInformation());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
                     if(tour.getLocation() != null)
                     {
-                        Label text = new Label("위치 : " + tour.getContactInformation());
+                        Label text = new Label("위치 : " + tour.getLocation());
                         text.setWrapText(true);
-                        vBox.getChildren().add(text);
+                        newV.getChildren().add(text);
                     }
+                    vBox.getChildren().add(newV);
                 });
             }
         };
