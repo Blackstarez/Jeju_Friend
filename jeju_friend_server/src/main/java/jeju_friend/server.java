@@ -237,6 +237,7 @@ class SocketManager extends Thread
                                 
                                 protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_WEATHER,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN,Weather.getBytes(weatherList));
                                 os.write(protocol.getPacket());
+                                System.out.println("["+sock.getInetAddress()+"] : 날씨 정보 송신 완료");
                                 break;
                             // 여행일정
                             case Protocol.PT_TOURPLAN:

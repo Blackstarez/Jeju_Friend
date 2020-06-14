@@ -86,7 +86,7 @@ public class APIManager {
                 
                 if(!isEqual)
                 {
-                    System.out.println("시간이 같지 않음");
+                    //시간이 같지 않은 경우
                     weatherInfoList.add(tmp);
                     tmp = new Weather();
                     //weatherInfoList.get(weatherInfoList.size()-1).printInfo();
@@ -216,8 +216,17 @@ public class APIManager {
         try {
             ArrayList<Weather> weatherInfoList = a.getWeather(weatherJson);
             weatherInfo = new Weather[weatherInfoList.size()];
+            for(int i=0;i<weatherInfo.length;i++){
+                weatherInfo[i]=weatherInfoList.get(i);
+            }
         } catch (java.text.ParseException e) {
             e.printStackTrace();
+        }
+        for(int i =0;i<weatherInfo.length;i++)
+        {
+            System.out.println("--------------------"+i+"번째-------------------");
+            weatherInfo[i].printInfo();
+            System.out.println("---------------------------------------");
         }
         return weatherInfo;
     }

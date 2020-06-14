@@ -2,7 +2,7 @@ package jeju_friend.Elements;
 
 import java.io.*;
 
-public class UserInfo implements Serializable{
+public class UserInfo implements Serializable, Cloneable{
     private static final long serialVersionUID = 1L;
     private String id;
     private String pw;

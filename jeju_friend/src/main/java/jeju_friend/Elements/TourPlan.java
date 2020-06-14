@@ -2,16 +2,15 @@ package jeju_friend.Elements;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.Date;
 
-public class TourPlan implements Serializable{
+public class TourPlan implements Serializable, Cloneable{
     private static final long serialVersionUID = 1L;
     private String userId;          //사용자 ID
     private String tourPlanName;    //여행계획명
     private int tourWith;           //함께하는 사람
     private String tourForm;        //여행형태  구분자 ','
     private int areaInterest;       //관심지역
-    private LocalDate tourDay;           //여행시작일
+    private LocalDate tourDay;      //여행시작일
 
     public TourPlan(){}
     // getter, setter

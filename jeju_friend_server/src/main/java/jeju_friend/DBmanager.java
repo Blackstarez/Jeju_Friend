@@ -285,7 +285,7 @@ public class DBmanager {
             tourPlanList[index].setTourWith(results.getInt("동행코드"));
             tourPlanList[index].setTourForm(results.getString("여행목적"));
             tourPlanList[index].setAreaInterest(results.getInt("관심지역"));
-            tourPlanList[index].setTourDay(results.getDate("travelStartDate"));
+            tourPlanList[index].setTourDay(results.getDate("travelStartDate").toLocalDate());
             index++;
         }
         return tourPlanList;
@@ -299,6 +299,7 @@ public class DBmanager {
         String sql = "select X, Y from 지역코드 where 지역코드.지역코드 = '"+areaCode+"';";
         ResultSet result = stmt.executeQuery(sql);
         int[] xy = new int[2];
+        result.next();
         xy[0] = result.getInt("X");
         xy[1] = result.getInt("Y");
         return xy;

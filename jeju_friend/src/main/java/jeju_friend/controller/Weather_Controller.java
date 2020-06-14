@@ -122,7 +122,7 @@ public class Weather_Controller {
 
         Protocol protocol = new Protocol();
         Protocol resultProtocol = new Protocol();
-        protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_WEATHER, Protocol.PT_REQUEST, Protocol.PT_USER,
+        protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_WEATHER, Protocol.PT_LOOKUP, Protocol.PT_USER,
                 weather.toBytes());
         SocketHandler socketHandler = new SocketHandler();
 
@@ -133,6 +133,15 @@ public class Weather_Controller {
         }
 
         Weather[] list = Weather.toWeatherlists(resultProtocol.getBody());
+        System.out.println("===========================================");
+        System.out.println(list.length);
+        for(int i=0;i<list.length;i++){
+            System.out.println("===================="+i+"번째 =====================");
+            try{
+            list[i].printInfo();}
+            catch(Exception e){e.printStackTrace();continue;}
+            System.out.println("===========================================");
+        }
 
         return list;
 
@@ -168,15 +177,15 @@ public class Weather_Controller {
         Date tomorrow = list[0].getDay();
         Weather[] tomorrowList = new Weather[10];
         int index = 0 , num = 0;
-        while(list[index].getDay() == tomorrow)
+        while(list[index].getDay().compareTo(tomorrow) == 0)
         {
             index++;
         }
         tomorrow = list[index].getDay();
-        while(list[index].getDay() == tomorrow)
-        {
-            tomorrowList[num] = list[index];
-            num++;
+        for(int i=0;index<list.length;index++, i++){
+            if(tomorrow.compareTo(list[index].getDay()) != 0)
+                break;
+            tomorrowList[i]=list[index];
         }
         return tomorrowList;
     }
@@ -184,22 +193,23 @@ public class Weather_Controller {
     {
         Date day = list[0].getDay();
         Weather[] lastList = new Weather[10];
-        int index = 0 , num = 0;
-        while(list[index].getDay() == day)
-        {
-            index++;
+        int count = 0,index = 0;
+        for(int i = 0;i<list.length;i++){
+            if(count < 2)
+            {
+                if(day.compareTo(list[i].getDay()) != 0)
+                {
+                    count++;
+                    day = list[i].getDay();
+                }
+            }
+            else
+            {
+                lastList[index] = list[i];
+                index++;
+            }
         }
-        day = list[index].getDay();
-        while(list[index].getDay() == day)
-        {
-            index++;
-        }
-        day = list[index].getDay();
-        while(list[index].getDay() == day)
-        {
-            lastList[num] = list[index];
-            num++;
-        }
+
         return lastList;
 	}
 
