@@ -40,7 +40,7 @@
       </Pane>
       <Pane layoutX="872.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: rgb(156, 212, 201);">
         <children>
-           <Label fx:id="concernedAreaLabel" layoutX="5.0" layoutY="58.0" text="현재관심지역 :" wrapText="true">
+           <Label fx:id="interestAreaLabel" layoutX="5.0" layoutY="58.0" text="현재관심지역 :" wrapText="true">
               <font>
                  <Font name="LG PC" size="24.0" />
               </font>

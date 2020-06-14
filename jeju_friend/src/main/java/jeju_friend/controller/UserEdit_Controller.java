@@ -14,6 +14,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import jeju_friend.Elements.Protocol;
 import jeju_friend.Elements.TourPlan;
@@ -70,11 +72,13 @@ public class UserEdit_Controller {
 	private TextArea nameArea;
 
 	@FXML
-	private VBox travelBox;
+	private GridPane travelGridPane;
 
 	private String userName;
 
 	private int interestArea;
+
+	private ToggleButton[] group = new ToggleButton[10];
 	
 	Image map1SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1_selected.png"));
 	Image map1UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1.png"));
@@ -92,10 +96,9 @@ public class UserEdit_Controller {
 		TourPlan[] tourList = getTourList();
 		userName = user.getNickName();
 		interestArea = user.getInterestArea();
-		
 		nameArea.setText(userName);
 		setToggle(interestArea);
-		setTourBox(travelBox, tourList);
+		setTourBox(travelGridPane, tourList);
 	}
 
 	// 이벤트 핸들러
@@ -159,6 +162,7 @@ public class UserEdit_Controller {
     {
         
 	}
+
 	public void addTravelBtn_Actioned() throws IOException
     {
         moveToAddTravel();
@@ -271,23 +275,26 @@ public class UserEdit_Controller {
 			{
 				regionBtn5.setSelected(true);
 				view5.setImage(map5SelectedImage);
-			}
-			
+			}	
 		}
-
 	}
-	public void setTourBox(VBox tourListBox, TourPlan[] tourList)
+
+	public void setTourBox(GridPane travelGridPane, TourPlan[] tourList)
 	{
 		for(int index = 0; index<tourList.length; index++)
 		{
+			RowConstraints con = new RowConstraints();
+			con.setPrefHeight(50);
+            travelGridPane.getRowConstraints().add(con);
 			VBox input = new VBox();
 			TextArea tourPlanNameArea = new TextArea(tourList[index].getTourPlanName());
 			//DatePicker tourDay = new DatePicker(tourList[index].getTourDay());
 			input.getChildren().addAll(tourPlanNameArea);
 			//input.getChildren().addAll(tourPlanNameArea,tourDay);
-			tourListBox.getChildren().add(input);
+			travelGridPane.getChildren().add(input);
 		}
 	}
+	
     public int getSelectedRegion() {
 		
 		if(regionBtn1.isSelected())
