@@ -53,7 +53,7 @@ public class Main_Controller {
     TouristSpot[] tourList;
     TouristSpot[] foodList;
     
-    UserInfo user;
+    UserInfo user = new UserInfo();
 
     public void enter(String id) throws InterruptedException, ExecutionException {
         user.setId(id);

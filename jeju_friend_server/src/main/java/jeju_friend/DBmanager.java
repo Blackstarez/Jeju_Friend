@@ -101,6 +101,7 @@ public class DBmanager {
         String sql = "select * from user_info where ID = '"+id+"';";
         ResultSet result = stmt.executeQuery(sql);
         UserInfo user = new UserInfo();
+        result.next();
         user.setId(result.getString("ID"));
         user.setNickName(result.getString("nickName"));
         user.setAge(result.getInt("age"));
@@ -160,7 +161,7 @@ public class DBmanager {
         while(results.next())
         {
             spotList[index] = new TouristSpot();
-            spotList[index].setTouristSpot(results.getString("관광지명"));
+            spotList[index].setTouristSpot(results.getString("시설명"));
             spotList[index].setAreaCode(results.getInt("지역코드"));
             spotList[index].setContactInformation(results.getString("연락처"));
             spotList[index].setLocation(results.getString("위치"));
@@ -194,7 +195,7 @@ public class DBmanager {
         while(results.next())
         {
             spotList[index] = new TouristSpot();
-            spotList[index].setTouristSpot(results.getString("관광지명"));          // 음식점명으로 사용된다.
+            spotList[index].setTouristSpot(results.getString("시설명"));          // 음식점명으로 사용된다.
             spotList[index].setAreaCode(results.getInt("지역코드"));
             spotList[index].setContactInformation(results.getString("연락처"));
             spotList[index].setLocation(results.getString("위치"));
