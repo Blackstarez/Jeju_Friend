@@ -291,7 +291,7 @@ public class Sign_Controller
 			alert.showAndWait();
 			pwField.requestFocus();
 			return;
-		} else if (inputPW != inputConfirmPW) {
+		} else if (inputPW.compareTo(inputConfirmPW)!=0) {
 			final Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
@@ -314,6 +314,7 @@ public class Sign_Controller
 			userInfo.setAge(inputAge);
 			userInfo.setGender(isMale);
 			userInfo.setId(inputPW);
+			userInfo.setPw(inputPW);
 			userInfo.setNickName(inputName);
 			userInfo.setInterestArea(interestArea);
 			tryToSign(userInfo);
@@ -321,13 +322,14 @@ public class Sign_Controller
 	}
 
 	public void tryToSign(UserInfo userInfo) throws IOException {
-		Protocol protocol = new Protocol();
+		Protocol pro = new Protocol();
 		Protocol resultProtocol = new Protocol();
-		protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_APPLY, Protocol.PT_UNKNOWN, userInfo.toBytes());
+		System.out.println(userInfo.toBytes());
+		pro.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_APPLY, Protocol.PT_UNKNOWN, userInfo.toBytes());
 		
 		SocketHandler socketHandler = new SocketHandler();
 		try {
-			resultProtocol = socketHandler.request(protocol);
+			resultProtocol = socketHandler.request(pro);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -8,7 +8,8 @@ enum SkyState {콩, 맑음, 없음 ,구름많음, 흐림}      // 대기상태�
 enum WindDirection {북, 북북동, 북동, 동북동, 동, 동남동, 남동, 남남동, 남, 남남서, 남서, 서남서, 서, 서북서, 북서, 북북서, 북북}
 
 
-public class Weather {
+public class Weather implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int areaCode;                   // 지역코드
     private Date day;                       // 날짜
     private int time;                       // 시간 : 18:00 의경우 18, 21:00의 경우 21으로 저장

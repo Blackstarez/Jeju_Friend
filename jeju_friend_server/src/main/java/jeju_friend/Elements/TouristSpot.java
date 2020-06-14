@@ -2,7 +2,7 @@ package jeju_friend.Elements;
 
 import java.io.*;
 
-public class TouristSpot {
+public class TouristSpot implements Serializable{
     private static final long serialVersionUID = 1L;
     private String touristSpot;             //관광지 명
     private int areaCode;                   //지역코드

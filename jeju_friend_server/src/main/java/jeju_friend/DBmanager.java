@@ -44,7 +44,7 @@ public class DBmanager {
     public boolean isLoginIdExist(String id) 
     {
         try{
-        String sql = "select * from 로그인 where ID ='" + id + "';";
+        String sql = "select * from login where ID ='" + id + "';";
         ResultSet result;
 
         result = stmt.executeQuery(sql);
@@ -71,20 +71,21 @@ public class DBmanager {
         
         char sex = gender==true?'M':'F';
         try{
-            String sql = "Insert into user_info (ID,nickName,age,gender,권한,관심지역) Values(?,?,?,?,?,?);";
+            String sql = "Insert into login (ID,PW) Values(?,?);";
             PreparedStatement prestmt = conn.prepareStatement(sql);
+            
+            prestmt.setString(1,id);
+            prestmt.setString(2,pw);
+            prestmt.executeUpdate();
+
+            sql = "Insert into user_info (ID,nickName,age,gender,권한,관심지역) Values(?,?,?,?,?,?);";
+            prestmt = conn.prepareStatement(sql);
             prestmt.setString(1,id);
             prestmt.setString(2,nickName);
             prestmt.setInt(3, age);
             prestmt.setString(4, String.valueOf(sex));
             prestmt.setInt(5,0);
             prestmt.setInt(6,interestArea);
-            prestmt.executeUpdate();
-
-            sql = "Insert into login (ID,PW) Values(?,?);";
-            prestmt = conn.prepareStatement(sql);
-            prestmt.setString(1,id);
-            prestmt.setString(2,pw);
             prestmt.executeUpdate();
         }catch(Exception e)
         {
