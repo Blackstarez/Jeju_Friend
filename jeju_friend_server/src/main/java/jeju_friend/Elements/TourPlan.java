@@ -3,7 +3,7 @@ package jeju_friend.Elements;
 import java.io.*;
 import java.util.Date;
 
-public class TourPlan {
+public class TourPlan implements Serializable{
     private static final long serialVersionUID = 1L;
     private String userId;          //사용자 ID
     private String tourPlanName;    //여행계획명

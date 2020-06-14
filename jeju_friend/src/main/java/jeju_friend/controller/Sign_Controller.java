@@ -291,7 +291,7 @@ public class Sign_Controller
 			alert.showAndWait();
 			pwField.requestFocus();
 			return;
-		} else if (inputPW != inputConfirmPW) {
+		} else if (inputPW.compareTo(inputConfirmPW)!=0) {
 			final Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
@@ -313,7 +313,8 @@ public class Sign_Controller
 			UserInfo userInfo = new UserInfo();
 			userInfo.setAge(inputAge);
 			userInfo.setGender(isMale);
-			userInfo.setId(inputPW);
+			userInfo.setId(inputID);
+			userInfo.setPw(inputPW);
 			userInfo.setNickName(inputName);
 			userInfo.setInterestArea(interestArea);
 			tryToSign(userInfo);
@@ -321,13 +322,14 @@ public class Sign_Controller
 	}
 
 	public void tryToSign(UserInfo userInfo) throws IOException {
-		Protocol protocol = new Protocol();
+		Protocol pro = new Protocol();
 		Protocol resultProtocol = new Protocol();
-		protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_APPLY, Protocol.PT_UNKNOWN, userInfo.toBytes());
+		System.out.println(userInfo.toBytes());
+		pro.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_APPLY, Protocol.PT_UNKNOWN, userInfo.toBytes());
 		
 		SocketHandler socketHandler = new SocketHandler();
 		try {
-			resultProtocol = socketHandler.request(protocol);
+			resultProtocol = socketHandler.request(pro);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -340,9 +342,9 @@ public class Sign_Controller
 		else
 		{
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("로그인 오류");
+			alert.setTitle("회원가입 오류");
 			alert.setHeaderText(null);
-			alert.setContentText("아이디 비밀번호를 다시 입력해 주세요!");
+			alert.setContentText("아이디가 중복됩니다.\n다시 입력해 주세요!");
 			alert.showAndWait();
 			idField.requestFocus();
 			return;

@@ -2,7 +2,7 @@ package jeju_friend.Elements;
 
 import java.io.*;
 
-public class UserInfo {
+public class UserInfo implements Serializable{
     private static final long serialVersionUID = 1L;
     private String id;
     private String pw;
@@ -86,8 +86,8 @@ public class UserInfo {
                 ObjectOutputStream oos = new ObjectOutputStream(baos);
                 oos.writeObject(obj);
                 serializedMember = baos.toByteArray();
-            }catch(Exception e) { }
-        }catch(Exception e) { }
+            }catch(Exception e) {e.printStackTrace(); }
+        }catch(Exception e) { e.printStackTrace();}
 
         return serializedMember;
     }
