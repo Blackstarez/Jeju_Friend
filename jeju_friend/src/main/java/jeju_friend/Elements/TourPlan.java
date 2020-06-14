@@ -1,6 +1,7 @@
 package jeju_friend.Elements;
 
 import java.io.*;
+import java.util.Date;
 
 public class TourPlan {
     private static final long serialVersionUID = 1L;
@@ -8,7 +9,8 @@ public class TourPlan {
     private String tourPlanName;    //여행계획명
     private int tourWith;           //함께하는 사람
     private String tourForm;        //여행형태  구분자 ','
-    private int areaInterest; //관심지역
+    private int areaInterest;       //관심지역
+    private Date tourDay;           //여행시작일
 
     public TourPlan(){}
     // getter, setter
@@ -52,6 +54,13 @@ public class TourPlan {
         this.areaInterest = areaInterest;
     }
     
+    public Date getTourDay() {
+        return tourDay;
+    }
+
+    public void setTourDay(Date tourDay) {
+        this.tourDay = tourDay;
+    }
 
     //직렬화 및 역 직렬화
     public byte[] toBytes()
@@ -71,7 +80,7 @@ public class TourPlan {
         return serializedMember;
     }
 
-    public static TourPlan toLogin(byte[] serializedTourPlan)
+    public static TourPlan toTourPlan(byte[] serializedTourPlan)
     {
         TourPlan plan = null;
 
@@ -114,8 +123,6 @@ public class TourPlan {
 	}
 
 
-
-
     // 객체 출력
     public void printInfo()
     {   
@@ -140,6 +147,5 @@ public class TourPlan {
         }
         System.out.printf("사용자ID : %s\n여행명 : %s\n함께하는 사람 : %s\n여행형태 : %s\n관심지역 : %s\n",this.userId,this.tourPlanName,with,this.tourForm,this.areaInterest);
     }
-
 
 }

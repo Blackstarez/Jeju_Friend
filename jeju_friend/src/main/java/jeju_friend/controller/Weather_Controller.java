@@ -211,10 +211,10 @@ public class Weather_Controller {
 
             grid.add(new Label(todayAsString), index, 0);
             grid.add(new Label(String.valueOf(list[index].getRainfallProbability())), index , 1);
-            grid.add(new Label(list[index].getRainfallForm().name()), index, 2);
+            grid.add(new Label(list[index].getRainfallForm()), index, 2);
             grid.add(new Label(String.valueOf(list[index].getTemperature())), index, 3);
             grid.add(new Label(String.valueOf(list[index].getWindSpeed())), index, 4);
-            grid.add(new Label(list[index].getWindDirection().name()), index, 5);
+            grid.add(new Label(list[index].getWindDirection()), index, 5);
             grid.add(new Label(String.valueOf(list[index].getHumidity())), index, 6);
         }
         grid1.setVisible(true);

@@ -19,6 +19,7 @@ public class TouristSpot {
     private String location;                //위치
     private int recommendedNumber;          //추천수
     private int sortation;                  //구분
+    private String imageUrl;               //이미지 주소
     
     public TouristSpot(){}
     
@@ -141,6 +142,14 @@ public class TouristSpot {
 
     public void setSortation(int sortation) {
         this.sortation = sortation;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
 

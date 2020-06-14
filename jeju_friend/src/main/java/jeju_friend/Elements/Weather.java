@@ -58,8 +58,8 @@ public class Weather {
         this.rainfallProbability = rainfallProbability;
     }
 
-    public RainfallForm getRainfallForm() {
-        return rainfallForm;
+    public String getRainfallForm() {
+        return rainfallForm.name();
     }
 
     public void setRainfallForm(int rainfallForm) {
@@ -74,8 +74,8 @@ public class Weather {
         this.humidity = humidity;
     }
 
-    public SkyState getSky() {
-        return sky;
+    public String getSky() {
+        return sky.name();
     }
 
     public void setSky(int sky) {
@@ -106,8 +106,8 @@ public class Weather {
         this.highestTemperature = highestTemperature;
     }
 
-    public WindDirection getWindDirection() {
-        return windDirection;
+    public String getWindDirection() {
+        return windDirection.name();
     }
 
     public void setWindDirection(int windDirection) {
