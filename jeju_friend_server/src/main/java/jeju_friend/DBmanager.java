@@ -175,6 +175,7 @@ public class DBmanager {
             spotList[index].setClosedInformation(results.getString("휴관정보"));
             spotList[index].setEtc(results.getString("특이사항"));
             spotList[index].setRecommendedNumber(results.getInt("추천수"));
+            spotList[index].setImageUrl(results.getString("이미지"));
             index++;
         }
         return spotList;
@@ -283,6 +284,7 @@ public class DBmanager {
             tourPlanList[index].setTourWith(results.getInt("동행코드"));
             tourPlanList[index].setTourForm(results.getString("여행목적"));
             tourPlanList[index].setAreaInterest(results.getInt("관심지역"));
+            tourPlanList[index].setTourDay(results.getDate("travelStartDate"));
             index++;
         }
         return tourPlanList;
