@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeju_friend.Elements.Protocol;
 import jeju_friend.Elements.TouristSpot;
+import jeju_friend.Elements.UserInfo;
 import jeju_friend.application.SocketHandler;
 
 public class Main_Controller {
@@ -47,16 +48,45 @@ public class Main_Controller {
     private Pane mainPane;
     @FXML
     private Pane searchBar;
-
+    @FXML
+    private Label interestAreaLabel;
+    TouristSpot[] tourList;
+    TouristSpot[] foodList;
     // 이벤트 핸들러
 
     @FXML
     public void searchField_Typed(KeyEvent event) throws InterruptedException, ExecutionException {
         if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
-            //검색기능 수행
+            TouristSpot touristSpot = searchTouristSpot(searchField.getText());
+            vBox.getChildren().clear();
+            addVBox(touristSpot);
         }
         searchLabel.setVisible(false);
     }
+    
+    private TouristSpot searchTouristSpot(String text) {
+        int index = 0;
+        TouristSpot spot;
+        while(index<=tourList.length)
+        {
+            if(tourList[index].getTouristSpot() == text)
+            {
+                spot = tourList[index];
+                return spot;
+            }
+        }
+        index = 0;
+        while(index<=foodList.length)
+        {
+            if(foodList[index].getTouristSpot() == text)
+            {
+                spot = foodList[index];
+                return spot;
+            }
+        }
+        return null;
+    }
+
     @FXML
     public void refreshBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
         refresh();
@@ -83,20 +113,69 @@ public class Main_Controller {
     }
 
     @FXML
-    public void userEditBtn_Actioned() throws IOException {
+    public void userEditBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
         moveToUserEdit();
     }
-    // 로직
 
     public void lookUp() throws InterruptedException, ExecutionException {
-        
-        TouristSpot[] tourList = getTouristSpotList();
-        TouristSpot[] foodList = getFoodSpotList();
+        UserInfo user = getUserInfo();
+        tourList = getTouristSpotList();
+        foodList = getFoodSpotList();
         TouristSpot tourSpot = getTouristSpot(tourList);
         TouristSpot foodSpot = getTouristSpot(foodList);
+        String interestArea =  ToAreaName(user.getInterestArea());
+        interestAreaLabel.setText("현재관심지역: " + interestArea);
         addVBox(tourSpot);
         addVBox(foodSpot);
     }
+
+
+    // 로직
+
+
+    private String ToAreaName(int interestArea) {
+        String name = "";
+        switch(interestArea)
+        {
+            case 1: name = "신나는 제주";
+                    break;
+            case 2: name = "익스트림 제주";
+                    break;
+            case 3: name = "열대 제주";
+                    break;
+            case 4: name = "힐링 제주";
+                    break;
+            case 5: name = "숲속 제주";
+                    break;
+        }
+        return name;
+    }
+
+    private UserInfo getUserInfo() throws InterruptedException, ExecutionException {
+		Task<UserInfo> task = new Task<UserInfo>() {
+
+			@Override
+			protected UserInfo call() throws Exception {
+
+				Protocol protocol = new Protocol();
+				Protocol resultProtocol = new Protocol();
+
+				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_LOOKUP, Protocol.PT_USER);
+				SocketHandler socketHandler = new SocketHandler();
+				try {
+					resultProtocol = socketHandler.request(protocol);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				UserInfo user = UserInfo.toUser(resultProtocol.getBody());
+				return user;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
+		return task.get();
+	}
 
     public TouristSpot[] getTouristSpotList() throws InterruptedException, ExecutionException 
     {
