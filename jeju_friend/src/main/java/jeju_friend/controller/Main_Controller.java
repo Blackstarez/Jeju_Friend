@@ -52,6 +52,23 @@ public class Main_Controller {
     private Label interestAreaLabel;
     TouristSpot[] tourList;
     TouristSpot[] foodList;
+    
+    UserInfo user;
+
+    public void enter(String id) throws InterruptedException, ExecutionException {
+        user.setId(id);
+        UserInfo userinfo = getUserInfo();
+        tourList = getTouristSpotList();
+        foodList = getFoodSpotList();
+        TouristSpot tourSpot = getTouristSpot(tourList);
+        TouristSpot foodSpot = getTouristSpot(foodList);
+        String interestArea =  ToAreaName(userinfo.getInterestArea());
+        interestAreaLabel.setText("현재관심지역: " + interestArea);
+        addVBox(tourSpot);
+        addVBox(foodSpot);
+    }
+
+
     // 이벤트 핸들러
 
     @FXML
@@ -99,7 +116,7 @@ public class Main_Controller {
 
     @FXML
     public void addTravelBtn_Actioned() throws IOException {
-        moveToAddTrevel();
+        moveToAddTravel();
     }
 
     @FXML
@@ -117,17 +134,7 @@ public class Main_Controller {
         moveToUserEdit();
     }
 
-    public void lookUp() throws InterruptedException, ExecutionException {
-        UserInfo user = getUserInfo();
-        tourList = getTouristSpotList();
-        foodList = getFoodSpotList();
-        TouristSpot tourSpot = getTouristSpot(tourList);
-        TouristSpot foodSpot = getTouristSpot(foodList);
-        String interestArea =  ToAreaName(user.getInterestArea());
-        interestAreaLabel.setText("현재관심지역: " + interestArea);
-        addVBox(tourSpot);
-        addVBox(foodSpot);
-    }
+   
 
 
     // 로직
@@ -159,8 +166,7 @@ public class Main_Controller {
 
 				Protocol protocol = new Protocol();
 				Protocol resultProtocol = new Protocol();
-
-				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_LOOKUP, Protocol.PT_USER);
+				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_LOOKUP, Protocol.PT_USER, user.toBytes());
 				SocketHandler socketHandler = new SocketHandler();
 				try {
 					resultProtocol = socketHandler.request(protocol);
@@ -187,7 +193,7 @@ public class Main_Controller {
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
                 
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER);
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
@@ -214,7 +220,7 @@ public class Main_Controller {
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
                 
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER);
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
@@ -254,9 +260,9 @@ public class Main_Controller {
                 ImageView tourImage = new ImageView(image);
                 Platform.runLater(() -> {
                     mainPane.setLayoutY(searchBar.getLayoutY()+80);
-                    //tourImage.setFitWidth(200);
-                    //tourImage.setFitHeight(150);
-                    newV.getChildren().addAll(tourName); //  newV.getChildren().addAll(tourName, tourImage);
+                    tourImage.setFitWidth(200);
+                    tourImage.setFitHeight(150);
+                    newV.getChildren().addAll(tourName, tourImage);
                     if(tour.getContactInformation() != null)
                     {
                         Label text = new Label("연락처 : " + tour.getContactInformation());
@@ -340,12 +346,13 @@ public class Main_Controller {
 		primaryStage.setResizable(false);
         primaryStage.show();   
     }
-    public void moveToAddTrevel() throws IOException
+    public void moveToAddTravel() throws IOException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/AddTravel.fxml"));
         Parent root = loader.load();
         AddTravel_Controller controller = loader.getController();
         addTravelBtn.getScene().setRoot(root);
+        controller.enter(user.getId());
     }
     
     public void moveToWeather() throws IOException
@@ -354,7 +361,7 @@ public class Main_Controller {
         Parent root = loader.load();
         Weather_Controller weatherController = loader.getController();
         weatherBtn.getScene().setRoot(root);
-        weatherController.enter();
+        weatherController.enter(user.getId());
     }
 
     public void moveToUserEdit() throws IOException, InterruptedException, ExecutionException
@@ -363,16 +370,16 @@ public class Main_Controller {
         Parent root = loader.load();
         UserEdit_Controller controller = loader.getController();
         userEditBtn.getScene().setRoot(root); 
-        controller.enter();
+        controller.enter(user.getId());
     }
 
         
     private void refresh() throws IOException, InterruptedException, ExecutionException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
-        Parent root = loader.load();
-        Main_Controller controller = loader.getController();
-        userEditBtn.getScene().setRoot(root); 
-        controller.lookUp();
+        vBox.getChildren().clear();
+        TouristSpot tourSpot = getTouristSpot(tourList);
+        TouristSpot foodSpot = getTouristSpot(foodList);
+        addVBox(tourSpot);
+        addVBox(foodSpot);
     }
 
 }

@@ -78,6 +78,8 @@ public class UserEdit_Controller {
 
 	private int interestArea;
 
+	UserInfo user;
+
 	private ToggleButton[] group = new ToggleButton[10];
 	
 	Image map1SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1_selected.png"));
@@ -91,7 +93,8 @@ public class UserEdit_Controller {
 	Image map5SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_5_selected.png"));
     Image map5UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_5.png"));
 	
-	public void enter() throws InterruptedException, ExecutionException {
+	public void enter(String id) throws InterruptedException, ExecutionException {
+		user.setId(id);
 		UserInfo user = getUserInfo();
 		TourPlan[] tourList = getTourList();
 		userName = user.getNickName();
@@ -114,7 +117,7 @@ public class UserEdit_Controller {
 				Protocol protocol = new Protocol();
 				Protocol resultProtocol = new Protocol();
 
-				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER);
+				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER, user.toBytes());
 				SocketHandler socketHandler = new SocketHandler();
 				try {
 					resultProtocol = socketHandler.request(protocol);
@@ -140,7 +143,7 @@ public class UserEdit_Controller {
 				Protocol protocol = new Protocol();
 				Protocol resultProtocol = new Protocol();
 
-				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_LOOKUP, Protocol.PT_USER);
+				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_USERINFO, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
 				SocketHandler socketHandler = new SocketHandler();
 				try {
 					resultProtocol = socketHandler.request(protocol);
@@ -316,7 +319,8 @@ public class UserEdit_Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/AddTravel.fxml"));
         Parent root = loader.load();
         AddTravel_Controller controller = loader.getController();
-        addTravelBtn.getScene().setRoot(root);
+		addTravelBtn.getScene().setRoot(root);
+		controller.enter(user.getId());
 	}
 	
 	public void moveToMain() throws IOException, InterruptedException, ExecutionException
@@ -325,7 +329,7 @@ public class UserEdit_Controller {
         Parent root = loader.load();
         Main_Controller controller = loader.getController();
         cancelBtn.getScene().setRoot(root); 
-        controller.lookUp();
+        controller.enter(user.getId());
     }
 
 }

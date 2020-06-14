@@ -109,12 +109,12 @@ public class Login_Controller {
 			tryLogin(inputID, inputPW);
 	}
 
-	public void moveToMain() throws IOException, InterruptedException, ExecutionException {
+	public void moveToMain(String id) throws IOException, InterruptedException, ExecutionException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
         Parent root = loader.load();
         Main_Controller controller = loader.getController();
         loginBtn.getScene().setRoot(root); 
-        controller.lookUp();
+        controller.enter(id);
 	}
 
 	public void moveToSign() throws IOException {
@@ -131,7 +131,7 @@ public class Login_Controller {
 		Protocol protocol = new Protocol();
 		Protocol resultProtocol = new Protocol();
 		Login loginInfo = new Login(inputID, inputPW);
-		
+
 		//로그인 요청
 		protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_SIGNIN, Protocol.PT_APPLY, Protocol.PT_USER,
 				loginInfo.toBytes());
@@ -145,7 +145,7 @@ public class Login_Controller {
 		//로그인 성공 여부 체크
 		if(resultProtocol.getProtocolCodeExpansion() == Protocol.PT_SUCCESS)
 		{
-			moveToMain();
+			moveToMain(inputID);
 		}
 		else
 		{

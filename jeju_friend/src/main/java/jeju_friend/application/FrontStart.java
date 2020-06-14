@@ -18,7 +18,7 @@ public class FrontStart extends Application{
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
-
+		
 	}
 	public static void main(String[] args) 
 	{

@@ -21,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import jeju_friend.Elements.Protocol;
+import jeju_friend.Elements.UserInfo;
 import jeju_friend.Elements.Weather;
 import jeju_friend.application.SocketHandler;
 
@@ -55,6 +56,8 @@ public class Weather_Controller {
     @FXML
     private GridPane grid3;
 
+    UserInfo user;
+
     private final String[] sityArr = { "제주시", "서귀포시" };
 
     private final String[] townArr1 = { "전체", "한림음", "애월읍", "구좌읍", "조천읍", "한경명", "추자면", "우도면", "일도1동", "일도2동", "이도1동",
@@ -70,9 +73,10 @@ public class Weather_Controller {
             50130253, 50130259, 50130310, 50130320, 50130510, 50130520, 50130530, 50130540, 50130550, 50130560,
             50130570, 50130580, 50130590, 50130600, 50130610, 50130620 };
 
-    public void enter() {
+    public void enter(String id) {
         cityBox.setItems(FXCollections.observableArrayList(sityArr));
         grid1.setVisible(false);
+        user.setId(id);
     }
 
     // 이벤트 처리
@@ -140,7 +144,7 @@ public class Weather_Controller {
         Parent root = loader.load();
         Main_Controller controller = loader.getController();
         backBtn.getScene().setRoot(root); 
-        controller.lookUp();
+        controller.enter(user.getId());
     }
 
     public Weather[] getTodayWeatherlist(Weather[] list) 

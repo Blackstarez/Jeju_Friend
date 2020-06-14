@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import jeju_friend.Elements.Protocol;
 import jeju_friend.Elements.TourPlan;
+import jeju_friend.Elements.UserInfo;
 import jeju_friend.application.SocketHandler;
 
 public class AddTravel_Controller {
@@ -31,6 +32,12 @@ public class AddTravel_Controller {
     @FXML
     private DatePicker datePicker;
 
+    UserInfo user;
+
+    public void enter(String id)
+    {
+        user.setId(id);
+    }
     // 이벤트 핸들러
     @FXML
     public void cancelBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
@@ -68,6 +75,7 @@ public class AddTravel_Controller {
             TourPlan tourPlan = new TourPlan();
             tourPlan.setTourPlanName(inputName);
             tourPlan.setTourDay(tourDay);
+            tourPlan.setUserId(user.getId());
             addTravel(tourPlan);
         }
     }
@@ -101,6 +109,6 @@ public class AddTravel_Controller {
         Parent root = loader.load();
         Main_Controller controller = loader.getController();
         cancelBtn.getScene().setRoot(root); 
-        controller.lookUp();
+        controller.enter(user.getId());
     }
 }
