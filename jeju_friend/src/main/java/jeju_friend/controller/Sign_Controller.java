@@ -93,6 +93,7 @@ public class Sign_Controller
 
 	@FXML
 	private ToggleGroup regionGroup;
+	
 
 	private int inputAge = 12;
 	Image maleSelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/male_icon_selected.png"));

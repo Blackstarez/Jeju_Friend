@@ -78,7 +78,7 @@ public class UserEdit_Controller {
 
 	private int interestArea;
 
-	UserInfo user;
+	UserInfo user = new UserInfo();
 
 	private ToggleButton[] group = new ToggleButton[10];
 	
@@ -325,7 +325,7 @@ public class UserEdit_Controller {
 			con.setPrefHeight(50);
             travelGridPane.getRowConstraints().add(con);
 			Button button = new Button(tourList[index].getTourPlanName());
-			
+
 		}
 	}
 	

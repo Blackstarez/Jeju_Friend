@@ -32,7 +32,7 @@ public class AddTravel_Controller {
     @FXML
     private DatePicker datePicker;
 
-    UserInfo user;
+    UserInfo user = new UserInfo();
 
     public void enter(String id)
     {
