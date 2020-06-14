@@ -14,11 +14,6 @@
       <Button fx:id="cancelBtn" layoutX="649.0" layoutY="473.0" mnemonicParsing="false" onAction="cancelBtn_Actioned" text="취소" />
       <Label fx:id="travelLabel" layoutX="23.0" layoutY="32.0" prefHeight="35.0" prefWidth="103.0" stylesheets="@userEdit.css" text="여행 일정" />
       <Button fx:id="addTravelBtn" layoutX="123.0" layoutY="32.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" text="여행추가" wrapText="true" />
-      <Button fx:id="travelDeleteBtn" layoutX="195.0" layoutY="32.0" mnemonicParsing="false" onAction="#travelDeleteBtn_Actioned" text="삭제" wrapText="true">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Button>
       <Label layoutX="459.0" layoutY="455.0" text="닉네임" />
       <TextField fx:id="nameArea" layoutX="459.0" layoutY="472.0" prefHeight="33.0" prefWidth="159.0" />
 
@@ -73,13 +68,7 @@
             <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
-      <GridPane fx:id="travelGridPane" layoutX="26.0" layoutY="127.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="154.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="46.0" />
-        </columnConstraints>
-      </GridPane>
-      <Button fx:id="modifyBtn" layoutX="251.0" layoutY="31.0" mnemonicParsing="false" onAction="#modifyBtn_Actioned" text="수정" />
+      <VBox fx:id="travelView" layoutX="25.0" layoutY="82.0" prefHeight="349.0" prefWidth="207.0" />
 
    </children>
 </Pane>

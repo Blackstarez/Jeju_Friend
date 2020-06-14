@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="520.0" prefWidth="314.0" style="-fx-background-color: #cefbf2;" stylesheets="@AddTravel.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.AddTravel_Controller">
+   <children>
+      <Label layoutX="39.0" layoutY="39.0" text="여행 이름이 무엇인가요?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="LG PC" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="cancelBtn" layoutX="136.0" layoutY="427.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소">
+         <font>
+            <Font name="LG PC" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="addTravelBtn" layoutX="212.0" layoutY="427.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" text="확인">
+         <font>
+            <Font name="LG PC" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="39.0" layoutY="158.0" text="여행 출발이 언제인가요?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="LG PC" size="25.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datePicker" layoutX="45.0" layoutY="206.0" />
+      <Label fx:id="travelNameLabel" layoutX="65.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" text="여행이름" />
+      <Button fx:id="deleteBtn" layoutX="65.0" layoutY="427.0" mnemonicParsing="false" onAction="#deleteBtn_Actioned" text="삭제">
+         <font>
+            <Font name="LG PC" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+   </children>
+</Pane>
