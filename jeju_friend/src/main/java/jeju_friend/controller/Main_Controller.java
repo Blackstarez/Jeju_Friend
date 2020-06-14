@@ -249,9 +249,9 @@ public class Main_Controller {
             public void run() {                
                 VBox newV = new VBox();
                 Label tourName = new Label(tour.getTouristSpot());
-                //String imageSource = tour.getImageUrl();
-                //Image image = new Image(imageSource);
-                //ImageView tourImage = new ImageView(image);
+                String imageSource = tour.getImageUrl();
+                Image image = new Image(imageSource);
+                ImageView tourImage = new ImageView(image);
                 Platform.runLater(() -> {
                     mainPane.setLayoutY(searchBar.getLayoutY()+80);
                     //tourImage.setFitWidth(200);

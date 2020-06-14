@@ -2,6 +2,7 @@ package jeju_friend.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 import javafx.fxml.FXML;
@@ -66,7 +67,7 @@ public class AddTravel_Controller {
         } else {
             TourPlan tourPlan = new TourPlan();
             tourPlan.setTourPlanName(inputName);
-            // tourPlan.setTourDay(date)
+            tourPlan.setTourDay(tourDay);
             addTravel(tourPlan);
         }
     }

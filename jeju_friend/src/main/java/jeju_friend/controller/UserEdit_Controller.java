@@ -288,10 +288,12 @@ public class UserEdit_Controller {
             travelGridPane.getRowConstraints().add(con);
 			VBox input = new VBox();
 			TextArea tourPlanNameArea = new TextArea(tourList[index].getTourPlanName());
-			//DatePicker tourDay = new DatePicker(tourList[index].getTourDay());
+			DatePicker tourDay = new DatePicker(tourList[index].getTourDay());
 			input.getChildren().addAll(tourPlanNameArea);
-			//input.getChildren().addAll(tourPlanNameArea,tourDay);
-			travelGridPane.getChildren().add(input);
+			input.getChildren().addAll(tourPlanNameArea,tourDay);
+			ToggleButton toggleButton = new ToggleButton("선택");
+			group[index] = toggleButton;
+			
 		}
 	}
 	
