@@ -56,7 +56,7 @@ public class Weather_Controller {
     @FXML
     private GridPane grid3;
 
-    UserInfo user;
+    UserInfo user = new UserInfo();
 
     private final String[] sityArr = { "제주시", "서귀포시" };
 
