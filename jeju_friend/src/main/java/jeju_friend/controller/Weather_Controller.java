@@ -75,7 +75,9 @@ public class Weather_Controller {
 
     public void enter(String id) {
         cityBox.setItems(FXCollections.observableArrayList(sityArr));
-        grid1.setVisible(false);
+        //grid1.setVisible(false);
+        //grid1.setVisible(false);
+        //grid1.setVisible(false);
         user.setId(id);
     }
 
@@ -133,16 +135,6 @@ public class Weather_Controller {
         }
 
         Weather[] list = Weather.toWeatherlists(resultProtocol.getBody());
-        System.out.println("===========================================");
-        System.out.println(list.length);
-        for(int i=0;i<list.length;i++){
-            System.out.println("===================="+i+"번째 =====================");
-            try{
-            list[i].printInfo();}
-            catch(Exception e){e.printStackTrace();continue;}
-            System.out.println("===========================================");
-        }
-
         return list;
 
     }
@@ -158,43 +150,67 @@ public class Weather_Controller {
 
     public Weather[] getTodayWeatherlist(Weather[] list) 
     {
-        Date today = list[0].getDay();
-        Weather[] todayList = new Weather[10];
+        Date today = new Date();
+        Weather[] todayList;
         int index = 0;
-        while(true)
+        while(index < list.length)
         {
-            todayList[index] = list[index];
             index++;
-            if(list[index].getDay() != today)
+            if(list[index].getDay().compareTo(today) != 0)
             {
                 break;
             }
         }
+
+        todayList = new Weather[index];
+
+        for(int i =0;i<index;i++)
+        {
+            todayList[i]=list[i];
+        }
         return todayList;
     }
+
+
     public Weather[] getTomorrowWeatherlist(Weather[] list) 
     {
-        Date tomorrow = list[0].getDay();
-        Weather[] tomorrowList = new Weather[10];
-        int index = 0 , num = 0;
-        while(list[index].getDay().compareTo(tomorrow) == 0)
+        Date tomorrow = new Date();
+        Weather[] tomorrowList;
+        int i = 0 , count = 0, pos = 0;
+        boolean isCheck = false;
+        while(i<list.length)
         {
-            index++;
+            
+            if(tomorrow.compareTo(list[i].getDay()) != 0)
+            {
+                isCheck = !isCheck;
+            }
+
+            if(isCheck)
+            {
+                if(pos == 0)
+                    pos = i;
+                count++;
+            }
+            i++;
         }
-        tomorrow = list[index].getDay();
-        for(int i=0;index<list.length;index++, i++){
-            if(tomorrow.compareTo(list[index].getDay()) != 0)
-                break;
-            tomorrowList[i]=list[index];
+        pos--;
+        tomorrowList = new Weather[count];
+        for(i=0;i<count;pos++,i++)
+        {
+            tomorrowList[i] = list[pos];
         }
+
         return tomorrowList;
     }
+
+
     public Weather[] getLastWeatherlist(Weather[] list) 
     {
-        Date day = list[0].getDay();
+        Date day = new Date();
         Weather[] lastList = new Weather[10];
-        int count = 0,index = 0;
-        for(int i = 0;i<list.length;i++){
+        int count = 0,i;
+        for(i = 0;i<list.length;i++){
             if(count < 2)
             {
                 if(day.compareTo(list[i].getDay()) != 0)
@@ -205,11 +221,14 @@ public class Weather_Controller {
             }
             else
             {
-                lastList[index] = list[i];
-                index++;
+                break;
             }
         }
-
+        lastList = new Weather[list.length-i];
+        for(int j =0;i<list.length;i++,j++)
+        {
+            lastList[j] = list[i];
+        }
         return lastList;
 	}
 
@@ -219,19 +238,21 @@ public class Weather_Controller {
             RowConstraints con = new RowConstraints();
             con.setPrefHeight(30);
             grid.getRowConstraints().add(con);
-            DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-            Date today = Calendar.getInstance().getTime();   
-            String todayAsString = df.format(today);
+            
 
-            grid.add(new Label(todayAsString), index, 0);
-            grid.add(new Label(String.valueOf(list[index].getRainfallProbability())), index , 1);
-            grid.add(new Label(list[index].getRainfallForm()), index, 2);
-            grid.add(new Label(String.valueOf(list[index].getTemperature())), index, 3);
-            grid.add(new Label(String.valueOf(list[index].getWindSpeed())), index, 4);
-            grid.add(new Label(list[index].getWindDirection()), index, 5);
-            grid.add(new Label(String.valueOf(list[index].getHumidity())), index, 6);
+            System.out.println("---------------------------------------------");
+            list[index-1].printInfo();
+            System.out.println("---------------------------------------------");
+
+            grid.add(new Label(Integer.toString(list[index-1].getTime())+"시"), 0, index);
+            grid.add(new Label(Integer.toString(list[index-1].getRainfallProbability())), 1 ,index);
+            grid.add(new Label(list[index-1].getRainfallForm()), 2, index);
+            grid.add(new Label(String.valueOf(list[index-1].getTemperature())), 3, index);
+            grid.add(new Label(String.valueOf(list[index-1].getWindSpeed())), 4, index);
+            grid.add(new Label(list[index-1].getWindDirection()), 5, index);
+            grid.add(new Label(String.valueOf(list[index-1].getHumidity())), 6, index);
         }
-        grid1.setVisible(true);
+        grid.setVisible(true);
     }
 	
 }
