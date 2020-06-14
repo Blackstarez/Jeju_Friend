@@ -13,27 +13,13 @@
         },
         {
             "type": "java",
-            "name": "CodeLens (Launch) - APIManager",
-            "request": "launch",
-            "mainClass": "jeju_friend_server.APIManager",
-            "projectName": "jeju_friend_server"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch) - Current File",
+            "name": "CodeLens (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-server<jeju_friend_server>",
-            "request": "launch",
-            "mainClass": "jeju_friend_server.server",
-            "projectName": "jeju_friend_server"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-FrontStart<jeju_friend>",
+            "name": "CodeLens (Launch)-FrontStart<jeju_friend>",
             "request": "launch",
             "mainClass": "jeju_friend/jeju_friend.application.FrontStart",
             "projectName": "jeju_friend"
