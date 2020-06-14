@@ -57,12 +57,12 @@ public class Main_Controller {
 
     public void enter(String id) throws InterruptedException, ExecutionException {
         user.setId(id);
-        UserInfo userinfo = getUserInfo();
+        user = getUserInfo();
         tourList = getTouristSpotList();
         foodList = getFoodSpotList();
         TouristSpot tourSpot = getTouristSpot(tourList);
         TouristSpot foodSpot = getTouristSpot(foodList);
-        String interestArea =  ToAreaName(userinfo.getInterestArea());
+        String interestArea =  ToAreaName(user.getInterestArea());
         interestAreaLabel.setText("현재관심지역: " + interestArea);
         addVBox(tourSpot);
         addVBox(foodSpot);

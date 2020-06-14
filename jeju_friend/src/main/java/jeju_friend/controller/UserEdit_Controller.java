@@ -82,6 +82,8 @@ public class UserEdit_Controller {
 
 	private ToggleButton[] group = new ToggleButton[10];
 	
+	TourPlan[] tourPlans;
+
 	Image map1SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1_selected.png"));
 	Image map1UnselectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_1.png"));
 	Image map2SelectedImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/map_2_selected.png"));
@@ -96,16 +98,13 @@ public class UserEdit_Controller {
 	public void enter(String id) throws InterruptedException, ExecutionException {
 		user.setId(id);
 		UserInfo user = getUserInfo();
-		TourPlan[] tourList = getTourList();
+		tourPlans = getTourList();
 		userName = user.getNickName();
 		interestArea = user.getInterestArea();
 		nameArea.setText(userName);
 		setToggle(interestArea);
-		setTourBox(travelGridPane, tourList);
+		setTourBox(travelGridPane, tourPlans);
 	}
-
-	// 이벤트 핸들러
-
 	
 	private TourPlan[] getTourList() throws InterruptedException, ExecutionException {
 
@@ -160,21 +159,57 @@ public class UserEdit_Controller {
 		return task.get();
 	}
 
-   
+	// 이벤트 핸들러
+	   
     public void travelDeleteBtn_Actioned()
     {
-        
+		for(int index = 0; index < group.length; index++)
+		{
+			if(group[index].isSelected())
+			{
+				travelGridPane.getRowConstraints().remove(index);
+				for(int d = index; d< group.length-1;d++)
+				{
+					group[d] = group[d+1];
+				}
+			}
+		}
 	}
 
 	public void addTravelBtn_Actioned() throws IOException
     {
-        moveToAddTravel();
+        addTravel();
     }
 	public void cancelBtn_Actioned() throws IOException, InterruptedException, ExecutionException
 	{
 		moveToMain();
 	}
     
+	public void saveBtn_Actioned()
+	{
+		tryToSave();
+	}
+	
+	private void tryToSave() 
+	{
+
+	}
+	@FXML
+	private void modifyBtn_Actioned()
+	{
+		tryToModify();
+	}
+
+	private void tryToModify() 
+	{
+		for(int index = 0; index < group.length; index++)
+		{
+			if(group[index].isSelected())
+			{
+				
+			}
+		}
+	}
 
 	@FXML
 	private void regionBtn1_Actioned(){
@@ -289,13 +324,7 @@ public class UserEdit_Controller {
 			RowConstraints con = new RowConstraints();
 			con.setPrefHeight(50);
             travelGridPane.getRowConstraints().add(con);
-			VBox input = new VBox();
-			TextArea tourPlanNameArea = new TextArea(tourList[index].getTourPlanName());
-			DatePicker tourDay = new DatePicker(tourList[index].getTourDay());
-			input.getChildren().addAll(tourPlanNameArea);
-			input.getChildren().addAll(tourPlanNameArea,tourDay);
-			ToggleButton toggleButton = new ToggleButton("선택");
-			group[index] = toggleButton;
+			Button button = new Button(tourList[index].getTourPlanName());
 			
 		}
 	}
@@ -314,14 +343,17 @@ public class UserEdit_Controller {
 			return 5;
 		return 0;
 	}
-	public void moveToAddTravel() throws IOException
+
+	public void addTravel() throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/AddTravel.fxml"));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/AddTravel.fxml"));
         Parent root = loader.load();
         AddTravel_Controller controller = loader.getController();
-		addTravelBtn.getScene().setRoot(root);
-		controller.enter(user.getId());
+        addTravelBtn.getScene().setRoot(root);
+        controller.enter(user.getId());
 	}
+
+
 	
 	public void moveToMain() throws IOException, InterruptedException, ExecutionException
     {
@@ -330,6 +362,9 @@ public class UserEdit_Controller {
         Main_Controller controller = loader.getController();
         cancelBtn.getScene().setRoot(root); 
         controller.enter(user.getId());
-    }
+	}
+	
+
+	
 
 }
