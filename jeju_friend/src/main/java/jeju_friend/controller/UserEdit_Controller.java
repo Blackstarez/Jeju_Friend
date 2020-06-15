@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
@@ -70,7 +71,7 @@ public class UserEdit_Controller {
 	private ToggleGroup regionGroup;
 
 	@FXML
-	private TextArea nameArea;
+	private TextField nameArea;
 
 	@FXML
 	private PasswordField pwField;
