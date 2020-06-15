@@ -28,11 +28,11 @@ public class EditTravel_Controller {
     @FXML
     private Button EditTravelBtn;
     @FXML
+    private Button deleteBtn;
+    @FXML
     private Label travelNameLabel;
     @FXML
     private DatePicker datePicker;
-    @FXML
-    private Button deleteBtn;
     @FXML
     private ToggleButton groupBtn;
     @FXML
@@ -336,12 +336,10 @@ public class EditTravel_Controller {
     }
 
     public void checkValid() throws IOException, InterruptedException, ExecutionException {
-        LocalDate tourDay = datePicker.getValue();
         int region = getSelectedRegion();
         int partner = getPartner();
         int travel = getTravel();
-        // 선호 지역 골라야 함.
-        if (tourDay == null) {
+        if (datePicker.getValue() == null) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("여행 생성 오류");
             alert.setHeaderText(null);
@@ -367,7 +365,7 @@ public class EditTravel_Controller {
             return;
         }   
          else {
-            tour.setTourDay(tourDay);
+            tour.setTourDay(datePicker.getValue());
             tour.setUserId(user.getId());
             tour.setTourForm(getTravelName(travel));
             tour.setTourWith(partner);

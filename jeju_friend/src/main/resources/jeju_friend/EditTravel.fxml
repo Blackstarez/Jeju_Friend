@@ -232,7 +232,7 @@
             <Insets bottom="20.0" />
          </padding>
       </Pane>
-      <Button fx:id="cancelBtn" layoutX="972.0" layoutY="560.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소">
+      <Button fx:id="cancelBtn" layoutX="895.0" layoutY="560.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소">
          <font>
             <Font name="LG PC" size="24.0" />
          </font>
@@ -240,7 +240,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="addTravelBtn" layoutX="1037.0" layoutY="560.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" text="확인">
+      <Button fx:id="editTravelBtn" layoutX="1037.0" layoutY="560.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editTravelBtn_Actioned" text="확인">
          <font>
             <Font name="LG PC" size="24.0" />
          </font>
@@ -250,7 +250,15 @@
             <Font name="LG PC" size="25.0" />
          </font>
       </Label>
-      <DatePicker layoutX="132.0" layoutY="517.0" />
+      <DatePicker fx:id="datePicker" layoutX="132.0" layoutY="517.0" />
       <Label fx:id="travelNameLabel" layoutX="226.0" layoutY="83.0" text="Label" />
+      <Button fx:id="deleteBtn" layoutX="967.0" layoutY="560.0" mnemonicParsing="false" onAction="#deleteBtn_Actioned" text="삭제">
+         <font>
+            <Font name="LG PC" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
    </children>
 </Pane>

@@ -25,6 +25,8 @@ public class FoodView_Controller {
     Button backBtn;
     @FXML
     ScrollPane scrollPane;
+    @FXML
+    VBox vBox;
 
     UserInfo user = new UserInfo();
     TouristSpot[] foodList;
@@ -40,8 +42,6 @@ public class FoodView_Controller {
 
     private void setScrollPane() 
     {   
-                      
-        final VBox vb = new VBox();
         Thread thread = new Thread() {
             @Override
             public void run() {  
@@ -56,20 +56,17 @@ public class FoodView_Controller {
                     Platform.runLater(()->{
                         foodImage.setFitWidth(200);
                         foodImage.setFitHeight(150);
-                        vb.getChildren().addAll(foodImage,name,place);
+                        vBox.getChildren().addAll(foodImage,name,place);
                         });
                     } catch (Exception e) {
                         ImageView foodImage = new ImageView(defaultImage);
                         Platform.runLater(()->{
                             foodImage.setFitWidth(200);
                             foodImage.setFitHeight(150);
-                            vb.getChildren().addAll(foodImage,name,place);
+                            vBox.getChildren().addAll(foodImage,name,place);
                         });
                     }
                 }
-                Platform.runLater(()->{
-                    scrollPane.setContent(vb);
-                });
             }
         };
         thread.setDaemon(true);
@@ -93,7 +90,7 @@ public class FoodView_Controller {
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
                 
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER);
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
@@ -114,7 +111,6 @@ public class FoodView_Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
         Parent root = loader.load();
         Main_Controller controller = loader.getController();
-        Node loginBtn;
         backBtn.getScene().setRoot(root);
         controller.enter(id);
     }
