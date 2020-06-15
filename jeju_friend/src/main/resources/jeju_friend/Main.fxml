@@ -17,15 +17,11 @@
         <content>
           <AnchorPane>
                <children>
-                  <Pane fx:id="mainPane" prefHeight="566.0" prefWidth="763.0">
-                     <children>
-                        <VBox fx:id="vBox" prefHeight="566.0" prefWidth="763.0" style="-fx-background-color: white;">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                  </Pane>
+                  <VBox fx:id="vBox" prefHeight="544.0" prefWidth="763.0" style="-fx-background-color: white;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
                </children>
             </AnchorPane>
         </content>

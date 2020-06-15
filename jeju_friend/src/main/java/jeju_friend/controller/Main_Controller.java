@@ -46,8 +46,6 @@ public class Main_Controller {
     @FXML
     private VBox vBox;
     @FXML
-    private Pane mainPane;
-    @FXML
     private Pane searchBar;
     @FXML
     private Label interestAreaLabel;
@@ -131,7 +129,7 @@ public class Main_Controller {
   
 
    @FXML
-   public void tourSpotViewBtn_Actioned() throws IOException
+   public void tourSpotViewBtn_Actioned() throws IOException, InterruptedException, ExecutionException
    {
        moveToTourSpotView();
    }
@@ -415,18 +413,17 @@ public class Main_Controller {
         userEditBtn.getScene().setRoot(root); 
         controller.enter(user.getId());
     }
-    private void moveToTourSpotView() throws IOException
+    private void moveToTourSpotView() throws IOException, InterruptedException, ExecutionException
     {
-        Stage primaryStage = (Stage) logoutBtn.getScene().getWindow(); 
-        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/TourSpotView.fxml"));
-        Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-        primaryStage.show();   
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/TourSpotView.fxml"));
+        Parent root = loader.load();
+        TourSpotView_Controller controller = loader.getController();
+        userEditBtn.getScene().setRoot(root); 
+        controller.enter(user.getId());
     }
     private void moveToFoodView() throws IOException, InterruptedException, ExecutionException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/UserEdi.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/FoodView.fxml"));
         Parent root = loader.load();
         FoodView_Controller controller = loader.getController();
         userEditBtn.getScene().setRoot(root); 
