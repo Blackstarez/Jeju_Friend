@@ -1,6 +1,8 @@
 package jeju_friend;
 
 import java.sql.*;
+import java.util.Random;
+
 import jeju_friend.Elements.*;
 
 public class DBmanager {
@@ -41,18 +43,16 @@ public class DBmanager {
     }
 
     // 아이디 조회 - 회원가입시 아이디 중복을 방지하기 위함.
-    public boolean isLoginIdExist(String id) 
-    {
-        try{
-        String sql = "select * from login where ID ='" + id + "';";
-        ResultSet result;
+    public boolean isLoginIdExist(String id) {
+        try {
+            String sql = "select * from login where ID ='" + id + "';";
+            ResultSet result;
 
-        result = stmt.executeQuery(sql);
-        result.last();
-        if (result.getRow() != 0)
-            return true;
-        }catch(SQLException e)
-        {
+            result = stmt.executeQuery(sql);
+            result.last();
+            if (result.getRow() != 0)
+                return true;
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -62,33 +62,30 @@ public class DBmanager {
     // 사용자 관리 - 등록, 수정, 삭제, 조회
 
     // 사용자 등록
-    public boolean userApply(String id,String pw, String nickName, int age, boolean gender, int interestArea)
-    {
-        if(isLoginIdExist(id))
-        {
+    public boolean userApply(String id, String pw, String nickName, int age, boolean gender, int interestArea) {
+        if (isLoginIdExist(id)) {
             return false;
         }
-        
-        char sex = gender==true?'M':'F';
-        try{
+
+        char sex = gender == true ? 'M' : 'F';
+        try {
             String sql = "Insert into login (ID,PW) Values(?,?);";
             PreparedStatement prestmt = conn.prepareStatement(sql);
-            
-            prestmt.setString(1,id);
-            prestmt.setString(2,pw);
+
+            prestmt.setString(1, id);
+            prestmt.setString(2, pw);
             prestmt.executeUpdate();
 
             sql = "Insert into user_info (ID,nickName,age,gender,권한,관심지역) Values(?,?,?,?,?,?);";
             prestmt = conn.prepareStatement(sql);
-            prestmt.setString(1,id);
-            prestmt.setString(2,nickName);
+            prestmt.setString(1, id);
+            prestmt.setString(2, nickName);
             prestmt.setInt(3, age);
             prestmt.setString(4, String.valueOf(sex));
-            prestmt.setInt(5,0);
-            prestmt.setInt(6,interestArea);
+            prestmt.setInt(5, 0);
+            prestmt.setInt(6, interestArea);
             prestmt.executeUpdate();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -96,61 +93,56 @@ public class DBmanager {
     }
 
     // 사용자 조회(개인별)
-    public UserInfo userInfoLookup(String id) throws SQLException
-    {
-        String sql = "select * from user_info where ID = '"+id+"';";
+    public UserInfo userInfoLookup(String id) throws SQLException {
+        String sql = "select * from user_info where ID = '" + id + "';";
         ResultSet result = stmt.executeQuery(sql);
         UserInfo user = new UserInfo();
         result.next();
         user.setId(result.getString("ID"));
         user.setNickName(result.getString("nickName"));
         user.setAge(result.getInt("age"));
-        user.setGender(result.getString("gender")=="M"?true:false);
+        user.setGender(result.getString("gender") == "M" ? true : false);
         user.setInterestArea(result.getInt("관심지역"));
-        return user;        
+        return user;
     }
 
     // 사용자 삭제(개인별)
-    public boolean userInfoDelete(String id) throws SQLException
-    {
-        String sql = "delete from user_info where ID = '"+id+"';";
+    public boolean userInfoDelete(String id) throws SQLException {
+        String sql = "delete from user_info where ID = '" + id + "';";
         int result = stmt.executeUpdate(sql);
-        if(result > 0)
+        if (result > 0)
             return true;
         else
             return false;
     }
 
     // 사용자 수정
-    public boolean userInfoModify(String id,String pw, String nickName, int age, boolean gender, int interestArea)
-    {
-        char sex = gender==true?'M':'F';
-        try{
+    public boolean userInfoModify(String id, String pw, String nickName, int age, boolean gender, int interestArea) {
+        char sex = gender == true ? 'M' : 'F';
+        try {
             String sql = "update user_info set nickName=? , age=?, gender=?, 관심지역=? Where ID=?;";
             PreparedStatement prestmt = conn.prepareStatement(sql);
-            prestmt.setString(1,nickName);
-            prestmt.setInt(2,age);
+            prestmt.setString(1, nickName);
+            prestmt.setInt(2, age);
             prestmt.setString(3, String.valueOf(sex));
             prestmt.setInt(4, interestArea);
-            prestmt.setString(5,id);
+            prestmt.setString(5, id);
             prestmt.executeUpdate();
 
             sql = "update login set PW=? where ID=?;";
             prestmt = conn.prepareStatement(sql);
             prestmt.setString(1, pw);
-            prestmt.setString(2,id);
+            prestmt.setString(2, id);
             prestmt.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
 
-
     // 관광지 조회
-    public TouristSpot[] touristSpotLookup() throws SQLException
-    {
+    public TouristSpot[] touristSpotLookup() throws SQLException {
         String sql = "select * from 관광지 where 구분 = 1";
         ResultSet results = stmt.executeQuery(sql);
         results.last();
@@ -158,8 +150,7 @@ public class DBmanager {
         results.beforeFirst();
         TouristSpot[] spotList = new TouristSpot[rowCount];
         int index = 0;
-        while(results.next())
-        {
+        while (results.next()) {
             spotList[index] = new TouristSpot();
             spotList[index].setTouristSpot(results.getString("시설명"));
             spotList[index].setAreaCode(results.getInt("지역코드"));
@@ -183,8 +174,7 @@ public class DBmanager {
     }
 
     // 음식점 조회
-    public TouristSpot[] foodSpotLookup() throws SQLException
-    {
+    public TouristSpot[] foodSpotLookup() throws SQLException {
         String sql = "select * from 관광지 where 구분 = 2";
         ResultSet results = stmt.executeQuery(sql);
         results.last();
@@ -192,10 +182,9 @@ public class DBmanager {
         results.beforeFirst();
         TouristSpot[] spotList = new TouristSpot[rowCount];
         int index = 0;
-        while(results.next())
-        {
+        while (results.next()) {
             spotList[index] = new TouristSpot();
-            spotList[index].setTouristSpot(results.getString("시설명"));          // 음식점명으로 사용된다.
+            spotList[index].setTouristSpot(results.getString("시설명")); // 음식점명으로 사용된다.
             spotList[index].setAreaCode(results.getInt("지역코드"));
             spotList[index].setContactInformation(results.getString("연락처"));
             spotList[index].setLocation(results.getString("위치"));
@@ -209,19 +198,17 @@ public class DBmanager {
     }
 
     // 여행계획 등록
-    public boolean tourPlanApply(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest)
-    {
-        try{
+    public boolean tourPlanApply(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest) {
+        try {
             String sql = "insert into 여행계획 (userId,tourPlanName,tourWith,tourForm,areaInterest) Values(?,?,?,?,?);";
             PreparedStatement prestmt = conn.prepareStatement(sql);
             prestmt.setString(1, userId);
-            prestmt.setString(2,tourPlanName);
+            prestmt.setString(2, tourPlanName);
             prestmt.setInt(3, tourWith);
-            prestmt.setString(4,tourForm);
+            prestmt.setString(4, tourForm);
             prestmt.setInt(5, areaInterest);
             prestmt.executeUpdate();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -229,16 +216,14 @@ public class DBmanager {
     }
 
     // 여행계획 삭제
-    public boolean tourPlanDelete(String userId, String tourPlanName)
-    {
-        try{
+    public boolean tourPlanDelete(String userId, String tourPlanName) {
+        try {
             String sql = "delete from 여행계획 where userId=? && tourPlanName=?;";
             PreparedStatement prestmt = conn.prepareStatement(sql);
             prestmt.setString(1, userId);
-            prestmt.setString(2,tourPlanName);
+            prestmt.setString(2, tourPlanName);
             prestmt.executeUpdate();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -246,39 +231,34 @@ public class DBmanager {
     }
 
     // 여행계획 수정
-    public boolean tourPlanModify(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest)
-    {
-        try{
+    public boolean tourPlanModify(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest) {
+        try {
             String sql = "update 여행계획 set tourPlanName=?, tourWith=?,tourForm=?, areaInterest=? where userId=? && tourPlanName=?;";
             PreparedStatement prestmt = conn.prepareStatement(sql);
             prestmt.setString(1, tourPlanName);
-            prestmt.setInt(2,tourWith);
+            prestmt.setInt(2, tourWith);
             prestmt.setString(3, tourForm);
-            prestmt.setInt(4,areaInterest);
+            prestmt.setInt(4, areaInterest);
             prestmt.setString(5, userId);
             prestmt.setString(6, tourPlanName);
             prestmt.executeUpdate();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
 
-
     // 여행계획 조회
-    public TourPlan[] tourPlanLookup(String id) throws SQLException
-    {
-        String sql = "select * from '여행일정' where ID = '"+id+"';";
+    public TourPlan[] tourPlanLookup(String id) throws SQLException {
+        String sql = "select * from '여행일정' where ID = '" + id + "';";
         ResultSet results = stmt.executeQuery(sql);
         results.last();
         int rowCount = results.getRow();
         results.beforeFirst();
         TourPlan[] tourPlanList = new TourPlan[rowCount];
         int index = 0;
-        while(results.next())
-        {
+        while (results.next()) {
             tourPlanList[index] = new TourPlan();
             tourPlanList[index].setUserId(results.getString("ID"));
             tourPlanList[index].setTourPlanName(results.getString("여행명"));
@@ -291,12 +271,9 @@ public class DBmanager {
         return tourPlanList;
     }
 
-
-
     // 지역코드 - 격자 x, 격자 y 조회
-    public int[] getXY(int areaCode) throws SQLException
-    {
-        String sql = "select X, Y from 지역코드 where 지역코드.지역코드 = '"+areaCode+"';";
+    public int[] getXY(int areaCode) throws SQLException {
+        String sql = "select X, Y from 지역코드 where 지역코드.지역코드 = '" + areaCode + "';";
         ResultSet result = stmt.executeQuery(sql);
         int[] xy = new int[2];
         result.next();
@@ -306,8 +283,39 @@ public class DBmanager {
     }
 
     // 여행지역 추천
-    public LocationRecommend getRecommend(int age, boolean isMale)
-    {
+    public LocationRecommend getRecommend(int age, boolean isMale) {
+        String sql;
+        if (isMale)
+            sql = "select * from 지역추천 where MR=?";
+        else
+            sql = "select * from 지역추천 where FR=?";
+        try {
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setInt(1, age / 10);
+            
+            ResultSet results = prestmt.executeQuery(sql);
+            results.last();
+            int rowCount = results.getRow();
+            results.beforeFirst();
+            
+            if(rowCount>1)
+            {
+                Random rand = new Random(); 
+                rand.setSeed(System.currentTimeMillis());
+                int randNume = rand.nextInt(rowCount-1);
+                for(int i=0;i<=randNume;i++)
+                    results.next();
+            }
+            results.next();
+            LocationRecommend recommend = new LocationRecommend();
+            recommend.setAge(age);
+            recommend.setMale(isMale);
+            recommend.setLocationName(results.getString("시")+" "+results.getString("읍면동"));
+            return recommend;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
