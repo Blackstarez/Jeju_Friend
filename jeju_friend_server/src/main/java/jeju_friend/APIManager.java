@@ -31,9 +31,12 @@ public class APIManager {
         Date date = new Date();
         System.out.println("현재 시각 : "+format.format(date));
         int result = Integer.parseInt(format.format(date));
-        if((result+1)/3 == result/3)
+        if((result+1)/3 == result/3 && result != 0)
             result = (result/3)*3-1;
+
         System.out.println("보정 시각 : "+Integer.toString(result));
+        if(result<10)
+            return "0"+Integer.toString(result);
         return Integer.toString(result);
         
     }
@@ -184,12 +187,34 @@ public class APIManager {
                 + URLEncoder.encode(Integer.toString(x), "UTF-8")); /* 예보지점 X 좌표값 */
         urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "="
                 + URLEncoder.encode(Integer.toString(y), "UTF-8")); /* 예보지점의 Y 좌표값 */
+
+        if(this.getHour().compareTo("00") == 0)
+        {
+            String day = Integer.toString(Integer.parseInt(this.getDay())-1);
+            urlBuilder = new StringBuilder(
+                "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + this.weatherkey); /* Service Key */
+            urlBuilder
+                    .append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
+                    + URLEncoder.encode("1000", "UTF-8")); /* 한 페이지 결과 수 */
+            urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "="
+                    + URLEncoder.encode("JSON", "UTF-8")); /* 요청자료형식(XML/JSON)Default: XML */
+            urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "="
+                    + URLEncoder.encode(day, "UTF-8")); /* yyyymmdd발표 */
+            urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "="
+                    + URLEncoder.encode("2300", "UTF-8")); /* HH시 발표 */
+            urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "="
+                    + URLEncoder.encode(Integer.toString(x), "UTF-8")); /* 예보지점 X 좌표값 */
+            urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "="
+                    + URLEncoder.encode(Integer.toString(y), "UTF-8")); /* 예보지점의 Y 좌표값 */
+        }        
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
 
-        System.out.println("Response code: " + conn.getResponseCode());
+        //System.out.println("Response code: " + conn.getResponseCode());
 
         BufferedReader rd;
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -204,7 +229,7 @@ public class APIManager {
         }
         rd.close();
         conn.disconnect();
-        System.out.println(sb.toString());
+        //System.out.println(sb.toString());
         return sb.toString();
     }
 
@@ -222,12 +247,12 @@ public class APIManager {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        for(int i =0;i<weatherInfo.length;i++)
+        /*for(int i =0;i<weatherInfo.length;i++)
         {
             System.out.println("--------------------"+i+"번째-------------------");
             weatherInfo[i].printInfo();
             System.out.println("---------------------------------------");
-        }
+        }*/
         return weatherInfo;
     }
 
