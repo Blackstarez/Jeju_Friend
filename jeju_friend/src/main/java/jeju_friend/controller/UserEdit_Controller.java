@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -29,11 +30,11 @@ import jeju_friend.application.SocketHandler;
 public class UserEdit_Controller {
 
 	@FXML
-	Button addTravelBtn;
+	private Button addTravelBtn;
 	@FXML
-	Button cancelBtn;
+	private Button cancelBtn;
 	@FXML
-	Button saveBtn;
+	private Button saveBtn;
 
 	@FXML
 	private ToggleButton regionBtn1;
@@ -70,6 +71,9 @@ public class UserEdit_Controller {
 
 	@FXML
 	private TextArea nameArea;
+
+	@FXML
+	private PasswordField pwField;
 
 	private String userName;
 
@@ -158,16 +162,18 @@ public class UserEdit_Controller {
 		return task.get();
 	}
 
+	
 	// 이벤트 핸들러
 
+	@FXML
 	public void addTravelBtn_Actioned() throws IOException {
 		moveToAddTravel();
 	}
-
+	@FXML
 	public void cancelBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
 		moveToMain();
 	}
-
+	@FXML
 	public void saveBtn_Actioned() {
 		tryToSave();
 	}
@@ -282,7 +288,8 @@ public class UserEdit_Controller {
 						e1.printStackTrace();
 					}
 				}		
-		});
+			});
+		travelView.getChildren().add(button);
 		}
 	}
 	
@@ -339,6 +346,7 @@ public class UserEdit_Controller {
 		String nickName = nameArea.getText();
 		user.setNickName(nickName);
 		user.setInterestArea(interestArea);
+		user.setPw(pwField.getText());
 		if(nickName.isEmpty())
 		{
 			Alert alert = new Alert(AlertType.INFORMATION);

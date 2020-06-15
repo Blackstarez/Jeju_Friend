@@ -117,11 +117,11 @@ public class EditTravel_Controller {
         setSelectedPartner(tour.getTourWith());
         setArr();
     }
+    
+    
+
+    
     // 이벤트 핸들러
-
-    
-
-    
 
     @FXML
     public void deleteBtn_Actioned()
