@@ -236,8 +236,9 @@ public class Main_Controller {
 
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
-                
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER, user.toBytes());
+                TourPlan tourPlan = new TourPlan();
+                tourPlan.setUserId(user.getId());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,tourPlan.toBytes());
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
@@ -262,8 +263,9 @@ public class Main_Controller {
 
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
-                
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
+                TourPlan tourPlan = new TourPlan();
+                tourPlan.setUserId(user.getId());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER);
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
@@ -290,7 +292,7 @@ public class Main_Controller {
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
                 
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RESTAURANT, Protocol.PT_LOOKUP, Protocol.PT_USER);
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
