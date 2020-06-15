@@ -113,8 +113,20 @@ public class Main_Controller {
     public void searchField_Typed(KeyEvent event) throws InterruptedException, ExecutionException {
         if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
             TouristSpot touristSpot = searchTouristSpot(searchField.getText());
-            vBox.getChildren().clear();
-            addVBox(touristSpot);
+            if(touristSpot != null)
+            {
+                vBox.getChildren().clear();
+                addVBox(touristSpot);
+            }
+            else
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+			    alert.setTitle("검색 오류");
+			    alert.setHeaderText(null);
+    			alert.setContentText("검색 결과가 없습니다/n정확한 명칭을 입력해주세요");
+	    		alert.showAndWait();
+		    	searchField.requestFocus();
+            }
         }
         searchLabel.setVisible(false);
     }
