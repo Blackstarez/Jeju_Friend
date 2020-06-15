@@ -4,14 +4,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Sign.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.TourSpotView_Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@Sign.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.TourSpotView_Controller">
    <children>
-      <ScrollPane fx:id="scrollPane" layoutX="40.0" layoutY="70.0" prefHeight="281.0" prefWidth="538.0">
+      <ScrollPane fx:id="scrollPane" layoutX="40.0" layoutY="70.0">
         <content>
-          <AnchorPane minHeight="280.0" minWidth="470.0" prefHeight="280.0" prefWidth="537.0" />
+          <AnchorPane />
         </content>
       </ScrollPane>
       <Label layoutX="51.0" layoutY="25.0" text="제주도 관광지 조회" />
-      <Button fx:id="backBtn" layoutX="478.0" layoutY="359.0" mnemonicParsing="false" onAction="#backBtn_Actioned" prefHeight="33.0" prefWidth="100.0" text="뒤로가기" />
+      <Button fx:id="backBtn" layoutX="478.0" layoutY="359.0" mnemonicParsing="false" onAction="#backBtn_Actioned" text="뒤로가기" />
    </children>
 </Pane>

@@ -58,6 +58,7 @@ public class Main_Controller {
 
     TouristSpot[] tourList;
     TouristSpot[] foodList;
+    TourPlan[] planList;
     
     UserInfo user = new UserInfo();
 
@@ -68,16 +69,20 @@ public class Main_Controller {
         user = getUserInfo();
         tourList = getTouristSpotList();
         foodList = getFoodSpotList();
+        planList = getTourPlanList();
         TouristSpot tourSpot = getTouristSpot(tourList);
         TouristSpot foodSpot = getTouristSpot(foodList);
         String interestArea =  ToAreaName(user.getInterestArea());
         interestAreaLabel.setText("현재관심지역: " + interestArea);
         addVBox(tourSpot);
         addVBox(foodSpot);
+        setTravelView(planList);
     }
 
 
     // 이벤트 핸들러
+
+    
 
     @FXML
     public void searchField_Typed(KeyEvent event) throws InterruptedException, ExecutionException {
@@ -204,7 +209,31 @@ public class Main_Controller {
 		thread.start();
 		return task.get();
 	}
+    private TourPlan[] getTourPlanList() throws InterruptedException, ExecutionException {
+        Task<TourPlan[]> task = new Task<TourPlan[]>() {
 
+			@Override
+			protected TourPlan[] call() throws Exception {
+
+				Protocol protocol = new Protocol();
+                Protocol resultProtocol = new Protocol();
+                
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
+                SocketHandler socketHandler = new SocketHandler();
+                try {
+                    resultProtocol = socketHandler.request(protocol);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody());  
+                return list; 
+            }   
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        return task.get();
+    }
     public TouristSpot[] getTouristSpotList() throws InterruptedException, ExecutionException 
     {
         Task<TouristSpot[]> task = new Task<TouristSpot[]>() {
