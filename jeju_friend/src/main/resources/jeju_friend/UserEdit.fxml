@@ -11,11 +11,11 @@
    <children>
       <Label fx:id="regionLabel" layoutX="482.0" layoutY="82.0" prefHeight="35.0" prefWidth="55.0" text="관심지역" />
       <Button fx:id="saveBtn" layoutX="721.0" layoutY="473.0" mnemonicParsing="false" onAction="#saveBtn_Actioned" text="저장" />
-      <Button fx:id="cancelBtn" layoutX="649.0" layoutY="473.0" mnemonicParsing="false" onAction="#cancelBtn_Actioned" text="취소" />
+      <Button fx:id="cancelBtn" layoutX="649.0" layoutY="473.0" mnemonicParsing="false" onAction="cancelBtn_Actioned" text="취소" />
       <Label fx:id="travelLabel" layoutX="23.0" layoutY="32.0" prefHeight="35.0" prefWidth="103.0" stylesheets="@userEdit.css" text="여행 일정" />
       <Button fx:id="addTravelBtn" layoutX="123.0" layoutY="32.0" mnemonicParsing="false" onAction="#addTravelBtn_Actioned" text="여행추가" wrapText="true" />
-      <Label layoutX="459.0" layoutY="455.0" text="닉네임" />
-      <TextArea fx:id="nameArea" layoutX="459.0" layoutY="472.0" prefHeight="33.0" prefWidth="159.0" />
+      <Label layoutX="295.0" layoutY="455.0" text="닉네임" />
+      <TextField fx:id="nameArea" layoutX="295.0" layoutY="472.0" prefHeight="33.0" prefWidth="159.0" />
 
 
       <ImageView fx:id="view1" fitHeight="131.0" fitWidth="244.0" layoutX="360.0" layoutY="142.0">
@@ -69,6 +69,8 @@
         </toggleGroup>
       </ToggleButton>
       <VBox fx:id="travelView" layoutX="25.0" layoutY="82.0" prefHeight="349.0" prefWidth="207.0" />
+      <PasswordField fx:id="pwField" layoutX="473.0" layoutY="472.0" prefHeight="33.0" prefWidth="159.0" />
+      <Label layoutX="473.0" layoutY="455.0" text="비밀번호" />
 
    </children>
 </Pane>
