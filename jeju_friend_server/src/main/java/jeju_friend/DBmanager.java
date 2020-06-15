@@ -291,6 +291,8 @@ public class DBmanager {
             sql = "select * from 지역추천 where FR=?";
         try {
             PreparedStatement prestmt = conn.prepareStatement(sql);
+            if(age/10 == 1)
+                age+=10;
             prestmt.setInt(1, age / 10);
             
             ResultSet results = prestmt.executeQuery(sql);
