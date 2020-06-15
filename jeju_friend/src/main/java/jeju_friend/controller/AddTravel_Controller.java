@@ -273,7 +273,7 @@ public class AddTravel_Controller {
 
     public void checkValid() throws IOException, InterruptedException, ExecutionException {
         String inputName = nameField.getText();
-        LocalDate tourDay = datePicker.getValue();
+        LocalDate tourDay;
         int region = getSelectedRegion();
         int partner = getPartner();
         int travel = getTravel();
@@ -314,6 +314,7 @@ public class AddTravel_Controller {
             return;
         }   
          else {
+            tourDay = datePicker.getValue();
             TourPlan tourPlan = new TourPlan();
             tourPlan.setTourPlanName(inputName);
             tourPlan.setTourDay(tourDay);
