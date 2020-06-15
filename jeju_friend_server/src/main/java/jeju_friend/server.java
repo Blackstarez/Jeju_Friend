@@ -91,9 +91,6 @@ class SocketManager extends Thread
                 protocolType = buf[0];
                 Protocol t = new Protocol();
                 t.setPacket(buf);
-                System.out.println("수신한 데이터 길이 : "+t.getProtocolType());
-                System.out.println("수신한 타입 : "+protocolType);
-                t.printPacket();
                 switch(protocolType)
                 {
                     // 종료 요청 수신 시
@@ -262,7 +259,7 @@ class SocketManager extends Thread
                                         protocol.setPacket(buf);
                                         plan = TourPlan.toTourPlan(protocol.getBody());
                                         TourPlan[] tourPlanList = db.tourPlanLookup(plan.getUserId());
-                                        if(tourPlanList.length == 0)
+                                        if(tourPlanList != null)
                                         {
                                             protocol.setPacket(Protocol.PT_RESPONSE, Protocol.PT_TOURPLAN, Protocol.PT_SUCCESS, Protocol.PT_UNKNOWN, TourPlan.getBytes(tourPlanList));
                                         }

@@ -3,6 +3,7 @@ package jeju_friend.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
@@ -66,6 +67,8 @@ public class Main_Controller {
     TouristSpot[] tourList;
     TouristSpot[] foodList;
     TourPlan[] planList;
+    HashMap<String,Integer> searchTourTable;
+    HashMap<String,Integer> searchFoodTable;
     
     UserInfo user = new UserInfo();
 
@@ -88,6 +91,17 @@ public class Main_Controller {
         addVBox(tourSpot);
         addVBox(foodSpot);
         setTravelView(planList);
+
+        searchTourTable = new HashMap<String,Integer>();
+        searchFoodTable = new HashMap<String,Integer>();
+        for(int i=0;i<tourList.length;i++)
+        {
+            searchTourTable.put(tourList[i].getTouristSpot(),i);
+        }
+        for(int i = 0;i<foodList.length;i++)
+        {
+            searchFoodTable.put(foodList[i].getTouristSpot(),i);
+        }
     }
 
 
@@ -164,24 +178,19 @@ public class Main_Controller {
 
     
    private TouristSpot searchTouristSpot(String text) {
-        int index = 0;
-        TouristSpot spot;
-        while(index<=tourList.length)
+        int tourIndex = searchTourTable.getOrDefault(text,-1);
+        int foodIndex = searchFoodTable.getOrDefault(text,-1);
+        if(tourIndex == -1 && foodIndex == -1)
         {
-            if(tourList[index].getTouristSpot() == text)
-            {
-                spot = tourList[index];
-                return spot;
-            }
+            return null;
         }
-        index = 0;
-        while(index<=foodList.length)
+        else if(foodIndex == -1)
         {
-            if(foodList[index].getTouristSpot() == text)
-            {
-                spot = foodList[index];
-                return spot;
-            }
+            return tourList[tourIndex];
+        }
+        else if(tourIndex == -1)
+        {
+            return foodList[foodIndex];
         }
         return null;
     }
@@ -242,11 +251,14 @@ public class Main_Controller {
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
+                    System.out.println(resultProtocol.getBody());
+                    TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody()); 
+                    return list;
                 } catch (Exception e) {
                     e.printStackTrace();
+                    System.out.println("tourPlan lookup error 발생");
                 }
-                TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody());  
-                return list; 
+                return null; 
             }   
         };
         Thread thread = new Thread(task);

@@ -291,21 +291,22 @@ public class DBmanager {
     // 여행지역 추천
     public LocationRecommend getRecommend(int age, boolean isMale) {
         String sql;
+        System.out.println("나이 : "+age);
+        int a = age;
+        if(a/10 == 1)
+        a+=10;
+        a/=10;
         if (isMale)
-            sql = "select * from 지역추천 where MR = ?;";
+            sql = "select * from 지역추천 where MR = "+a+";";
         else
-            sql = "select * from 지역추천 where FR = ?;";
+            sql = "select * from 지역추천 where FR = "+a+";";
         try {
-            PreparedStatement prestmt = conn.prepareStatement(sql);
-            if(age/10 == 1)
-                age+=10;
-            prestmt.setInt(1, age / 10);
-            
-            ResultSet results = prestmt.executeQuery(sql);
+            ResultSet results = stmt.executeQuery(sql);
             results.last();
             int rowCount = results.getRow();
             results.beforeFirst();
             
+            System.out.println(rowCount);
             if(rowCount>1)
             {
                 Random rand = new Random(); 
