@@ -123,7 +123,7 @@ public class Main_Controller {
     }
 
    @FXML
-   public void foodViewBtn_Actioned() throws IOException
+   public void foodViewBtn_Actioned() throws IOException, InterruptedException, ExecutionException
    {
        moveToFoodView();
    }

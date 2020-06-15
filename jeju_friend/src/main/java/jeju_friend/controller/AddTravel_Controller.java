@@ -2,7 +2,6 @@ package jeju_friend.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 import javafx.fxml.FXML;
@@ -111,23 +110,14 @@ public class AddTravel_Controller {
 
     public void enter(String id)
     {
+        final DatePicker datePicker = new DatePicker();
         user.setId(id);
-        tbArr[1] = familyBtn;
-        tbArr[2] = friendBtn;
-        tbArr[3] = loverBtn;
-        tbArr[4] = groupBtn;
-        tbArr[5] = aloneBtn;
-        tbArr[6] = familyTravelBtn;
-        tbArr[7] =  parentTravelBtn;
-        tbArr[8] = loverTravelBtn;
-        tbArr[9] = friendTravelBtn;
-        tbArr[10] = tourismTravelBtn;
-        tbArr[11] = foodTravelBtn;
-        tbArr[12] = healingTravelBtn;
-        tbArr[13] = schoolTripBtn;
+        setArr();
     }
-    // 이벤트 핸들러
+
+
     
+    // 이벤트 핸들러
     @FXML
     public void cancelBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
         moveToMain();
@@ -279,12 +269,15 @@ public class AddTravel_Controller {
     
     // 로직
 
+  
+
     public void checkValid() throws IOException, InterruptedException, ExecutionException {
         String inputName = nameField.getText();
         LocalDate tourDay = datePicker.getValue();
         int region = getSelectedRegion();
         int partner = getPartner();
         int travel = getTravel();
+
         if (inputName.isEmpty()) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("여행 생성 오류");
@@ -293,7 +286,7 @@ public class AddTravel_Controller {
             alert.showAndWait();
             nameField.requestFocus();
             return;
-        } else if (tourDay == null) {
+        } else if (datePicker.getValue() == null) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("여행 생성 오류");
             alert.setHeaderText(null);
@@ -445,7 +438,22 @@ public class AddTravel_Controller {
 			return 5;
 		else
 		return 0;
-	}
+    }
+    private void setArr() {
+        tbArr[1] = familyBtn;
+        tbArr[2] = friendBtn;
+        tbArr[3] = loverBtn;
+        tbArr[4] = groupBtn;
+        tbArr[5] = aloneBtn;
+        tbArr[6] = familyTravelBtn;
+        tbArr[7] =  parentTravelBtn;
+        tbArr[8] = loverTravelBtn;
+        tbArr[9] = friendTravelBtn;
+        tbArr[10] = tourismTravelBtn;
+        tbArr[11] = foodTravelBtn;
+        tbArr[12] = healingTravelBtn;
+        tbArr[13] = schoolTripBtn;
+    }
 
     public void moveToMain() throws IOException, InterruptedException, ExecutionException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
