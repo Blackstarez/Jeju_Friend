@@ -53,6 +53,10 @@ public class Main_Controller {
     private Label interestAreaLabel;
     @FXML
     private VBox travelView;
+    @FXML
+    private Button tourSpotViewBtn;
+    @FXML
+    private Button foodViewBtn;
 
     TouristSpot[] tourList;
     TouristSpot[] foodList;
@@ -87,28 +91,6 @@ public class Main_Controller {
         searchLabel.setVisible(false);
     }
     
-    private TouristSpot searchTouristSpot(String text) {
-        int index = 0;
-        TouristSpot spot;
-        while(index<=tourList.length)
-        {
-            if(tourList[index].getTouristSpot() == text)
-            {
-                spot = tourList[index];
-                return spot;
-            }
-        }
-        index = 0;
-        while(index<=foodList.length)
-        {
-            if(foodList[index].getTouristSpot() == text)
-            {
-                spot = foodList[index];
-                return spot;
-            }
-        }
-        return null;
-    }
 
     @FXML
     public void refreshBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
@@ -140,11 +122,47 @@ public class Main_Controller {
         moveToUserEdit();
     }
 
-   
+   @FXML
+   public void foodViewBtn_Actioned() throws IOException
+   {
+       moveToFoodView();
+   }
 
+  
+
+   @FXML
+   public void tourSpotViewBtn_Actioned() throws IOException
+   {
+       moveToTourSpotView();
+   }
+    
 
     // 로직
 
+
+    
+   private TouristSpot searchTouristSpot(String text) {
+        int index = 0;
+        TouristSpot spot;
+        while(index<=tourList.length)
+        {
+            if(tourList[index].getTouristSpot() == text)
+            {
+                spot = tourList[index];
+                return spot;
+            }
+        }
+        index = 0;
+        while(index<=foodList.length)
+        {
+            if(foodList[index].getTouristSpot() == text)
+            {
+                spot = foodList[index];
+                return spot;
+            }
+        }
+        return null;
+    }
 
     private String ToAreaName(int interestArea) {
         String name = "";
@@ -241,6 +259,13 @@ public class Main_Controller {
         thread.setDaemon(true);
         thread.start();
         return task.get();
+    }
+    private void setTravelView(TourPlan[] tourPlans)
+    {
+        for(int i = 0; i<tourPlans.length; i++)
+        {
+            travelView.getChildren().add(new Label(tourPlans[i].getTourPlanName()));
+        }
     }
 
     public TouristSpot getTouristSpot(TouristSpot[] list)
@@ -390,7 +415,23 @@ public class Main_Controller {
         userEditBtn.getScene().setRoot(root); 
         controller.enter(user.getId());
     }
-
+    private void moveToTourSpotView() throws IOException
+    {
+        Stage primaryStage = (Stage) logoutBtn.getScene().getWindow(); 
+        Parent root = FXMLLoader.load(getClass().getResource("/jeju_friend/TourSpotView.fxml"));
+        Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+        primaryStage.show();   
+    }
+    private void moveToFoodView() throws IOException, InterruptedException, ExecutionException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/UserEdi.fxml"));
+        Parent root = loader.load();
+        FoodView_Controller controller = loader.getController();
+        userEditBtn.getScene().setRoot(root); 
+        controller.enter(user.getId());
+    }
         
     private void refresh() throws IOException, InterruptedException, ExecutionException {
         vBox.getChildren().clear();
@@ -400,12 +441,5 @@ public class Main_Controller {
         addVBox(foodSpot);
     }
 
-    private void setTravelView(TourPlan[] tourPlans)
-    {
-        for(int i = 0; i<tourPlans.length; i++)
-        {
-            travelView.getChildren().add(new Label(tourPlans[i].getTourPlanName()));
-        }
-    }
-
+  
 }

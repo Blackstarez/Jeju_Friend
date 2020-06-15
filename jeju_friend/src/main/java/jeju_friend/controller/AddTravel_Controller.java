@@ -285,7 +285,6 @@ public class AddTravel_Controller {
         int region = getSelectedRegion();
         int partner = getPartner();
         int travel = getTravel();
-        // 선호 지역 골라야 함.
         if (inputName.isEmpty()) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("여행 생성 오류");
