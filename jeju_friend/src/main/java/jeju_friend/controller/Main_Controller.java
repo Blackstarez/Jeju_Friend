@@ -1,6 +1,8 @@
 package jeju_friend.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
@@ -69,6 +71,8 @@ public class Main_Controller {
 
     Image defaultImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/defaultImage.png"));
 
+    LocationRecommend recommend;
+
     public void enter(String id) throws InterruptedException, ExecutionException {
         user.setId(id);
         user = getUserInfo();
@@ -79,6 +83,8 @@ public class Main_Controller {
         TouristSpot foodSpot = getTouristSpot(foodList);
         String interestArea =  ToAreaName(user.getInterestArea());
         interestAreaLabel.setText("현재관심지역: " + interestArea);
+        recommend.setAge(user.getAge());
+        recommend.setMale(user.getGender());
         addVBox(tourSpot);
         addVBox(foodSpot);
         setTravelView(planList);
@@ -231,7 +237,7 @@ public class Main_Controller {
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
                 
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER, user.toBytes());
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
@@ -309,14 +315,14 @@ public class Main_Controller {
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
                 
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RECOMMEND, Protocol.PT_EMPTY, Protocol.PT_USER,user.toBytes());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RECOMMEND, Protocol.PT_EMPTY, Protocol.PT_USER,recommend.toBytes());
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                LocationRecommend recommend = LocationRecommend.toRecommend(resultProtocol.getBody());  
+                recommend = LocationRecommend.toRecommend(resultProtocol.getBody());  
                 return recommend; 
             }   
         };
@@ -327,9 +333,19 @@ public class Main_Controller {
     }
     private void setTravelView(TourPlan[] tourPlans)
     {
+        LocalDate today = LocalDate.now();
         for(int i = 0; i<tourPlans.length; i++)
         {
             travelView.getChildren().add(new Label(tourPlans[i].getTourPlanName()));
+            Long dday = ChronoUnit.DAYS.between(today, tourPlans[i].getTourDay());
+            if(dday == 0L)
+            {
+                travelView.getChildren().add(new Label("D-Day"));
+            }
+            else
+            {
+                travelView.getChildren().add(new Label("D-"+dday));
+            }
         }
     }
 
