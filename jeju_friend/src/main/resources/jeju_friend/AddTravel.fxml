@@ -28,7 +28,7 @@
       </Label>
       <HBox layoutX="100.0" layoutY="195.0">
          <children>
-            <ToggleButton fx:id="parentBtn" mnemonicParsing="false" onAction="#parentBtn_Actioned" style="-fx-background-color: rgb(127, 198, 135);" text="부모님">
+            <ToggleButton fx:id="groupBtn" mnemonicParsing="false" onAction="#groupBtn_Actioned" style="-fx-background-color: rgb(127, 198, 135);" text="단체">
                <font>
                   <Font name="LG PC" size="16.0" />
                </font>

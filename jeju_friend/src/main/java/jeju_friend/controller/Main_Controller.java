@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jeju_friend.Elements.Protocol;
+import jeju_friend.Elements.TourPlan;
 import jeju_friend.Elements.TouristSpot;
 import jeju_friend.Elements.UserInfo;
 import jeju_friend.application.SocketHandler;
@@ -50,10 +51,15 @@ public class Main_Controller {
     private Pane searchBar;
     @FXML
     private Label interestAreaLabel;
+    @FXML
+    private VBox travelView;
+
     TouristSpot[] tourList;
     TouristSpot[] foodList;
     
     UserInfo user = new UserInfo();
+
+    Image defaultImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/defaultImage.png"));
 
     public void enter(String id) throws InterruptedException, ExecutionException {
         user.setId(id);
@@ -255,14 +261,26 @@ public class Main_Controller {
             public void run() {                
                 VBox newV = new VBox();
                 Label tourName = new Label(tour.getTouristSpot());
-                String imageSource = tour.getImageUrl();
-                Image image = new Image(imageSource);
-                ImageView tourImage = new ImageView(image);
+                try {
+                    String imageSource = tour.getImageUrl();
+                    Image image = new Image(imageSource);
+                    ImageView tourImage = new ImageView(image);
+                    Platform.runLater(()->{
+                        tourImage.setFitWidth(200);
+                        tourImage.setFitHeight(150);
+                        newV.getChildren().addAll(tourImage,tourName);
+                    });
+                } catch (Exception e) {
+                    ImageView tourImage = new ImageView(defaultImage);
+                    Platform.runLater(()->{
+                        tourImage.setFitWidth(200);
+                        tourImage.setFitHeight(150);
+                        newV.getChildren().addAll(tourImage,tourName);
+                    });
+                }
+               
                 Platform.runLater(() -> {
                     mainPane.setLayoutY(searchBar.getLayoutY()+80);
-                    tourImage.setFitWidth(200);
-                    tourImage.setFitHeight(150);
-                    newV.getChildren().addAll(tourName, tourImage);
                     if(tour.getContactInformation() != null)
                     {
                         Label text = new Label("연락처 : " + tour.getContactInformation());
@@ -380,6 +398,14 @@ public class Main_Controller {
         TouristSpot foodSpot = getTouristSpot(foodList);
         addVBox(tourSpot);
         addVBox(foodSpot);
+    }
+
+    private void setTravelView(TourPlan[] tourPlans)
+    {
+        for(int i = 0; i<tourPlans.length; i++)
+        {
+            travelView.getChildren().add(new Label(tourPlans[i].getTourPlanName()));
+        }
     }
 
 }
