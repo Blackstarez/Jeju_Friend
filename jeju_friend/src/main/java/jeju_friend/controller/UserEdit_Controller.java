@@ -112,9 +112,9 @@ public class UserEdit_Controller {
 
 				Protocol protocol = new Protocol();
 				Protocol resultProtocol = new Protocol();
-
-				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,
-						user.toBytes());
+				TourPlan tour = new TourPlan();
+				tour.setUserId(user.getId());
+				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,tour.toBytes());
 				SocketHandler socketHandler = new SocketHandler();
 				try {
 					resultProtocol = socketHandler.request(protocol);
