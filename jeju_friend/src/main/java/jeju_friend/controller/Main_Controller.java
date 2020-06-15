@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -55,6 +56,8 @@ public class Main_Controller {
     private Button tourSpotViewBtn;
     @FXML
     private Button foodViewBtn;
+    @FXML
+    private Button recommendBtn;
 
     TouristSpot[] tourList;
     TouristSpot[] foodList;
@@ -139,7 +142,16 @@ public class Main_Controller {
        moveToTourSpotView();
    }
     
-
+    @FXML
+    public void recommendBtn_Actioned() {
+        LocationRecommend recommend = "";
+        LocationRecommend recommend = getLocationRecommend();
+        Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("지역 추천");
+			alert.setHeaderText(null);
+			alert.setContentText(user.getNickName()+"님에게 추천되는 장소는/n"+recommend.getName()+"입니다");
+			alert.showAndWait();
+    }
     // 로직
 
 
@@ -280,6 +292,31 @@ public class Main_Controller {
                 }
                 TouristSpot[] list = TouristSpot.toTouristSpotList(resultProtocol.getBody());  
                 return list; 
+            }   
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        return task.get();
+    }
+    private LocationRecommend getLocationRecommend() throws InterruptedException, ExecutionException {
+        Task<LocationRecommend> task = new Task<LocationRecommend>() {
+
+			@Override
+			protected LocationRecommend call() throws Exception {
+
+				Protocol protocol = new Protocol();
+                Protocol resultProtocol = new Protocol();
+                
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_RECOMMEND, Protocol.PT_EMPTY, Protocol.PT_USER,user.toBytes());
+                SocketHandler socketHandler = new SocketHandler();
+                try {
+                    resultProtocol = socketHandler.request(protocol);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                LocationRecommend recommend = LocationRecommend.toLocationRecommend(resultProtocol.getBody());  
+                return recommend; 
             }   
         };
         Thread thread = new Thread(task);
