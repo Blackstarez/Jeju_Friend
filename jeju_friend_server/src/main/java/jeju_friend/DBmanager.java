@@ -1,6 +1,8 @@
 package jeju_friend;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Random;
 
 import jeju_friend.Elements.*;
@@ -198,15 +200,17 @@ public class DBmanager {
     }
 
     // 여행계획 등록
-    public boolean tourPlanApply(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest) {
+    public boolean tourPlanApply(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest, LocalDate date) {
         try {
-            String sql = "insert into 여행계획 (userId,tourPlanName,tourWith,tourForm,areaInterest) Values(?,?,?,?,?);";
+            String sql = "insert into 여행계획 (userId,tourPlanName,tourWith,tourForm,areaInterest,travelStartDate) Values(?,?,?,?,?,?);";
             PreparedStatement prestmt = conn.prepareStatement(sql);
             prestmt.setString(1, userId);
             prestmt.setString(2, tourPlanName);
             prestmt.setInt(3, tourWith);
             prestmt.setString(4, tourForm);
             prestmt.setInt(5, areaInterest);
+            Date d = new Date(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
+            prestmt.setDate(6,d);
             prestmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -231,16 +235,18 @@ public class DBmanager {
     }
 
     // 여행계획 수정
-    public boolean tourPlanModify(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest) {
+    public boolean tourPlanModify(String userId, String tourPlanName, int tourWith, String tourForm, int areaInterest, LocalDate date) {
         try {
-            String sql = "update 여행계획 set tourPlanName=?, tourWith=?,tourForm=?, areaInterest=? where userId=? && tourPlanName=?;";
+            String sql = "update 여행계획 set tourPlanName=?, tourWith=?,tourForm=?, areaInterest=?, travelStartDate=? where userId=? && tourPlanName=?;";
             PreparedStatement prestmt = conn.prepareStatement(sql);
             prestmt.setString(1, tourPlanName);
             prestmt.setInt(2, tourWith);
             prestmt.setString(3, tourForm);
             prestmt.setInt(4, areaInterest);
-            prestmt.setString(5, userId);
-            prestmt.setString(6, tourPlanName);
+            Date d = new Date(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
+            prestmt.setDate(5,d);
+            prestmt.setString(6, userId);
+            prestmt.setString(7, tourPlanName);
             prestmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,7 +257,7 @@ public class DBmanager {
 
     // 여행계획 조회
     public TourPlan[] tourPlanLookup(String id) throws SQLException {
-        String sql = "select * from '여행일정' where ID = '" + id + "';";
+        String sql = "select * from 여행계획 where userId = '" + id + "';";
         ResultSet results = stmt.executeQuery(sql);
         results.last();
         int rowCount = results.getRow();
@@ -260,11 +266,11 @@ public class DBmanager {
         int index = 0;
         while (results.next()) {
             tourPlanList[index] = new TourPlan();
-            tourPlanList[index].setUserId(results.getString("ID"));
-            tourPlanList[index].setTourPlanName(results.getString("여행명"));
-            tourPlanList[index].setTourWith(results.getInt("동행코드"));
-            tourPlanList[index].setTourForm(results.getString("여행목적"));
-            tourPlanList[index].setAreaInterest(results.getInt("관심지역"));
+            tourPlanList[index].setUserId(results.getString("userId"));
+            tourPlanList[index].setTourPlanName(results.getString("tourPlanName"));
+            tourPlanList[index].setTourWith(results.getInt("tourWith"));
+            tourPlanList[index].setTourForm(results.getString("tourForm"));
+            tourPlanList[index].setAreaInterest(results.getInt("areaInterest"));
             tourPlanList[index].setTourDay(results.getDate("travelStartDate").toLocalDate());
             index++;
         }
@@ -286,9 +292,9 @@ public class DBmanager {
     public LocationRecommend getRecommend(int age, boolean isMale) {
         String sql;
         if (isMale)
-            sql = "select * from 지역추천 where MR=?";
+            sql = "select * from 지역추천 where MR = ?;";
         else
-            sql = "select * from 지역추천 where FR=?";
+            sql = "select * from 지역추천 where FR = ?;";
         try {
             PreparedStatement prestmt = conn.prepareStatement(sql);
             if(age/10 == 1)

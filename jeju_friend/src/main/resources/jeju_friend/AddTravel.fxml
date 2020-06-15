@@ -255,6 +255,6 @@
             <Font name="LG PC" size="25.0" />
          </font>
       </Label>
-      <DatePicker layoutX="132.0" layoutY="517.0" />
+      <DatePicker layoutX="132.0" layoutY="517.0" fx:id="datePicker"/>
    </children>
 </Pane>

@@ -247,7 +247,7 @@ class SocketManager extends Thread
                                     case Protocol.PT_APPLY:
                                         protocol.setPacket(buf);
                                         plan = TourPlan.toTourPlan(protocol.getBody());
-                                        if(db.tourPlanApply(plan.getUserId(), plan.getTourPlanName(), plan.getTourWith(), plan.getTourForm(), plan.getAreaInterest()))
+                                        if(db.tourPlanApply(plan.getUserId(), plan.getTourPlanName(), plan.getTourWith(), plan.getTourForm(), plan.getAreaInterest(),plan.getTourDay()))
                                         {
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
                                         }
@@ -290,7 +290,7 @@ class SocketManager extends Thread
                                     case Protocol.PT_MODIFY:
                                         protocol.setPacket(buf);
                                         plan = TourPlan.toTourPlan(protocol.getBody());
-                                        if(db.tourPlanModify(plan.getUserId(), plan.getTourPlanName(), plan.getTourWith(), plan.getTourForm(), plan.getAreaInterest()))
+                                        if(db.tourPlanModify(plan.getUserId(), plan.getTourPlanName(), plan.getTourWith(), plan.getTourForm(), plan.getAreaInterest(),plan.getTourDay()))
                                         {
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_SUCCESS,Protocol.PT_UNKNOWN);
                                         }

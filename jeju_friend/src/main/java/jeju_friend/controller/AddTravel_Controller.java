@@ -110,7 +110,7 @@ public class AddTravel_Controller {
 
     public void enter(String id)
     {
-        final DatePicker datePicker = new DatePicker();
+        //datePicker = new DatePicker();
         user.setId(id);
         setArr();
     }

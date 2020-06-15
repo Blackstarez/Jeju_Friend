@@ -71,7 +71,7 @@ public class Main_Controller {
 
     Image defaultImage = new Image(getClass().getResourceAsStream("/jeju_friend/image/defaultImage.png"));
 
-    LocationRecommend recommend;
+    LocationRecommend recommend = new LocationRecommend();
 
     public void enter(String id) throws InterruptedException, ExecutionException {
         user.setId(id);
