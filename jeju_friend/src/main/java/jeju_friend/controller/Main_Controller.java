@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -22,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jeju_friend.Elements.LocationRecommend;
 import jeju_friend.Elements.Protocol;
 import jeju_friend.Elements.TourPlan;
 import jeju_friend.Elements.TouristSpot;
@@ -143,13 +145,12 @@ public class Main_Controller {
    }
     
     @FXML
-    public void recommendBtn_Actioned() {
-        LocationRecommend recommend = "";
+    public void recommendBtn_Actioned() throws InterruptedException, ExecutionException {
         LocationRecommend recommend = getLocationRecommend();
         Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("지역 추천");
 			alert.setHeaderText(null);
-			alert.setContentText(user.getNickName()+"님에게 추천되는 장소는/n"+recommend.getName()+"입니다");
+			alert.setContentText(user.getNickName()+"님에게 추천되는 장소는 「"+recommend.getLocationName()+"」 입니다");
 			alert.showAndWait();
     }
     // 로직
@@ -315,7 +316,7 @@ public class Main_Controller {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                LocationRecommend recommend = LocationRecommend.toLocationRecommend(resultProtocol.getBody());  
+                LocationRecommend recommend = LocationRecommend.toRecommend(resultProtocol.getBody());  
                 return recommend; 
             }   
         };
