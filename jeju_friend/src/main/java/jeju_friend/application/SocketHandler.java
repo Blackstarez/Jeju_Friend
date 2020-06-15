@@ -48,7 +48,7 @@ public class SocketHandler {
 
 
             // 서버와 연결 끊기
-
+            disconnect();
             return result;
         } catch (IOException e) {
             e.printStackTrace();

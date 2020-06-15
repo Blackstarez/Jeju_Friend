@@ -54,7 +54,7 @@ public class APIManager {
             boolean isEqual = true;
             String fcstTime = new String();
             Weather tmp = null;
-            DateFormat df = new SimpleDateFormat("yyyymmdd");
+            DateFormat df = new SimpleDateFormat("yyyyMMdd");
             for(int i=0; i < weatherArray.size(); i++) 
             { 
                 JSONObject weatherObject = (JSONObject) weatherArray.get(i);
