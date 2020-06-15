@@ -25,6 +25,8 @@ public class TourSpotView_Controller {
     Button backBtn;
     @FXML
     ScrollPane scrollPane;
+    @FXML
+    VBox vBox;
 
     UserInfo user = new UserInfo();
     TouristSpot[] tourList;
@@ -32,16 +34,14 @@ public class TourSpotView_Controller {
 
     public void enter(String userID) throws InterruptedException, ExecutionException {
         user.setId(userID);
-        tourList = getFoodSpotList();
-        setScrollPane();    
+        tourList = getTourSpotList();
+        setVBox();    
     }
     // 이벤트 핸들러
 
 
-    private void setScrollPane() 
+    private void setVBox() 
     {   
-                      
-        final VBox vb = new VBox();
         Thread thread = new Thread() {
             @Override
             public void run() {  
@@ -56,20 +56,17 @@ public class TourSpotView_Controller {
                     Platform.runLater(()->{
                         tourImage.setFitWidth(200);
                         tourImage.setFitHeight(150);
-                        vb.getChildren().addAll(tourImage,name,place);
+                        vBox.getChildren().addAll(tourImage,name,place);
                         });
                     } catch (Exception e) {
                         ImageView tourImage = new ImageView(defaultImage);
                         Platform.runLater(()->{
                             tourImage.setFitWidth(200);
                             tourImage.setFitHeight(150);
-                            vb.getChildren().addAll(tourImage,name,place);
+                            vBox.getChildren().addAll(tourImage,name,place);
                         });
                     }
                 }
-                Platform.runLater(()->{
-                    scrollPane.setContent(vb);
-                });
             }
         };
         thread.setDaemon(true);
@@ -83,7 +80,7 @@ public class TourSpotView_Controller {
 
     // 로직
 
-    public TouristSpot[] getFoodSpotList() throws InterruptedException, ExecutionException 
+    public TouristSpot[] getTourSpotList() throws InterruptedException, ExecutionException 
     {
         Task<TouristSpot[]> task = new Task<TouristSpot[]>() {
 
@@ -92,8 +89,8 @@ public class TourSpotView_Controller {
 
 				Protocol protocol = new Protocol();
                 Protocol resultProtocol = new Protocol();
-                
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER,user.toBytes());
+
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURIST_SPOT, Protocol.PT_LOOKUP, Protocol.PT_USER);
                 SocketHandler socketHandler = new SocketHandler();
                 try {
                     resultProtocol = socketHandler.request(protocol);

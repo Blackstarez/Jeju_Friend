@@ -4,14 +4,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.FoodView_Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeju_friend.controller.FoodView_Controller">
    <children>
-      <ScrollPane fx:id="scrollPane" layoutX="40.0" layoutY="70.0">
+      <ScrollPane fx:id="scrollPane" layoutX="40.0" layoutY="70.0" prefHeight="465.0" prefWidth="753.0">
         <content>
-          <AnchorPane />
+          <AnchorPane prefHeight="466.0" prefWidth="749.0">
+               <children>
+                  <VBox fx:id="vBox" layoutX="300.0" layoutY="104.0" prefHeight="466.0" prefWidth="749.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
         </content>
       </ScrollPane>
       <Label layoutX="51.0" layoutY="25.0" text="제주도 음식점 조회" />
-      <Button fx:id="backBtn" layoutX="478.0" layoutY="359.0" mnemonicParsing="false" onAction="#backBtn_Actioned" prefHeight="33.0" prefWidth="100.0" text="뒤로가기" />
+      <Button fx:id="backBtn" layoutX="831.0" layoutY="505.0" mnemonicParsing="false" onAction="#backBtn_Actioned" prefHeight="33.0" prefWidth="100.0" text="뒤로가기" />
    </children>
 </Pane>
