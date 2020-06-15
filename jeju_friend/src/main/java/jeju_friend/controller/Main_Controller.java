@@ -303,7 +303,6 @@ public class Main_Controller {
                 }
                
                 Platform.runLater(() -> {
-                    mainPane.setLayoutY(searchBar.getLayoutY()+80);
                     if(tour.getContactInformation() != null)
                     {
                         Label text = new Label("연락처 : " + tour.getContactInformation());
