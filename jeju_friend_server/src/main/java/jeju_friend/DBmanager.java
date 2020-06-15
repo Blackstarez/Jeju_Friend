@@ -304,4 +304,10 @@ public class DBmanager {
         xy[1] = result.getInt("Y");
         return xy;
     }
+
+    // 여행지역 추천
+    public LocationRecommend getRecommend(int age, boolean isMale)
+    {
+        return null;
+    }
 }

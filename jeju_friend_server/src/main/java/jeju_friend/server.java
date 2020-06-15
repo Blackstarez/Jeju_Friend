@@ -283,6 +283,7 @@ class SocketManager extends Thread
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
                                         }
                                         os.write(protocol.getPacket());
+                                        System.out.println("["+sock.getInetAddress()+"] : 여행계획 처리 결과 송신 완료");
                                         break;
                                     case Protocol.PT_MODIFY:
                                         protocol.setPacket(buf);
@@ -296,17 +297,30 @@ class SocketManager extends Thread
                                             protocol.setPacket(Protocol.PT_RESPONSE,Protocol.PT_TOURPLAN,Protocol.PT_FAIL,Protocol.PT_UNKNOWN);
                                         }
                                         os.write(protocol.getPacket());
+                                        System.out.println("["+sock.getInetAddress()+"] : 지역 추천 정보 송신 완료");
                                         break;
                                     default:
                                         break;
                                 }
+                                break;
+                            case Protocol.PT_RECOMMEND:
+                                protocol.setPacket(buf);
+                                LocationRecommend recommend = LocationRecommend.toRecommend(protocol.getBody());
+                                recommend = db.getRecommend(recommend.getAge(), recommend.isMale());
+                                protocol.setPacket(Protocol.PT_RESPONSE, Protocol.PT_RECOMMEND, Protocol.PT_EMPTY, Protocol.PT_UNKNOWN,recommend.toBytes());
+                                os.write(protocol.getPacket());
+
                                 break;
                             default:
                                 System.out.println("잘못된 패킷 수신");
                                 break;
                         }
                 }
-            }            
+            }  
+            if(!sock.isClosed())
+            {
+                sock.close();
+            }          
         } catch (Exception e) {
             e.printStackTrace();
         }

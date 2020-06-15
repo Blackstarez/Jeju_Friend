@@ -2,6 +2,7 @@ package jeju_friend.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -75,9 +76,9 @@ public class Weather_Controller {
 
     public void enter(String id) {
         cityBox.setItems(FXCollections.observableArrayList(sityArr));
-        //grid1.setVisible(false);
-        //grid1.setVisible(false);
-        //grid1.setVisible(false);
+        // grid1.setVisible(false);
+        // grid1.setVisible(false);
+        // grid1.setVisible(false);
         user.setId(id);
     }
 
@@ -139,68 +140,67 @@ public class Weather_Controller {
 
     }
 
-    public void moveToMain() throws IOException, InterruptedException, ExecutionException
-    {
+    public void moveToMain() throws IOException, InterruptedException, ExecutionException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
         Parent root = loader.load();
         Main_Controller controller = loader.getController();
-        backBtn.getScene().setRoot(root); 
+        backBtn.getScene().setRoot(root);
         controller.enter(user.getId());
     }
 
-    public Weather[] getTodayWeatherlist(Weather[] list) 
-    {
+    public Weather[] getTodayWeatherlist(Weather[] list) {
         Date today = new Date();
         Weather[] todayList;
         int index = 0;
-        while(index < list.length)
-        {
-            index++;
-            if(list[index].getDay().compareTo(today) != 0)
-            {
+        while (index < list.length) {
+            System.out.println("=========오늘 날씨 날씨비교===" + index + "======");
+            System.out.println("리스트 : " + list[index].getDay());
+            System.out.println("today 변수 : " + today);
+
+            if (list[index].getDay().compareTo(today) > 0) {
                 break;
             }
+            index++;
         }
+        if (index == 0)
+            return null;
 
         todayList = new Weather[index];
 
-        for(int i =0;i<index;i++)
-        {
-            todayList[i]=list[i];
+        for (int i = 0; i < index; i++) {
+            todayList[i] = list[i];
         }
         return todayList;
     }
 
-
-    public Weather[] getTomorrowWeatherlist(Weather[] list) 
-    {
+    public Weather[] getTomorrowWeatherlist(Weather[] list) {
         Date tomorrow = new Date();
         Weather[] tomorrowList;
         int i = 0 , count = 0, pos = 0;
-        boolean isCheck = false;
         while(i<list.length)
         {
-            
-            if(tomorrow.compareTo(list[i].getDay()) != 0)
+            System.out.println("=========내일 날씨 날씨비교==="+i+"======");
+            System.out.println(list[i].getDay());
+            System.out.println(tomorrow);
+            if(list[i].getDay().compareTo(tomorrow) > 0)
             {
-                isCheck = !isCheck;
-            }
-
-            if(isCheck)
-            {
-                if(pos == 0)
-                    pos = i;
                 count++;
+                if(count == 1)
+                {
+                    tomorrow = list[i].getDay(); 
+                    pos = i;
+                }
+                else
+                    break;
             }
             i++;
         }
-        pos--;
-        tomorrowList = new Weather[count];
-        for(i=0;i<count;pos++,i++)
+ 
+        tomorrowList = new Weather[i-pos];
+        for(int j = 0;pos<i;pos++,j++)
         {
-            tomorrowList[i] = list[pos];
+            tomorrowList[j] = list[pos];
         }
-
         return tomorrowList;
     }
 
@@ -208,22 +208,20 @@ public class Weather_Controller {
     public Weather[] getLastWeatherlist(Weather[] list) 
     {
         Date day = new Date();
-        Weather[] lastList = new Weather[10];
+        Weather[] lastList;
         int count = 0,i;
         for(i = 0;i<list.length;i++){
-            if(count < 2)
+            if(list[i].getDay().compareTo(day) > 0)
             {
-                if(day.compareTo(list[i].getDay()) != 0)
-                {
-                    count++;
-                    day = list[i].getDay();
-                }
+                count++;
+                day = list[i].getDay();
             }
-            else
-            {
+            if(count == 2)
                 break;
-            }
         }
+        if(count<2)
+            return null;
+        
         lastList = new Weather[list.length-i];
         for(int j =0;i<list.length;i++,j++)
         {
@@ -234,15 +232,13 @@ public class Weather_Controller {
 
     public void setGrid(GridPane grid, Weather[] list)
     {
+        if(list == null)
+            return;
         for (int index = 1; index <=list.length; index++) {
             RowConstraints con = new RowConstraints();
             con.setPrefHeight(30);
             grid.getRowConstraints().add(con);
-            
-
-            System.out.println("---------------------------------------------");
-            list[index-1].printInfo();
-            System.out.println("---------------------------------------------");
+        
 
             grid.add(new Label(Integer.toString(list[index-1].getTime())+"시"), 0, index);
             grid.add(new Label(Integer.toString(list[index-1].getRainfallProbability())), 1 ,index);

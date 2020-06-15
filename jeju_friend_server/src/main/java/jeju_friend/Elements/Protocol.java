@@ -15,6 +15,7 @@ public class Protocol {
     public static final byte PT_RESTAURANT = 4;     // 식당 - 관광지와 같은 테이블을 사용하나 구분으로 구분되어 있음.
     public static final byte PT_WEATHER = 5;        // 날씨
     public static final byte PT_TOURPLAN = 6;       // 여행일정
+    public static final byte PT_RECOMMEND = 7;      // 지역추천
     
 
     //Code 확장
