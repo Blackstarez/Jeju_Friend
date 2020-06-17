@@ -3,7 +3,10 @@ package jeju_friend.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
@@ -69,6 +72,8 @@ public class Main_Controller {
     TourPlan[] planList;
     HashMap<String,Integer> searchTourTable;
     HashMap<String,Integer> searchFoodTable;
+    HashMap<String,Object> searchWordFoodTable;
+    HashMap<String,Object> searchWordTourTable;
     
     UserInfo user = new UserInfo();
 
@@ -102,6 +107,9 @@ public class Main_Controller {
         {
             searchFoodTable.put(foodList[i].getTouristSpot(),i);
         }
+
+        makeTourSpotSearchTable();
+        makeFoodSearchTable();
     }
 
 
@@ -112,18 +120,25 @@ public class Main_Controller {
     @FXML
     public void searchField_Typed(KeyEvent event) throws InterruptedException, ExecutionException {
         if (event.getCode() == KeyCode.ENTER || event.getCharacter().equals("\r")) {
-            TouristSpot touristSpot = searchTouristSpot(searchField.getText());
-            if(touristSpot != null)
+            ArrayList<TouristSpot> touristSpot = searchTouristSpot(searchField.getText());
+            if(touristSpot.size() != 0)
             {
                 vBox.getChildren().clear();
-                addVBox(touristSpot);
+                for(TouristSpot t : touristSpot)
+                    addVBox(t);
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("검색 완료");
+                alert.setHeaderText(null);
+                alert.setContentText("검색을 완료했습니다.");
+                alert.showAndWait();
+                searchField.requestFocus();
             }
             else
             {
                 Alert alert = new Alert(AlertType.INFORMATION);
 			    alert.setTitle("검색 오류");
 			    alert.setHeaderText(null);
-    			alert.setContentText("검색 결과가 없습니다/n정확한 명칭을 입력해주세요");
+    			alert.setContentText("검색 결과가 없습니다\n정확한 명칭을 입력해주세요");
 	    		alert.showAndWait();
 		    	searchField.requestFocus();
             }
@@ -187,22 +202,126 @@ public class Main_Controller {
     }
     // 로직
 
+    private void makeFoodSearchTable() throws InterruptedException, ExecutionException {
+        Task<HashMap<String,Object>> task = new Task<>() {
+
+			@Override
+			protected HashMap<String,Object> call() throws Exception {
+                HashMap<String,Object> foodWordSearchTable = new HashMap<>();
+                // 단어 분할
+                String word;
+                HashSet<String> wordSet = new HashSet<>();
+                List<Integer> indexList;
+                for(int i=0;i<foodList.length;i++)
+                {
+                    for(int j=0;j*2+1<foodList[i].getTouristSpot().length();j++){
+                        word = foodList[i].getTouristSpot().substring(j * 2, j * 2 + 2);
+                        if(!wordSet.contains(word))
+                        {
+                            wordSet.add(word);
+                            indexList = new ArrayList<Integer>();
+                            indexList.add(i);
+                            wordSet.add(word);
+                            foodWordSearchTable.put(word,indexList);
+                        }
+                        else
+                        {
+                            indexList = (ArrayList<Integer>)foodWordSearchTable.get(word);
+                            indexList.add(i);
+                            foodWordSearchTable.replace(word, indexList);    
+                        }  
+                    }
+                }
+				return foodWordSearchTable;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+        thread.start();
+        searchWordFoodTable = task.get();
+		return ;
+    }
+
+    private void makeTourSpotSearchTable() throws InterruptedException, ExecutionException {
+        Task<HashMap<String,Object>> task = new Task<>() {
+
+			@Override
+			protected HashMap<String,Object> call() throws Exception {
+                HashMap<String,Object> tourWordSearchTable = new HashMap<>();
+                // 단어 분할
+                String word;
+                HashSet<String> wordSet = new HashSet<>();
+                List<Integer> indexList;
+                for(int i=0;i<tourList.length;i++)
+                {
+                    for(int j=0;j*2+1<tourList[i].getTouristSpot().length();j++){
+                        word = tourList[i].getTouristSpot().substring(j * 2, j * 2 + 2);
+                        if(!wordSet.contains(word))
+                        {
+                            wordSet.add(word);
+                            indexList = new ArrayList<Integer>();
+                            indexList.add(i);
+                            wordSet.add(word);
+                            tourWordSearchTable.put(word,indexList);
+                        }
+                        else
+                        {
+                            indexList = (ArrayList<Integer>)tourWordSearchTable.get(word);
+                            indexList.add(i);
+                            tourWordSearchTable.replace(word, indexList);    
+                        }  
+                    }
+                }
+				return tourWordSearchTable;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+        thread.start();
+        searchWordTourTable = task.get();
+		return ;
+    }
 
     
-   private TouristSpot searchTouristSpot(String text) {
+   private ArrayList<TouristSpot> searchTouristSpot(String text) {
         int tourIndex = searchTourTable.getOrDefault(text,-1);
         int foodIndex = searchFoodTable.getOrDefault(text,-1);
         if(tourIndex == -1 && foodIndex == -1)
         {
-            return null;
+            ArrayList<TouristSpot> results = new ArrayList<TouristSpot>();
+            List<Integer> indexList;
+            // 2글자로 쪼개 검색
+            for(int i=0;2*i+1<text.length();i++)
+            {
+                indexList = (ArrayList<Integer>)searchWordFoodTable.getOrDefault(text.substring(i*2, i*2+2),null);
+                if(indexList != null)
+                {
+                    for(int k : indexList){
+                        results.add(foodList[k]);
+                    }
+                }
+                indexList = (ArrayList<Integer>)searchWordTourTable.getOrDefault(text.substring(i*2, i*2+2),null);
+                if(indexList != null)
+                {
+                    for(int k : indexList){
+                        System.out.println("관광지 index : "+k);
+                        results.add(tourList[k]);
+                    }
+                }
+            }
+            return results;
         }
         else if(foodIndex == -1)
         {
-            return tourList[tourIndex];
+            ArrayList<TouristSpot> result = new ArrayList<TouristSpot>();
+            result.add(tourList[tourIndex]);
+            return result;
         }
         else if(tourIndex == -1)
         {
-            return foodList[foodIndex];
+            ArrayList<TouristSpot> result = new ArrayList<TouristSpot>();
+            result.add(foodList[foodIndex]);
+            return result;
         }
         return null;
     }

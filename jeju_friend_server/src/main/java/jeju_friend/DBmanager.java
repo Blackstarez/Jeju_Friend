@@ -194,6 +194,7 @@ public class DBmanager {
             spotList[index].setSortation(results.getInt("구분"));
             spotList[index].setEtc(results.getString("특이사항"));
             spotList[index].setRecommendedNumber(results.getInt("추천수"));
+            spotList[index].setImageUrl(results.getString("이미지"));
             index++;
         }
         return spotList;
