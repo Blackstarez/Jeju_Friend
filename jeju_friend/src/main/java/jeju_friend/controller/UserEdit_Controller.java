@@ -116,6 +116,7 @@ public class UserEdit_Controller {
 		interestArea = user.getInterestArea();
 		inputAge = user.getAge();
 		nameArea.setText(userName);
+		ageLabel.setText(Integer.toString(inputAge));
 		setToggle(interestArea);
 		setTourView(travelView, tourPlans);
 	}
