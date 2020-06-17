@@ -372,6 +372,7 @@ public class UserEdit_Controller {
 		user.setNickName(nickName);
 		user.setInterestArea(interestArea);
 		user.setPw(pwField.getText());
+		user.setAge(inputAge);
 		if(nickName.isEmpty())
 		{
 			Alert alert = new Alert(AlertType.INFORMATION);
