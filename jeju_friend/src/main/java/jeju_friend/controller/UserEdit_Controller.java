@@ -302,19 +302,19 @@ public class UserEdit_Controller {
 		for (int index = 0; index < tourList.length; index++) 
 		{
 			Button button = new Button(tourList[index].getTourPlanName());
-			button.setId(Integer.toString(index));
+			button.setUserData(index);
 			button.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent e) {
 					try {
-						moveToEditTravel(Integer.parseInt(button.getId()));
+						moveToEditTravel((int)button.getUserData());
 					} catch (NumberFormatException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}		
-			});
+			});	
 			travelView.getChildren().add(button);
 		}
 	}
