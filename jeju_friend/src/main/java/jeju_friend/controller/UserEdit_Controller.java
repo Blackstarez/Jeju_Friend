@@ -11,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -76,9 +78,18 @@ public class UserEdit_Controller {
 	@FXML
 	private PasswordField pwField;
 
+	@FXML
+	private Slider slider;
+
+	@FXML
+	private Label ageLabel;
+
+
 	private String userName;
 
 	private int interestArea;
+
+	private int inputAge;
 
 	private VBox travelView;
 
@@ -100,41 +111,44 @@ public class UserEdit_Controller {
 	public void enter(String id) throws InterruptedException, ExecutionException {
 		user.setId(id);
 		UserInfo user = getUserInfo();
-		tourPlans = getTourList();
+		tourPlans = getTourPlanList();
 		userName = user.getNickName();
 		interestArea = user.getInterestArea();
+		inputAge = user.getAge();
 		nameArea.setText(userName);
 		setToggle(interestArea);
 		setTourView(travelView, tourPlans);
 	}
 
-	private TourPlan[] getTourList() throws InterruptedException, ExecutionException {
-
-		Task<TourPlan[]> task = new Task<TourPlan[]>() {
+	private TourPlan[] getTourPlanList() throws InterruptedException, ExecutionException {
+        Task<TourPlan[]> task = new Task<TourPlan[]>() {
 
 			@Override
 			protected TourPlan[] call() throws Exception {
 
 				Protocol protocol = new Protocol();
-				Protocol resultProtocol = new Protocol();
-				TourPlan tour = new TourPlan();
-				tour.setUserId(user.getId());
-				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,tour.toBytes());
-				SocketHandler socketHandler = new SocketHandler();
-				try {
-					resultProtocol = socketHandler.request(protocol);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody());
-				return list;
-			}
-		};
-		Thread thread = new Thread(task);
-		thread.setDaemon(true);
-		thread.start();
-		return task.get();
-	}
+                Protocol resultProtocol = new Protocol();
+                TourPlan tourPlan = new TourPlan();
+                tourPlan.setUserId(user.getId());
+                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,tourPlan.toBytes());
+                SocketHandler socketHandler = new SocketHandler();
+                try {
+                    resultProtocol = socketHandler.request(protocol);
+                    System.out.println(resultProtocol.getBody());
+                    TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody()); 
+                    return list;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("tourPlan lookup error 발생");
+                }
+                return null; 
+            }   
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        return task.get();
+    }
 
 	private UserInfo getUserInfo() throws InterruptedException, ExecutionException {
 		Task<UserInfo> task = new Task<UserInfo>() {
@@ -177,6 +191,17 @@ public class UserEdit_Controller {
 	@FXML
 	public void saveBtn_Actioned() {
 		tryToSave();
+	}
+
+	@FXML
+	private void sliderMouseDragged() {
+		slider.setShowTickLabels(false);
+		slider.valueProperty().addListener(
+			(observable, oldvalue, newvalue) ->
+			{
+				inputAge = newvalue.intValue();
+				ageLabel.setText(Integer.toString(inputAge));
+			} );
 	}
 
 	@FXML
@@ -273,7 +298,8 @@ public class UserEdit_Controller {
 	}
 
 	public void setTourView(VBox travelView, TourPlan[] tourList) {
-		for (int index = 0; index < tourList.length; index++) {
+		for (int index = 0; index < tourList.length; index++) 
+		{
 			Button button = new Button(tourList[index].getTourPlanName());
 			button.setId(Integer.toString(index));
 			button.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -282,15 +308,13 @@ public class UserEdit_Controller {
 					try {
 						moveToEditTravel(Integer.parseInt(button.getId()));
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}		
 			});
-		travelView.getChildren().add(button);
+			travelView.getChildren().add(button);
 		}
 	}
 	

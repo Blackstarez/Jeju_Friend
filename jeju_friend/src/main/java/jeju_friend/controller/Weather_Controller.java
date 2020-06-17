@@ -234,6 +234,7 @@ public class Weather_Controller {
     {
         if(list == null)
             return;
+        grid.getChildren().clear();
         for (int index = 1; index <=list.length; index++) {
             RowConstraints con = new RowConstraints();
             con.setPrefHeight(30);

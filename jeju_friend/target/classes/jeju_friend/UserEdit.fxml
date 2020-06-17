@@ -68,9 +68,17 @@
             <ToggleGroup fx:id="regionGroup" />
         </toggleGroup>
       </ToggleButton>
+      <Slider fx:id="slider" layoutX="129.0" layoutY="476.0" max="70.0" min="12.0" onMouseDragged="#sliderMouseDragged" prefHeight="30.0" prefWidth="159.0" value="20.0" />
+      <Label fx:id="ageLabel" layoutX="39.0" layoutY="474.0" prefHeight="34.0" prefWidth="36.0" style="-fx-font-size: 20;" text="12" wrapText="true">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
       <VBox fx:id="travelView" layoutX="25.0" layoutY="82.0" prefHeight="349.0" prefWidth="207.0" />
       <PasswordField fx:id="pwField" layoutX="473.0" layoutY="472.0" prefHeight="33.0" prefWidth="159.0" />
       <Label layoutX="473.0" layoutY="455.0" text="비밀번호" />
+      <Label layoutX="75.0" layoutY="482.0" text="세" />
+      <Label layoutX="42.0" layoutY="455.0" text="나이" />
 
    </children>
 </Pane>
