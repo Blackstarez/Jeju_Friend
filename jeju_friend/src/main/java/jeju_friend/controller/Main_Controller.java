@@ -579,7 +579,7 @@ public class Main_Controller {
                         text.setWrapText(true);
                         newV.getChildren().add(text);
                     }
-                    if(tour.getEtc() != null)
+                    if(tour.getEtc() != null && !tour.getEtc().equals(""))
                     {
                         Label text = new Label("기타사항 : " + tour.getEtc());
                         text.setWrapText(true);

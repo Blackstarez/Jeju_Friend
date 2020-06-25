@@ -84,7 +84,6 @@ public class UserEdit_Controller {
 	@FXML
 	private Label ageLabel;
 
-
 	private String userName;
 
 	private int interestArea;
@@ -122,34 +121,35 @@ public class UserEdit_Controller {
 	}
 
 	private TourPlan[] getTourPlanList() throws InterruptedException, ExecutionException {
-        Task<TourPlan[]> task = new Task<TourPlan[]>() {
+		Task<TourPlan[]> task = new Task<TourPlan[]>() {
 
 			@Override
 			protected TourPlan[] call() throws Exception {
 
 				Protocol protocol = new Protocol();
-                Protocol resultProtocol = new Protocol();
-                TourPlan tourPlan = new TourPlan();
-                tourPlan.setUserId(user.getId());
-                protocol.setPacket(Protocol.PT_REQUEST,Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,tourPlan.toBytes());
-                SocketHandler socketHandler = new SocketHandler();
-                try {
-                    resultProtocol = socketHandler.request(protocol);
-                    System.out.println(resultProtocol.getBody());
-                    TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody()); 
-                    return list;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("tourPlan lookup error 발생");
-                }
-                return null; 
-            }   
-        };
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-        return task.get();
-    }
+				Protocol resultProtocol = new Protocol();
+				TourPlan tourPlan = new TourPlan();
+				tourPlan.setUserId(user.getId());
+				protocol.setPacket(Protocol.PT_REQUEST, Protocol.PT_TOURPLAN, Protocol.PT_LOOKUP, Protocol.PT_USER,
+						tourPlan.toBytes());
+				SocketHandler socketHandler = new SocketHandler();
+				try {
+					resultProtocol = socketHandler.request(protocol);
+					System.out.println(resultProtocol.getBody());
+					TourPlan[] list = TourPlan.toTourPlanList(resultProtocol.getBody());
+					return list;
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("tourPlan lookup error 발생");
+				}
+				return null;
+			}
+		};
+		Thread thread = new Thread(task);
+		thread.setDaemon(true);
+		thread.start();
+		return task.get();
+	}
 
 	private UserInfo getUserInfo() throws InterruptedException, ExecutionException {
 		Task<UserInfo> task = new Task<UserInfo>() {
@@ -178,20 +178,32 @@ public class UserEdit_Controller {
 		return task.get();
 	}
 
-	
 	// 이벤트 핸들러
 
 	@FXML
 	public void addTravelBtn_Actioned() throws IOException {
 		moveToAddTravel();
 	}
+
 	@FXML
 	public void cancelBtn_Actioned() throws IOException, InterruptedException, ExecutionException {
 		moveToMain();
 	}
+
 	@FXML
 	public void saveBtn_Actioned() {
-		tryToSave();
+		try {
+			tryToSave();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -355,18 +367,8 @@ public class UserEdit_Controller {
 	}
 
 
-	
-	public void moveToMain() throws IOException, InterruptedException, ExecutionException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
-        Parent root = loader.load();
-        Main_Controller controller = loader.getController();
-        cancelBtn.getScene().setRoot(root); 
-        controller.enter(user.getId());
-	}
-	
 
-	private void tryToSave() 
+	private void tryToSave() throws IOException, InterruptedException, ExecutionException
 	{
 		int interestArea = getSelectedRegion();
 		String nickName = nameArea.getText();
@@ -400,6 +402,18 @@ public class UserEdit_Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		moveToMain();
 	}
+
+	
+	
+	public void moveToMain() throws IOException, InterruptedException, ExecutionException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jeju_friend/Main.fxml"));
+        Parent root = loader.load();
+        Main_Controller controller = loader.getController();
+        cancelBtn.getScene().setRoot(root); 
+        controller.enter(user.getId());
+	}
+	
 }

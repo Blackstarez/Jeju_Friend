@@ -76,9 +76,9 @@ public class Weather_Controller {
 
     public void enter(String id) {
         cityBox.setItems(FXCollections.observableArrayList(sityArr));
-        // grid1.setVisible(false);
-        // grid1.setVisible(false);
-        // grid1.setVisible(false);
+        grid1.setVisible(true);
+        grid1.setVisible(true);
+        grid1.setVisible(true);
         user.setId(id);
     }
 
@@ -234,7 +234,6 @@ public class Weather_Controller {
     {
         if(list == null)
             return;
-        grid.getChildren().clear();
         for (int index = 1; index <=list.length; index++) {
             RowConstraints con = new RowConstraints();
             con.setPrefHeight(30);
